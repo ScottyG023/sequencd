@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="SEQUENCD - A daily number sequence puzzle game. Find the missing number!">
+    <meta name="theme-color" content="#6B5B95">
+    <title>SEQUENCD - Daily Number Puzzle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6B5B95;
+            --primary-dark: #574a7a;
+            --primary-light: #8677a8;
+            --success: #4CAF50;
+            --success-bg: #4CAF5020;
+            --warning: #FF9800;
+            --warning-bg: #FF980020;
+            --error: #f44336;
+            --error-bg: #f4433620;
+            --bg: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text: #1a1a2e;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --border: #e0e0e0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-card: #0f0f23;
+            --text: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #666666;
+            --border: #333355;
+            --shadow: 0 4px 20px rgba(0,0,0,0.3);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            display: inline-block;
+            width: 0.8em;
+            border-bottom: 3px solid var(--primary);
+            margin: 0 -2px;
+            vertical-align: baseline;
+            position: relative;
+            top: -3px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 1.2rem;
+        }
+
+        .icon-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--text);
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 16px;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Puzzle info */
+        .puzzle-info {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .puzzle-number {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .attempts-display {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .attempt-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: all 0.3s;
+        }
+
+        .attempt-dot.used {
+            background: var(--error);
+        }
+
+        .attempt-dot.success {
+            background: var(--success);
+        }
+
+        /* Sequence display */
+        .sequence-container {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px 16px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+
+        .sequence {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sequence-item {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            padding: 12px 8px;
+            min-width: 50px;
+            text-align: center;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .sequence-item.blank {
+            background: var(--primary);
+            color: white;
+            min-width: 70px;
+            border: 3px dashed rgba(255,255,255,0.5);
+            position: relative;
+        }
+
+        .sequence-item.blank.correct {
+            background: var(--success);
+            border-style: solid;
+            animation: bounce 0.5s ease;
+        }
+
+        .sequence-item.blank.close {
+            background: var(--warning);
+            border-style: solid;
+            animation: wobble 0.5s ease;
+        }
+
+        .sequence-item.blank.wrong {
+            background: var(--error);
+            border-style: solid;
+            animation: shake 0.5s ease;
+        }
+
+        .comma {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.4rem;
+            color: var(--text-muted);
+        }
+
+        /* Input area */
+        .input-area {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .number-input {
+            font-family: 'Space Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+            padding: 16px;
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-card);
+            color: var(--text);
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .number-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary)20;
+        }
+
+        .number-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Number pad */
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .numpad-btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .numpad-btn:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .numpad-btn:active {
+            transform: scale(0.95);
+        }
+
+        .numpad-btn.submit {
+            background: var(--primary);
+            color: white;
+        }
+
+        .numpad-btn.submit:hover {
+            background: var(--primary-dark);
+        }
+
+        .numpad-btn.submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .numpad-btn.delete {
+            font-size: 1.2rem;
+        }
+
+        /* Feedback */
+        .feedback {
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+        }
+
+        .feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feedback.success {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .feedback.close {
+            background: var(--warning-bg);
+            color: var(--warning);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+        }
+
+        /* Result display */
+        .result-container {
+            display: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .result-container.show {
+            display: block;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .pattern-reveal {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+
+        .pattern-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .pattern-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .difficulty-display {
+            margin: 16px 0;
+        }
+
+        .stars {
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+        }
+
+        /* Share button */
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 16px 0;
+        }
+
+        .share-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .share-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Timer */
+        .next-puzzle {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .next-puzzle-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .countdown {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            padding: 16px;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Guess distribution */
+        .distribution-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .distribution-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .distribution-label {
+            font-weight: 600;
+            width: 20px;
+        }
+
+        .distribution-bar {
+            flex: 1;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .distribution-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            min-width: 24px;
+            transition: width 0.5s ease;
+        }
+
+        .distribution-fill.highlight {
+            background: var(--success);
+        }
+
+        .distribution-count {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* How to play */
+        .how-to-play p {
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .example-sequence {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .example-numbers {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .hint-list {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .hint-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .hint-icon {
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Streak fire */
+        .streak-fire {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #ff6b35, #f7931a);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text);
+            color: var(--bg);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Responsive */
+        @media (min-width: 600px) {
+            .sequence-item {
+                font-size: 1.8rem;
+                padding: 16px 12px;
+                min-width: 60px;
+            }
+
+            .sequence-item.blank {
+                min-width: 80px;
+            }
+
+            .numpad-btn {
+                font-size: 1.8rem;
+                padding: 20px;
+            }
+        }
+
+        /* Theme toggle animation */
+        .theme-toggle {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Confetti container */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">SEQU<span></span>NCD</div>
+        <div class="header-buttons">
+            <button class="icon-btn" id="helpBtn" aria-label="How to play">?</button>
+            <button class="icon-btn" id="statsBtn" aria-label="Statistics">📊</button>
+            <button class="icon-btn theme-toggle" id="themeBtn" aria-label="Toggle theme">🌙</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="puzzle-info">
+            <div class="puzzle-number" id="puzzleNumber">SEQUENCD #1</div>
+            <div id="streakDisplay"></div>
+            <div class="attempts-display" id="attemptsDisplay">
+                <div class="attempt-dot"></div>
+                <div class="attempt-dot"></div>
+                <div class="attempt-dot"></div>
+            </div>
+        </div>
+
+        <div class="sequence-container">
+            <div class="sequence" id="sequence"></div>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="input-area" id="inputArea">
+            <input type="text" class="number-input" id="numberInput" inputmode="numeric" pattern="[0-9]*" placeholder="?" maxlength="10" autocomplete="off">
+        </div>
+
+        <div class="numpad" id="numpad">
+            <button class="numpad-btn" data-num="1">1</button>
+            <button class="numpad-btn" data-num="2">2</button>
+            <button class="numpad-btn" data-num="3">3</button>
+            <button class="numpad-btn" data-num="4">4</button>
+            <button class="numpad-btn" data-num="5">5</button>
+            <button class="numpad-btn" data-num="6">6</button>
+            <button class="numpad-btn" data-num="7">7</button>
+            <button class="numpad-btn" data-num="8">8</button>
+            <button class="numpad-btn" data-num="9">9</button>
+            <button class="numpad-btn delete" data-action="delete">⌫</button>
+            <button class="numpad-btn" data-num="0">0</button>
+            <button class="numpad-btn submit" data-action="submit" id="submitBtn">→</button>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <div class="result-icon" id="resultIcon"></div>
+            <div class="result-title" id="resultTitle"></div>
+            <div class="pattern-reveal">
+                <div class="pattern-label">The pattern was</div>
+                <div class="pattern-name" id="patternName"></div>
+            </div>
+            <div class="difficulty-display">
+                <div class="stars" id="difficultyStars"></div>
+            </div>
+            <button class="share-btn" id="shareBtn">
+                <span>📤</span> Share Result
+            </button>
+            <div class="next-puzzle">
+                <div class="next-puzzle-label">Next puzzle in</div>
+                <div class="countdown" id="countdown">--:--:--</div>
+            </div>
+        </div>
+    </main>
+
+    <div class="confetti-container" id="confetti"></div>
+
+    <!-- How to Play Modal -->
+    <div class="modal-overlay" id="helpModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">How to Play</div>
+                <button class="modal-close" data-close="helpModal">&times;</button>
+            </div>
+            <div class="how-to-play">
+                <p>Find the missing number in the sequence! You have <strong>3 attempts</strong> to guess correctly.</p>
+
+                <div class="example-sequence">
+                    <div class="example-numbers">2, 4, 8, __, 32, 64</div>
+                    <div style="margin-top: 8px; color: var(--text-muted);">Answer: 16 (Powers of 2)</div>
+                </div>
+
+                <ul class="hint-list">
+                    <li>
+                        <span class="hint-icon">🟩</span>
+                        <span><strong>Correct!</strong> You found the missing number.</span>
+                    </li>
+                    <li>
+                        <span class="hint-icon">🟨</span>
+                        <span><strong>Close!</strong> Your guess is within 10% of the answer.</span>
+                    </li>
+                    <li>
+                        <span class="hint-icon">🟥</span>
+                        <span><strong>Wrong.</strong> Try again!</span>
+                    </li>
+                </ul>
+
+                <p>A new puzzle is available every day at midnight. Build your streak by playing daily!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div class="modal-overlay" id="statsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Statistics</div>
+                <button class="modal-close" data-close="statsModal">&times;</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="statPlayed">0</div>
+                    <div class="stat-label">Played</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statWinPct">0</div>
+                    <div class="stat-label">Win %</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statStreak">0</div>
+                    <div class="stat-label">Streak</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statMaxStreak">0</div>
+                    <div class="stat-label">Max</div>
+                </div>
+            </div>
+            <div class="distribution-title">Guess Distribution</div>
+            <div id="distribution">
+                <div class="distribution-row">
+                    <div class="distribution-label">1</div>
+                    <div class="distribution-bar"><div class="distribution-fill" data-guess="1"><span class="distribution-count">0</span></div></div>
+                </div>
+                <div class="distribution-row">
+                    <div class="distribution-label">2</div>
+                    <div class="distribution-bar"><div class="distribution-fill" data-guess="2"><span class="distribution-count">0</span></div></div>
+                </div>
+                <div class="distribution-row">
+                    <div class="distribution-label">3</div>
+                    <div class="distribution-bar"><div class="distribution-fill" data-guess="3"><span class="distribution-count">0</span></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ===== GAME STATE =====
+        const STORAGE_KEY = 'sequencd_data';
+        const EPOCH = new Date('2024-01-01').getTime();
+
+        let puzzles = [];
+        let currentPuzzle = null;
+        let gameState = {
+            puzzleNumber: 0,
+            attempts: 0,
+            guesses: [],
+            completed: false,
+            won: false
+        };
+        let stats = {
+            played: 0,
+            wins: 0,
+            currentStreak: 0,
+            maxStreak: 0,
+            distribution: { 1: 0, 2: 0, 3: 0 },
+            lastPlayed: null
+        };
+
+        // ===== INITIALIZATION =====
+        async function init() {
+            loadTheme();
+            loadStats();
+            await loadPuzzles();
+
+            const puzzleNumber = getPuzzleNumber();
+            gameState.puzzleNumber = puzzleNumber;
+
+            // Check if already played today
+            const savedGame = loadTodaysGame();
+            if (savedGame && savedGame.puzzleNumber === puzzleNumber) {
+                gameState = savedGame;
+                if (gameState.completed) {
+                    showResult();
+                } else {
+                    renderSequence();
+                    updateAttempts();
+                }
+            } else {
+                // New day, new puzzle
+                currentPuzzle = getPuzzleForDay(puzzleNumber);
+                renderSequence();
+            }
+
+            document.getElementById('puzzleNumber').textContent = `SEQUENCD #${puzzleNumber}`;
+            updateStreakDisplay();
+            setupEventListeners();
+            startCountdown();
+        }
+
+        async function loadPuzzles() {
+            try {
+                const response = await fetch('puzzles.json');
+                const data = await response.json();
+                puzzles = data.puzzles;
+            } catch (e) {
+                // Fallback puzzles if fetch fails
+                puzzles = [
+                    {"sequence": [2, 4, 6, 8, 10, 12], "blankIndex": 3, "answer": 8, "pattern": "Add 2", "difficulty": 1},
+                    {"sequence": [1, 1, 2, 3, 5, 8, 13], "blankIndex": 4, "answer": 5, "pattern": "Fibonacci sequence", "difficulty": 3},
+                    {"sequence": [2, 4, 8, 16, 32, 64], "blankIndex": 3, "answer": 16, "pattern": "Powers of 2", "difficulty": 2}
+                ];
+            }
+        }
+
+        function getPuzzleNumber() {
+            const now = new Date();
+            const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const daysSinceEpoch = Math.floor((midnight.getTime() - EPOCH) / (1000 * 60 * 60 * 24));
+            return daysSinceEpoch + 1;
+        }
+
+        function getPuzzleForDay(day) {
+            // Use day as seed for consistent puzzle selection
+            const index = day % puzzles.length;
+            return puzzles[index];
+        }
+
+        // ===== RENDERING =====
+        function renderSequence() {
+            if (!currentPuzzle) {
+                currentPuzzle = getPuzzleForDay(gameState.puzzleNumber);
+            }
+
+            const container = document.getElementById('sequence');
+            container.innerHTML = '';
+
+            currentPuzzle.sequence.forEach((num, i) => {
+                if (i > 0) {
+                    const comma = document.createElement('span');
+                    comma.className = 'comma';
+                    comma.textContent = ',';
+                    container.appendChild(comma);
+                }
+
+                const item = document.createElement('div');
+                item.className = 'sequence-item';
+
+                if (i === currentPuzzle.blankIndex) {
+                    item.classList.add('blank');
+                    item.id = 'blankSlot';
+                    item.textContent = gameState.completed ? currentPuzzle.answer : '?';
+                } else {
+                    item.textContent = formatNumber(num);
+                }
+
+                container.appendChild(item);
+            });
+        }
+
+        function formatNumber(num) {
+            if (Number.isInteger(num)) {
+                return num.toLocaleString();
+            }
+            return num.toString();
+        }
+
+        function updateAttempts() {
+            const dots = document.querySelectorAll('.attempt-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.remove('used', 'success');
+                if (i < gameState.attempts) {
+                    if (gameState.won && i === gameState.attempts - 1) {
+                        dot.classList.add('success');
+                    } else {
+                        dot.classList.add('used');
+                    }
+                }
+            });
+        }
+
+        function updateStreakDisplay() {
+            const display = document.getElementById('streakDisplay');
+            if (stats.currentStreak >= 2) {
+                display.innerHTML = `<div class="streak-fire">🔥 ${stats.currentStreak} day streak</div>`;
+            } else {
+                display.innerHTML = '';
+            }
+        }
+
+        // ===== GAME LOGIC =====
+        function submitGuess() {
+            if (gameState.completed) return;
+
+            const input = document.getElementById('numberInput');
+            const guess = parseFloat(input.value);
+
+            if (isNaN(guess) || input.value.trim() === '') {
+                showFeedback('Enter a number', 'wrong');
+                return;
+            }
+
+            gameState.guesses.push(guess);
+            gameState.attempts++;
+
+            const answer = currentPuzzle.answer;
+            const blankSlot = document.getElementById('blankSlot');
+
+            if (guess === answer) {
+                // Correct!
+                gameState.won = true;
+                gameState.completed = true;
+                blankSlot.textContent = formatNumber(answer);
+                blankSlot.classList.add('correct');
+                showFeedback('🎉 Correct!', 'success');
+                triggerConfetti();
+
+                // Update stats
+                stats.played++;
+                stats.wins++;
+                stats.distribution[gameState.attempts]++;
+                updateStreak(true);
+
+                setTimeout(() => showResult(), 1500);
+            } else if (isClose(guess, answer)) {
+                // Close!
+                blankSlot.classList.add('close');
+                showFeedback('🟨 Almost! Try again.', 'close');
+                setTimeout(() => blankSlot.classList.remove('close'), 500);
+
+                if (gameState.attempts >= 3) {
+                    gameState.completed = true;
+                    stats.played++;
+                    updateStreak(false);
+                    setTimeout(() => {
+                        blankSlot.textContent = formatNumber(answer);
+                        showResult();
+                    }, 1500);
+                }
+            } else {
+                // Wrong
+                blankSlot.classList.add('wrong');
+                const hint = guess < answer ? '📈 Higher!' : '📉 Lower!';
+                showFeedback(`🟥 ${hint}`, 'wrong');
+                setTimeout(() => blankSlot.classList.remove('wrong'), 500);
+
+                if (gameState.attempts >= 3) {
+                    gameState.completed = true;
+                    stats.played++;
+                    updateStreak(false);
+                    setTimeout(() => {
+                        blankSlot.textContent = formatNumber(answer);
+                        showResult();
+                    }, 1500);
+                }
+            }
+
+            input.value = '';
+            updateAttempts();
+            saveGame();
+            saveStats();
+        }
+
+        function isClose(guess, answer) {
+            const tolerance = Math.abs(answer) * 0.1; // Within 10%
+            return Math.abs(guess - answer) <= tolerance && guess !== answer;
+        }
+
+        function updateStreak(won) {
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
+
+            if (won) {
+                if (stats.lastPlayed === yesterday || stats.lastPlayed === null) {
+                    stats.currentStreak++;
+                } else if (stats.lastPlayed !== today) {
+                    stats.currentStreak = 1;
+                }
+                stats.maxStreak = Math.max(stats.maxStreak, stats.currentStreak);
+            } else {
+                stats.currentStreak = 0;
+            }
+            stats.lastPlayed = today;
+        }
+
+        // ===== UI FEEDBACK =====
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.className = `feedback ${type} show`;
+
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 2000);
+        }
+
+        function showResult() {
+            document.getElementById('inputArea').style.display = 'none';
+            document.getElementById('numpad').style.display = 'none';
+            document.getElementById('feedback').classList.remove('show');
+
+            const container = document.getElementById('resultContainer');
+            container.classList.add('show');
+            container.classList.add('animate-in');
+
+            const icon = document.getElementById('resultIcon');
+            const title = document.getElementById('resultTitle');
+
+            if (gameState.won) {
+                icon.textContent = '🎉';
+                title.textContent = ['Genius!', 'Impressive!', 'Well done!'][gameState.attempts - 1];
+            } else {
+                icon.textContent = '😔';
+                title.textContent = 'Better luck tomorrow!';
+            }
+
+            document.getElementById('patternName').textContent = currentPuzzle.pattern;
+            document.getElementById('difficultyStars').textContent = '⭐'.repeat(currentPuzzle.difficulty) + '☆'.repeat(5 - currentPuzzle.difficulty);
+
+            updateStreakDisplay();
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // ===== SHARING =====
+        function shareResult() {
+            const puzzle = currentPuzzle;
+            const seq = puzzle.sequence.map((n, i) =>
+                i === puzzle.blankIndex ? '__' : n
+            ).join(', ');
+
+            let result = `SEQUENCD #${gameState.puzzleNumber} ${'⭐'.repeat(puzzle.difficulty)}\n`;
+
+            if (gameState.won) {
+                result += `🟩 ${gameState.attempts}/3\n\n`;
+            } else {
+                result += `❌ 0/3\n\n`;
+            }
+
+            result += `${seq}\n`;
+            result += `Pattern: ${puzzle.pattern}\n\n`;
+            result += `sequencd.com`;
+
+            if (navigator.share) {
+                navigator.share({ text: result }).catch(() => {
+                    copyToClipboard(result);
+                });
+            } else {
+                copyToClipboard(result);
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!');
+            }).catch(() => {
+                showToast('Failed to copy');
+            });
+        }
+
+        // ===== CONFETTI =====
+        function triggerConfetti() {
+            const container = document.getElementById('confetti');
+            const colors = ['#6B5B95', '#4CAF50', '#FF9800', '#f44336', '#2196F3'];
+
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(confetti);
+
+                const animation = confetti.animate([
+                    { top: '-10px', opacity: 1 },
+                    { top: '100vh', opacity: 0 }
+                ], {
+                    duration: 2000 + Math.random() * 1000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // ===== COUNTDOWN =====
+        function startCountdown() {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+            const diff = tomorrow - now;
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent =
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // ===== STATS MODAL =====
+        function showStats() {
+            document.getElementById('statPlayed').textContent = stats.played;
+            document.getElementById('statWinPct').textContent = stats.played > 0
+                ? Math.round((stats.wins / stats.played) * 100)
+                : 0;
+            document.getElementById('statStreak').textContent = stats.currentStreak;
+            document.getElementById('statMaxStreak').textContent = stats.maxStreak;
+
+            // Distribution
+            const maxDist = Math.max(...Object.values(stats.distribution), 1);
+            [1, 2, 3].forEach(guess => {
+                const fill = document.querySelector(`.distribution-fill[data-guess="${guess}"]`);
+                const count = stats.distribution[guess] || 0;
+                const width = (count / maxDist) * 100;
+                fill.style.width = `${Math.max(width, 8)}%`;
+                fill.querySelector('.distribution-count').textContent = count;
+                fill.classList.toggle('highlight', gameState.completed && gameState.won && gameState.attempts === guess);
+            });
+
+            document.getElementById('statsModal').classList.add('show');
+        }
+
+        // ===== STORAGE =====
+        function saveGame() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            data.game = gameState;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function loadTodaysGame() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            return data.game || null;
+        }
+
+        function saveStats() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            data.stats = stats;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function loadStats() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            if (data.stats) {
+                stats = { ...stats, ...data.stats };
+            }
+        }
+
+        // ===== THEME =====
+        function loadTheme() {
+            const theme = localStorage.getItem('sequencd_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeIcon(theme);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('sequencd_theme', next);
+            updateThemeIcon(next);
+        }
+
+        function updateThemeIcon(theme) {
+            document.getElementById('themeBtn').textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // ===== EVENT LISTENERS =====
+        function setupEventListeners() {
+            // Numpad
+            document.querySelectorAll('.numpad-btn[data-num]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (gameState.completed) return;
+                    const input = document.getElementById('numberInput');
+                    if (input.value.length < 10) {
+                        input.value += btn.dataset.num;
+                    }
+                });
+            });
+
+            document.querySelector('.numpad-btn[data-action="delete"]').addEventListener('click', () => {
+                const input = document.getElementById('numberInput');
+                input.value = input.value.slice(0, -1);
+            });
+
+            document.querySelector('.numpad-btn[data-action="submit"]').addEventListener('click', submitGuess);
+
+            // Keyboard
+            document.getElementById('numberInput').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    submitGuess();
+                }
+            });
+
+            // Header buttons
+            document.getElementById('helpBtn').addEventListener('click', () => {
+                document.getElementById('helpModal').classList.add('show');
+            });
+
+            document.getElementById('statsBtn').addEventListener('click', showStats);
+            document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+            document.getElementById('shareBtn').addEventListener('click', shareResult);
+
+            // Modal close
+            document.querySelectorAll('.modal-close').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.getElementById(btn.dataset.close).classList.remove('show');
+                });
+            });
+
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        overlay.classList.remove('show');
+                    }
+                });
+            });
+
+            // Decimal point support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '.' && document.activeElement === document.getElementById('numberInput')) {
+                    const input = document.getElementById('numberInput');
+                    if (!input.value.includes('.')) {
+                        input.value += '.';
+                    }
+                }
+            });
+        }
+
+        // Start the game
+        init();
+    </script>
+</body>
+</html>
