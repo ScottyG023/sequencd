@@ -1394,7 +1394,7 @@
                 i === puzzle.blankIndex ? '__' : n
             ).join(', ');
 
-            let result = `SEQUE-NCD #${gameState.puzzleNumber}\n`;
+            let result = `SEQUE-NCD #${gameState.puzzleNumber}\n\n`;
             result += `🧠 ${'🟪'.repeat(puzzle.difficulty)}${'⬜'.repeat(5-puzzle.difficulty)}\n`;
 
             if (gameState.won) {
