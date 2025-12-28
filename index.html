@@ -365,6 +365,39 @@
             transform: scale(0.98);
         }
 
+        /* Hint Button */
+        .hint-btn {
+            display: block;
+            margin: 16px auto;
+            padding: 12px 20px;
+            font-size: 1.5rem;
+            background: transparent;
+            border: 3px solid var(--teletext-yellow);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            animation: pulse 2s infinite;
+        }
+
+        .hint-btn:hover {
+            background: var(--teletext-yellow);
+            box-shadow: 0 0 20px var(--teletext-yellow);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Hint Modal */
+        .hint-modal .hint-content {
+            padding: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: var(--teletext-yellow);
+        }
+
         /* Feedback */
         .feedback {
             display: none;
@@ -920,6 +953,8 @@
             <button class="submit-btn" id="submitBtn">SUBMIT</button>
         </div>
 
+        <button class="hint-btn" id="hintBtn" style="display: none;">💡</button>
+
         <div class="result-container" id="resultContainer">
             <div class="result-header">
                 <div class="result-icon" id="resultIcon"></div>
@@ -974,6 +1009,19 @@
                 </ul>
 
                 <p>NEW PUZZLE EVERY DAY AT MIDNIGHT. BUILD YOUR STREAK!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hint Modal -->
+    <div class="modal-overlay" id="hintModal">
+        <div class="modal hint-modal">
+            <div class="modal-header">
+                <div class="modal-title">💡 HINT</div>
+                <button class="modal-close" data-close="hintModal">X</button>
+            </div>
+            <div class="hint-content" id="hintContent">
+                <!-- Hint text will be inserted here -->
             </div>
         </div>
     </div>
@@ -1255,14 +1303,8 @@
                 // Close - also show hints
                 blankSlot.classList.add('close');
 
-                let hintText = 'ALMOST! TRY AGAIN';
-                if (gameState.attempts === 1 && currentPuzzle.hint1) {
-                    hintText = `ALMOST!\n💡 ${currentPuzzle.hint1}`;
-                } else if (gameState.attempts === 2 && currentPuzzle.hint2) {
-                    hintText = `ALMOST!\n💡 ${currentPuzzle.hint2}`;
-                }
-
-                showFeedback(hintText, 'close');
+                showFeedback('ALMOST! TRY AGAIN', 'close');
+                showHintButton();
                 setTimeout(() => blankSlot.classList.remove('close'), 500);
 
                 if (gameState.attempts >= 3) {
@@ -1276,19 +1318,12 @@
                     }, 1500);
                 }
             } else {
-                // Wrong - show progressive hints
+                // Wrong - show direction hint
                 blankSlot.classList.add('wrong');
                 const direction = guess < answer ? '>>> HIGHER!' : '<<< LOWER!';
 
-                // Get hint based on attempt number
-                let hintText = direction;
-                if (gameState.attempts === 1 && currentPuzzle.hint1) {
-                    hintText = `${direction}\n💡 ${currentPuzzle.hint1}`;
-                } else if (gameState.attempts === 2 && currentPuzzle.hint2) {
-                    hintText = `${direction}\n💡 ${currentPuzzle.hint2}`;
-                }
-
-                showFeedback(hintText, 'wrong');
+                showFeedback(direction, 'wrong');
+                showHintButton();
                 setTimeout(() => blankSlot.classList.remove('wrong'), 500);
 
                 if (gameState.attempts >= 3) {
@@ -1342,9 +1377,37 @@
             }, 2000);
         }
 
+        function showHintButton() {
+            const hintBtn = document.getElementById('hintBtn');
+            if (hintBtn && gameState.attempts >= 1 && !gameState.completed) {
+                hintBtn.style.display = 'block';
+            }
+        }
+
+        function openHintModal() {
+            const modal = document.getElementById('hintModal');
+            const content = document.getElementById('hintContent');
+
+            // Show hint based on attempts
+            let hint = '';
+            if (gameState.attempts >= 2 && currentPuzzle.hint2) {
+                hint = currentPuzzle.hint2;
+            } else if (gameState.attempts >= 1 && currentPuzzle.hint1) {
+                hint = currentPuzzle.hint1;
+            } else {
+                hint = 'No hint available yet!';
+            }
+
+            content.textContent = hint;
+            modal.classList.add('show');
+        }
+
         function showResult() {
             const inputArea = document.getElementById('inputArea');
             if (inputArea) inputArea.style.display = 'none';
+
+            const hintBtn = document.getElementById('hintBtn');
+            if (hintBtn) hintBtn.style.display = 'none';
 
             const feedback = document.getElementById('feedback');
             if (feedback) feedback.classList.remove('show');
@@ -1599,6 +1662,7 @@
 
             // Submit button
             addClick('#submitBtn', submitGuess);
+            addClick('#hintBtn', openHintModal);
 
             // Keyboard support (Enter to submit)
             const numberInput = document.getElementById('numberInput');
