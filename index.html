@@ -1036,7 +1036,9 @@
             attempts: 0,
             guesses: [],
             completed: false,
-            won: false
+            won: false,
+            startTime: null,
+            solveTime: null
         };
         let stats = {
             played: 0,
@@ -1074,11 +1076,14 @@
                         renderSequence(); // Show the completed sequence
                         showResult();
                     } else {
+                        // Resume incomplete game - restart timer if not set
+                        if (!gameState.startTime) gameState.startTime = Date.now();
                         renderSequence();
                         updateAttempts();
                     }
                 } else {
-                    // New day, fresh game
+                    // New day, fresh game - start timer
+                    gameState.startTime = Date.now();
                     renderSequence();
                 }
 
@@ -1233,6 +1238,7 @@
                 // Correct!
                 gameState.won = true;
                 gameState.completed = true;
+                gameState.solveTime = Date.now() - gameState.startTime;
                 blankSlot.textContent = formatNumber(answer);
                 blankSlot.classList.add('correct');
                 showFeedback('*** CORRECT! ***', 'success');
@@ -1261,6 +1267,7 @@
 
                 if (gameState.attempts >= 3) {
                     gameState.completed = true;
+                    gameState.solveTime = Date.now() - gameState.startTime;
                     stats.played++;
                     updateStreak(false);
                     setTimeout(() => {
@@ -1286,6 +1293,7 @@
 
                 if (gameState.attempts >= 3) {
                     gameState.completed = true;
+                    gameState.solveTime = Date.now() - gameState.startTime;
                     stats.played++;
                     updateStreak(false);
                     setTimeout(() => {
@@ -1398,7 +1406,26 @@
                 result += `🟥 0/3 FAILED!\n`;
             }
 
-            result += `\n» https://sequencd.netlify.app`;
+            // Add streak
+            if (gameState.won && stats.currentStreak > 0) {
+                result += `🔥 ${stats.currentStreak} day streak\n`;
+            } else if (!gameState.won) {
+                result += `💔 Streak lost\n`;
+            }
+
+            // Add time
+            if (gameState.solveTime) {
+                const seconds = Math.floor(gameState.solveTime / 1000);
+                if (seconds < 60) {
+                    result += `⏱️ ${seconds} seconds\n`;
+                } else {
+                    const mins = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    result += `⏱️ ${mins}m ${secs}s\n`;
+                }
+            }
+
+            result += `\n» https://sequencd.netlify.app\n#SEQUENCD`;
 
             // Web Share API requires HTTPS (secure context)
             if (!window.isSecureContext) {
