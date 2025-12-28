@@ -1627,85 +1627,75 @@
             ctx.font = '36px "Courier New", monospace';
             ctx.fillText(`#${gameState.puzzleNumber}`, 540, 180);
 
-            // Difficulty stars
-            const stars = '★'.repeat(currentPuzzle.difficulty) + '☆'.repeat(5 - currentPuzzle.difficulty);
-            ctx.fillStyle = '#FFFF00';
-            ctx.font = '48px "Courier New", monospace';
-            ctx.fillText(stars, 540, 260);
-
-            // The sequence WITH mystery blank - don't reveal!
-            const seq = currentPuzzle.sequence.map((n, i) => {
-                return i === currentPuzzle.blankIndex ? '?' : n;
-            }).join('  ');
-
+            // Brain + difficulty squares (like text share)
+            const difficultySquares = '🟪'.repeat(currentPuzzle.difficulty) + '⬜'.repeat(5 - currentPuzzle.difficulty);
             ctx.fillStyle = '#FFFFFF';
-            ctx.font = '48px "Courier New", monospace';
+            ctx.font = '56px "Courier New", monospace';
+            ctx.fillText(`🧠 ${difficultySquares}`, 540, 300);
 
-            // Handle long sequences
-            if (seq.length > 20) {
-                ctx.font = '36px "Courier New", monospace';
-            }
-            ctx.fillText(seq, 540, 380);
-
-            // Mystery box around the question mark
-            ctx.strokeStyle = '#FFFF00';
-            ctx.lineWidth = 3;
-
-            // Big mystery question
-            ctx.fillStyle = '#FF00FF';
-            ctx.font = 'bold 42px "Courier New", monospace';
-            ctx.fillText('WHAT COMES NEXT?', 540, 500);
-
-            // Teaser text based on result
-            let teaseText, teaseColor;
+            // Result based on attempts (like text share)
+            let resultText, resultColor;
             if (gameState.won) {
+                const emoji = ['🟩', '🟨', '🟧'][gameState.attempts - 1];
                 if (gameState.attempts === 1) {
-                    teaseText = 'I CRACKED IT INSTANTLY';
-                    teaseColor = '#00FF00';
+                    resultText = `${emoji} 1/3 GENIUS!`;
+                    resultColor = '#00FF00';
                 } else if (gameState.attempts === 2) {
-                    teaseText = 'FIGURED IT OUT';
-                    teaseColor = '#00FF00';
+                    resultText = `${emoji} 2/3 IMPRESSIVE!`;
+                    resultColor = '#FFFF00';
                 } else {
-                    teaseText = 'JUST BARELY GOT IT';
-                    teaseColor = '#FF9900';
+                    resultText = `${emoji} 3/3 GOT IT!`;
+                    resultColor = '#FF9900';
                 }
             } else {
-                teaseText = 'THIS ONE BROKE ME';
-                teaseColor = '#FF3333';
+                resultText = '🟥 0/3 FAILED!';
+                resultColor = '#FF3333';
             }
 
-            ctx.fillStyle = teaseColor;
-            ctx.font = '32px "Courier New", monospace';
-            ctx.fillText(teaseText, 540, 580);
+            ctx.fillStyle = resultColor;
+            ctx.font = 'bold 48px "Courier New", monospace';
+            ctx.fillText(resultText, 540, 420);
 
-            // Difficulty hint
-            const diffEmoji = ['👶', '🤔', '🧠', '🔥', '💀'][currentPuzzle.difficulty - 1];
-            ctx.fillStyle = '#FFFF00';
-            ctx.font = '36px "Courier New", monospace';
-            ctx.fillText(`DIFFICULTY: ${currentPuzzle.difficulty}/5`, 540, 660);
-
-            // Streak FOMO
-            if (stats.currentStreak >= 3) {
+            // Streak
+            let yPos = 520;
+            if (gameState.won && stats.currentStreak > 0) {
                 ctx.fillStyle = '#FF9900';
-                ctx.font = '32px "Courier New", monospace';
-                ctx.fillText(`🔥 ${stats.currentStreak} DAY STREAK`, 540, 720);
+                ctx.font = '40px "Courier New", monospace';
+                ctx.fillText(`🔥 ${stats.currentStreak} day streak`, 540, yPos);
+                yPos += 80;
+            } else if (!gameState.won) {
+                ctx.fillStyle = '#FF3333';
+                ctx.font = '40px "Courier New", monospace';
+                ctx.fillText('💔 Streak lost', 540, yPos);
+                yPos += 80;
+            }
+
+            // Time
+            if (gameState.solveTime) {
+                const seconds = Math.floor(gameState.solveTime / 1000);
+                let timeText;
+                if (seconds < 60) {
+                    timeText = `⏱️ ${seconds} seconds`;
+                } else {
+                    const mins = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    timeText = `⏱️ ${mins}m ${secs}s`;
+                }
+                ctx.fillStyle = '#00FFFF';
+                ctx.font = '40px "Courier New", monospace';
+                ctx.fillText(timeText, 540, yPos);
             }
 
             // Challenge call to action
-            ctx.fillStyle = '#00FFFF';
-            ctx.font = 'bold 48px "Courier New", monospace';
-            ctx.fillText('CAN YOU FIND', 540, 820);
-            ctx.fillText('THE PATTERN?', 540, 880);
+            ctx.fillStyle = '#FF00FF';
+            ctx.font = 'bold 52px "Courier New", monospace';
+            ctx.fillText('CAN YOU FIND', 540, 780);
+            ctx.fillText('THE PATTERN?', 540, 850);
 
             // Website
             ctx.fillStyle = '#FFFF00';
-            ctx.font = 'bold 32px "Courier New", monospace';
+            ctx.font = 'bold 36px "Courier New", monospace';
             ctx.fillText('SEQUENCD.COM.AU', 540, 960);
-
-            // Hashtag
-            ctx.fillStyle = '#FF00FF';
-            ctx.font = '32px "Courier New", monospace';
-            ctx.fillText('#SEQUENCD', 540, 980);
 
             // Add decorative border
             ctx.strokeStyle = '#00FFFF';
