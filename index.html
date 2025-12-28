@@ -1003,7 +1003,7 @@
             </div>
             <div class="share-buttons">
                 <button class="share-btn" id="shareBtn">SHARE TEXT</button>
-                <button class="share-btn instagram-btn" id="instaBtn">DOWNLOAD IMAGE</button>
+                <button class="share-btn instagram-btn" id="instaBtn">SHARE IMAGE</button>
             </div>
             <div class="next-puzzle">
                 <div class="next-puzzle-label">NEXT PUZZLE IN</div>
@@ -1734,12 +1734,37 @@
             ctx.lineWidth = 4;
             ctx.strokeRect(60, 60, 960, 960);
 
-            // Download the image
+            // Try to share, fall back to download
+            canvas.toBlob(async (blob) => {
+                const file = new File([blob], `sequencd-${gameState.puzzleNumber}.png`, { type: 'image/png' });
+
+                // Check if Web Share API supports files
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            files: [file],
+                            title: 'SEQUE-NCD',
+                            text: `SEQUE-NCD #${gameState.puzzleNumber} - sequencd.com.au #SEQUENCD`
+                        });
+                        showToast('SHARED!');
+                    } catch (err) {
+                        if (err.name !== 'AbortError') {
+                            // User didn't cancel, actually failed - download instead
+                            downloadFallback(canvas);
+                        }
+                    }
+                } else {
+                    // Web Share not supported - download instead
+                    downloadFallback(canvas);
+                }
+            }, 'image/png');
+        }
+
+        function downloadFallback(canvas) {
             const link = document.createElement('a');
             link.download = `sequencd-${gameState.puzzleNumber}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
-
             showToast('IMAGE DOWNLOADED!');
         }
 
