@@ -4,43 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="SEQUENCD - A daily number sequence puzzle game. Find the missing number!">
-    <meta name="theme-color" content="#6B5B95">
-    <title>SEQUENCD - Daily Number Puzzle</title>
+    <meta name="theme-color" content="#000000">
+    <title>SEQUE-NCD - Daily Number Puzzle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6B5B95;
-            --primary-dark: #574a7a;
-            --primary-light: #8677a8;
-            --success: #4CAF50;
-            --success-bg: #4CAF5020;
-            --warning: #FF9800;
-            --warning-bg: #FF980020;
-            --error: #f44336;
-            --error-bg: #f4433620;
-            --bg: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-card: #ffffff;
-            --text: #1a1a2e;
-            --text-secondary: #666666;
-            --text-muted: #999999;
-            --border: #e0e0e0;
-            --shadow: 0 4px 20px rgba(0,0,0,0.1);
-            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+            /* Teletext color palette */
+            --teletext-black: #000000;
+            --teletext-white: #FFFFFF;
+            --teletext-yellow: #FFFF00;
+            --teletext-cyan: #00FFFF;
+            --teletext-green: #00FF00;
+            --teletext-magenta: #FF00FF;
+            --teletext-red: #FF3333;
+            --teletext-blue: #3333FF;
+            --teletext-orange: #FF9900;
+
+            /* Semantic colors */
+            --primary: var(--teletext-cyan);
+            --success: var(--teletext-green);
+            --warning: var(--teletext-yellow);
+            --error: var(--teletext-red);
+            --bg: var(--teletext-black);
+            --text: var(--teletext-white);
+            --text-muted: #888888;
+
+            /* Glow effects */
+            --glow-cyan: 0 0 10px #00FFFF, 0 0 20px #00FFFF40;
+            --glow-green: 0 0 10px #00FF00, 0 0 20px #00FF0040;
+            --glow-yellow: 0 0 10px #FFFF00, 0 0 20px #FFFF0040;
+            --glow-red: 0 0 10px #FF3333, 0 0 20px #FF333340;
+            --glow-magenta: 0 0 10px #FF00FF, 0 0 20px #FF00FF40;
         }
 
-        [data-theme="dark"] {
-            --bg: #1a1a2e;
-            --bg-secondary: #16213e;
-            --bg-card: #0f0f23;
-            --text: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #666666;
-            --border: #333355;
-            --shadow: 0 4px 20px rgba(0,0,0,0.3);
-            --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+        @font-face {
+            font-family: 'Teletext';
+            src: local('Press Start 2P');
         }
 
         * {
@@ -50,14 +51,47 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Press Start 2P', monospace;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             flex-direction: column;
-            transition: background 0.3s, color 0.3s;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* CRT Scanline effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* CRT screen curve/vignette */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+            z-index: 999;
         }
 
         /* Header */
@@ -66,47 +100,57 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            background: var(--bg-card);
+            border-bottom: 4px double var(--teletext-yellow);
+            background: var(--bg);
         }
 
         .logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: -1px;
+            font-size: 1rem;
+            color: var(--teletext-cyan);
+            text-shadow: var(--glow-cyan);
+            letter-spacing: 2px;
         }
 
-        .logo span {
+        .logo .blank-char {
             display: inline-block;
             width: 0.8em;
-            border-bottom: 3px solid var(--primary);
-            margin: 0 -2px;
-            vertical-align: baseline;
+            border-bottom: 3px solid var(--teletext-cyan);
+            margin: 0 1px;
+            vertical-align: middle;
             position: relative;
-            top: -3px;
+            top: -2px;
+            box-shadow: 0 3px 10px #00FFFF80;
+        }
+
+        .page-number {
+            color: var(--teletext-yellow);
+            font-size: 0.7rem;
+            text-shadow: var(--glow-yellow);
         }
 
         .header-buttons {
             display: flex;
-            gap: 8px;
+            gap: 12px;
         }
 
         .icon-btn {
             background: transparent;
-            border: none;
-            color: var(--text-secondary);
+            border: 2px solid var(--teletext-white);
+            color: var(--teletext-white);
             cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
+            padding: 6px 10px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.6rem;
             transition: all 0.2s;
-            font-size: 1.2rem;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .icon-btn:hover {
-            background: var(--bg-secondary);
-            color: var(--text);
+            background: var(--teletext-white);
+            color: var(--teletext-black);
+            box-shadow: var(--glow-cyan);
         }
 
         /* Main content */
@@ -116,54 +160,74 @@
             flex-direction: column;
             align-items: center;
             padding: 20px 16px;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
             width: 100%;
+        }
+
+        /* Teletext-style header bar */
+        .teletext-bar {
+            width: 100%;
+            background: var(--teletext-blue);
+            padding: 8px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .teletext-bar-text {
+            color: var(--teletext-white);
+            font-size: 0.6rem;
+            letter-spacing: 1px;
         }
 
         /* Puzzle info */
         .puzzle-info {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .puzzle-number {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
+            font-size: 0.7rem;
+            color: var(--teletext-yellow);
+            text-shadow: var(--glow-yellow);
+            margin-bottom: 8px;
         }
 
         .attempts-display {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 12px;
+            margin-top: 12px;
         }
 
         .attempt-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--border);
+            width: 16px;
+            height: 16px;
+            background: #333;
+            border: 2px solid #666;
             transition: all 0.3s;
         }
 
         .attempt-dot.used {
-            background: var(--error);
+            background: var(--teletext-red);
+            border-color: var(--teletext-red);
+            box-shadow: var(--glow-red);
         }
 
         .attempt-dot.success {
-            background: var(--success);
+            background: var(--teletext-green);
+            border-color: var(--teletext-green);
+            box-shadow: var(--glow-green);
         }
 
         /* Sequence display */
         .sequence-container {
-            background: var(--bg-card);
-            border-radius: 16px;
+            background: #111;
+            border: 4px solid var(--teletext-cyan);
             padding: 24px 16px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow);
+            margin-bottom: 16px;
             width: 100%;
+            box-shadow: var(--glow-cyan), inset 0 0 30px rgba(0,255,255,0.05);
         }
 
         .sequence {
@@ -171,77 +235,104 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .sequence-item {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.4rem;
-            font-weight: 700;
-            padding: 12px 8px;
-            min-width: 50px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.2rem;
+            padding: 12px 10px;
+            min-width: 55px;
             text-align: center;
-            background: var(--bg-secondary);
-            border-radius: 8px;
+            background: var(--teletext-black);
+            color: var(--teletext-green);
+            border: 2px solid var(--teletext-green);
+            text-shadow: var(--glow-green);
             transition: all 0.3s;
         }
 
         .sequence-item.blank {
-            background: var(--primary);
-            color: white;
+            background: var(--teletext-cyan);
+            color: var(--teletext-black);
+            border-color: var(--teletext-cyan);
             min-width: 70px;
-            border: 3px dashed rgba(255,255,255,0.5);
-            position: relative;
+            text-shadow: none;
+            animation: blink-cursor 1s infinite;
+            box-shadow: var(--glow-cyan);
         }
 
         .sequence-item.blank.correct {
-            background: var(--success);
-            border-style: solid;
-            animation: bounce 0.5s ease;
+            background: var(--teletext-green);
+            border-color: var(--teletext-green);
+            animation: none;
+            box-shadow: var(--glow-green);
         }
 
         .sequence-item.blank.close {
-            background: var(--warning);
-            border-style: solid;
+            background: var(--teletext-yellow);
+            border-color: var(--teletext-yellow);
             animation: wobble 0.5s ease;
+            box-shadow: var(--glow-yellow);
         }
 
         .sequence-item.blank.wrong {
-            background: var(--error);
-            border-style: solid;
+            background: var(--teletext-red);
+            border-color: var(--teletext-red);
             animation: shake 0.5s ease;
+            box-shadow: var(--glow-red);
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .comma {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.4rem;
-            color: var(--text-muted);
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.2rem;
+            color: var(--teletext-white);
         }
 
         /* Input area */
         .input-area {
-            width: 100%;
-            margin-bottom: 16px;
+            width: 320px;
+            max-width: 90%;
+            margin: 0 auto;
+            display: block;
         }
 
         .number-input {
-            font-family: 'Space Mono', monospace;
-            font-size: 2rem;
-            font-weight: 700;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.5rem;
             text-align: center;
             width: 100%;
             padding: 16px;
-            border: 3px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg-card);
-            color: var(--text);
+            margin-bottom: 16px;
+            border: 3px solid var(--teletext-cyan);
+            background: #111;
+            color: var(--teletext-cyan);
             outline: none;
-            transition: all 0.2s;
+            text-shadow: var(--glow-cyan);
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+        }
+
+        .number-input::-webkit-outer-spin-button,
+        .number-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
 
         .number-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary)20;
+            border-color: var(--teletext-yellow);
+            color: var(--teletext-yellow);
+            text-shadow: var(--glow-yellow);
+            box-shadow: var(--glow-yellow), inset 0 0 20px rgba(255,255,0,0.1);
+        }
+
+        .number-input::placeholder {
+            color: #444;
         }
 
         .number-input:disabled {
@@ -249,87 +340,64 @@
             cursor: not-allowed;
         }
 
-        /* Number pad */
-        .numpad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+        .submit-btn {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.9rem;
             width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        .numpad-btn {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            background: var(--bg-secondary);
-            color: var(--text);
+            padding: 14px 20px;
+            border: 3px solid var(--teletext-green);
+            background: var(--teletext-green);
+            color: var(--teletext-black);
             cursor: pointer;
             transition: all 0.15s;
-            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+            box-sizing: border-box;
         }
 
-        .numpad-btn:hover {
-            background: var(--primary-light);
-            color: white;
+        .submit-btn:hover {
+            background: #00DD00;
+            box-shadow: 0 0 25px var(--teletext-green);
         }
 
-        .numpad-btn:active {
-            transform: scale(0.95);
-        }
-
-        .numpad-btn.submit {
-            background: var(--primary);
-            color: white;
-        }
-
-        .numpad-btn.submit:hover {
-            background: var(--primary-dark);
-        }
-
-        .numpad-btn.submit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .numpad-btn.delete {
-            font-size: 1.2rem;
+        .submit-btn:active {
+            transform: scale(0.98);
         }
 
         /* Feedback */
         .feedback {
+            display: none;
             text-align: center;
-            padding: 16px;
-            border-radius: 12px;
+            padding: 12px 16px;
             margin-bottom: 16px;
-            font-weight: 500;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.3s;
+            font-size: 0.65rem;
+            border: 3px solid;
         }
 
         .feedback.show {
-            opacity: 1;
-            transform: translateY(0);
+            display: block;
         }
 
         .feedback.success {
-            background: var(--success-bg);
-            color: var(--success);
+            background: #001100;
+            border-color: var(--teletext-green);
+            color: var(--teletext-green);
+            text-shadow: var(--glow-green);
         }
 
         .feedback.close {
-            background: var(--warning-bg);
-            color: var(--warning);
+            background: #111100;
+            border-color: var(--teletext-yellow);
+            color: var(--teletext-yellow);
+            text-shadow: var(--glow-yellow);
         }
 
         .feedback.wrong {
-            background: var(--error-bg);
-            color: var(--error);
+            background: #110000;
+            border-color: var(--teletext-red);
+            color: var(--teletext-red);
+            text-shadow: var(--glow-red);
         }
 
         /* Result display */
@@ -343,88 +411,103 @@
             display: block;
         }
 
-        .result-icon {
-            font-size: 4rem;
-            margin-bottom: 16px;
+        .result-header {
+            padding: 0;
         }
 
-        .result-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .result-icon {
+            font-size: 3rem;
             margin-bottom: 8px;
         }
 
-        .pattern-reveal {
-            background: var(--bg-secondary);
-            padding: 16px;
-            border-radius: 12px;
-            margin: 16px 0;
-        }
-
-        .pattern-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .pattern-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary);
+        .result-title {
+            font-size: 1rem;
+            color: var(--teletext-yellow);
+            text-shadow: var(--glow-yellow);
         }
 
         .difficulty-display {
-            margin: 16px 0;
+            margin: 14px 0 10px 0;
+        }
+
+        .difficulty-label {
+            font-size: 0.5rem;
+            color: var(--teletext-white);
+            margin-bottom: 2px;
+            text-transform: uppercase;
         }
 
         .stars {
-            font-size: 1.5rem;
+            font-size: 1rem;
             letter-spacing: 4px;
+            color: var(--teletext-yellow);
+            text-shadow: var(--glow-yellow);
+        }
+
+        .pattern-reveal {
+            background: #111;
+            border: 3px solid var(--teletext-magenta);
+            padding: 16px;
+            margin: 0;
+        }
+
+        .pattern-label {
+            font-size: 0.5rem;
+            color: var(--teletext-white);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .pattern-name {
+            font-size: 0.7rem;
+            color: var(--teletext-cyan);
+            text-shadow: var(--glow-cyan);
         }
 
         /* Share button */
         .share-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary);
-            color: white;
+            display: inline-block;
+            background: var(--teletext-magenta);
+            color: var(--teletext-black);
             border: none;
             padding: 14px 28px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: all 0.2s;
-            margin: 16px 0;
+            margin: 12px 0;
+            box-shadow: var(--glow-magenta);
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .share-btn:hover {
-            background: var(--primary-dark);
+            background: var(--teletext-yellow);
+            box-shadow: var(--glow-yellow);
             transform: scale(1.02);
-        }
-
-        .share-btn:active {
-            transform: scale(0.98);
         }
 
         /* Timer */
         .next-puzzle {
-            margin-top: 24px;
+            margin-top: 12px;
             text-align: center;
+            border-top: 2px solid #333;
+            padding-top: 10px;
         }
 
         .next-puzzle-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
+            font-size: 0.5rem;
+            color: var(--teletext-white);
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
         .countdown {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1rem;
+            color: var(--teletext-cyan);
+            text-shadow: var(--glow-cyan);
         }
 
         /* Modal */
@@ -434,11 +517,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.9);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 1001;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s;
@@ -451,15 +534,16 @@
         }
 
         .modal {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 24px;
+            background: var(--teletext-black);
+            border: 4px solid var(--teletext-cyan);
+            padding: 20px;
             max-width: 400px;
             width: 100%;
             max-height: 80vh;
             overflow-y: auto;
             transform: scale(0.9);
             transition: transform 0.3s;
+            box-shadow: var(--glow-cyan);
         }
 
         .modal-overlay.show .modal {
@@ -471,51 +555,60 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--teletext-yellow);
         }
 
         .modal-title {
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--teletext-yellow);
+            text-shadow: var(--glow-yellow);
         }
 
         .modal-close {
-            background: transparent;
+            background: var(--teletext-red);
             border: none;
-            font-size: 1.5rem;
-            color: var(--text-muted);
+            color: var(--teletext-black);
             cursor: pointer;
-            padding: 4px;
+            padding: 4px 8px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
         }
 
         /* Stats */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
             margin-bottom: 24px;
         }
 
         .stat-item {
             text-align: center;
+            padding: 12px;
+            border: 2px solid var(--teletext-green);
+            background: #001100;
         }
 
         .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text);
+            font-size: 1.2rem;
+            color: var(--teletext-green);
+            text-shadow: var(--glow-green);
         }
 
         .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            font-size: 0.4rem;
+            color: var(--teletext-white);
+            margin-top: 4px;
             text-transform: uppercase;
         }
 
         /* Guess distribution */
         .distribution-title {
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.6rem;
+            color: var(--teletext-yellow);
             margin-bottom: 12px;
+            text-shadow: var(--glow-yellow);
         }
 
         .distribution-row {
@@ -526,22 +619,21 @@
         }
 
         .distribution-label {
-            font-weight: 600;
+            font-size: 0.7rem;
             width: 20px;
+            color: var(--teletext-white);
         }
 
         .distribution-bar {
             flex: 1;
             height: 24px;
-            background: var(--bg-secondary);
-            border-radius: 4px;
-            overflow: hidden;
+            background: #222;
+            border: 1px solid #444;
         }
 
         .distribution-fill {
             height: 100%;
-            background: var(--primary);
-            border-radius: 4px;
+            background: var(--teletext-cyan);
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -551,33 +643,38 @@
         }
 
         .distribution-fill.highlight {
-            background: var(--success);
+            background: var(--teletext-green);
+            box-shadow: var(--glow-green);
         }
 
         .distribution-count {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: white;
+            font-size: 0.5rem;
+            color: var(--teletext-black);
         }
 
         /* How to play */
+        .how-to-play {
+            font-size: 0.5rem;
+            line-height: 2;
+        }
+
         .how-to-play p {
             margin-bottom: 16px;
-            line-height: 1.6;
+            color: var(--teletext-white);
         }
 
         .example-sequence {
-            background: var(--bg-secondary);
+            background: #111;
+            border: 2px solid var(--teletext-green);
             padding: 16px;
-            border-radius: 12px;
             margin: 16px 0;
             text-align: center;
         }
 
         .example-numbers {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 0.7rem;
+            color: var(--teletext-green);
+            text-shadow: var(--glow-green);
         }
 
         .hint-list {
@@ -589,11 +686,13 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            padding: 8px;
+            border-left: 3px solid var(--teletext-cyan);
         }
 
         .hint-icon {
-            font-size: 1.2rem;
+            font-size: 0.8rem;
             min-width: 24px;
         }
 
@@ -624,17 +723,14 @@
             animation: fadeIn 0.5s ease forwards;
         }
 
-        /* Streak fire */
+        /* Streak fire - teletext style */
         .streak-fire {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: linear-gradient(135deg, #ff6b35, #f7931a);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            display: inline-block;
+            background: var(--teletext-orange);
+            color: var(--teletext-black);
+            padding: 6px 12px;
+            font-size: 0.5rem;
+            margin-top: 8px;
         }
 
         /* Toast */
@@ -643,11 +739,11 @@
             bottom: 100px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: var(--text);
-            color: var(--bg);
+            background: var(--teletext-yellow);
+            color: var(--teletext-black);
             padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 500;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.5rem;
             opacity: 0;
             transition: all 0.3s;
             z-index: 2000;
@@ -658,12 +754,70 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Responsive */
-        @media (min-width: 600px) {
+        /* Responsive - Mobile first */
+
+        /* Very small phones (320px) */
+        @media (max-width: 359px) {
+            .logo {
+                font-size: 0.7rem;
+            }
+            .page-number {
+                display: none;
+            }
             .sequence-item {
-                font-size: 1.8rem;
-                padding: 16px 12px;
-                min-width: 60px;
+                font-size: 0.9rem;
+                padding: 8px 6px;
+                min-width: 40px;
+            }
+            .sequence-item.blank {
+                min-width: 50px;
+            }
+            .comma {
+                font-size: 0.9rem;
+            }
+            .numpad-btn {
+                font-size: 1rem;
+                padding: 14px;
+            }
+            .number-input {
+                font-size: 1.2rem;
+                padding: 12px;
+            }
+            .teletext-bar-text {
+                font-size: 0.45rem;
+            }
+        }
+
+        /* Small phones (360-399px) */
+        @media (min-width: 360px) and (max-width: 399px) {
+            .sequence-item {
+                font-size: 1rem;
+                padding: 10px 8px;
+                min-width: 45px;
+            }
+            .sequence-item.blank {
+                min-width: 55px;
+            }
+        }
+
+        /* Regular phones (400px+) */
+        @media (min-width: 400px) {
+            .sequence-item {
+                font-size: 1.1rem;
+                padding: 12px 10px;
+                min-width: 50px;
+            }
+            .sequence-item.blank {
+                min-width: 65px;
+            }
+        }
+
+        /* Larger screens (500px+) */
+        @media (min-width: 500px) {
+            .sequence-item {
+                font-size: 1.4rem;
+                padding: 14px 12px;
+                min-width: 65px;
             }
 
             .sequence-item.blank {
@@ -671,15 +825,32 @@
             }
 
             .numpad-btn {
-                font-size: 1.8rem;
-                padding: 20px;
+                font-size: 1.4rem;
+                padding: 22px;
+            }
+
+            .logo {
+                font-size: 1.2rem;
             }
         }
 
-        /* Theme toggle animation */
-        .theme-toggle {
-            position: relative;
-            overflow: hidden;
+        /* Tablets and desktop */
+        @media (min-width: 768px) {
+            .sequence-item {
+                font-size: 1.6rem;
+                padding: 16px 14px;
+                min-width: 75px;
+            }
+            .sequence-item.blank {
+                min-width: 90px;
+            }
+            .numpad {
+                max-width: 360px;
+            }
+            .numpad-btn {
+                font-size: 1.6rem;
+                padding: 24px;
+            }
         }
 
         /* Confetti container */
@@ -690,28 +861,44 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 999;
+            z-index: 998;
         }
 
         .confetti {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             opacity: 0;
+        }
+
+        /* Teletext flicker effect (subtle) */
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+        }
+
+        .sequence-container {
+            animation: flicker 4s infinite;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">SEQU<span></span>NCD</div>
+        <div class="logo">SEQUE<span class="blank-char">-</span>NCD</div>
+        <span class="page-number">P.100</span>
         <div class="header-buttons">
             <button class="icon-btn" id="helpBtn" aria-label="How to play">?</button>
-            <button class="icon-btn" id="statsBtn" aria-label="Statistics">📊</button>
-            <button class="icon-btn theme-toggle" id="themeBtn" aria-label="Toggle theme">🌙</button>
+            <button class="icon-btn" id="statsBtn" aria-label="Statistics">STATS</button>
         </div>
     </header>
 
     <main>
+        <div class="teletext-bar">
+            <span class="teletext-bar-text">>>> COMPLETE THE SEQUENCE <<<</span>
+        </div>
+
         <div class="puzzle-info">
             <div class="puzzle-number" id="puzzleNumber">SEQUENCD #1</div>
             <div id="streakDisplay"></div>
@@ -729,39 +916,26 @@
         <div class="feedback" id="feedback"></div>
 
         <div class="input-area" id="inputArea">
-            <input type="text" class="number-input" id="numberInput" inputmode="numeric" pattern="[0-9]*" placeholder="?" maxlength="10" autocomplete="off">
-        </div>
-
-        <div class="numpad" id="numpad">
-            <button class="numpad-btn" data-num="1">1</button>
-            <button class="numpad-btn" data-num="2">2</button>
-            <button class="numpad-btn" data-num="3">3</button>
-            <button class="numpad-btn" data-num="4">4</button>
-            <button class="numpad-btn" data-num="5">5</button>
-            <button class="numpad-btn" data-num="6">6</button>
-            <button class="numpad-btn" data-num="7">7</button>
-            <button class="numpad-btn" data-num="8">8</button>
-            <button class="numpad-btn" data-num="9">9</button>
-            <button class="numpad-btn delete" data-action="delete">⌫</button>
-            <button class="numpad-btn" data-num="0">0</button>
-            <button class="numpad-btn submit" data-action="submit" id="submitBtn">→</button>
+            <input type="number" class="number-input" id="numberInput" inputmode="decimal" placeholder="?" autocomplete="off">
+            <button class="submit-btn" id="submitBtn">SUBMIT</button>
         </div>
 
         <div class="result-container" id="resultContainer">
-            <div class="result-icon" id="resultIcon"></div>
-            <div class="result-title" id="resultTitle"></div>
-            <div class="pattern-reveal">
-                <div class="pattern-label">The pattern was</div>
-                <div class="pattern-name" id="patternName"></div>
+            <div class="result-header">
+                <div class="result-icon" id="resultIcon"></div>
+                <div class="result-title" id="resultTitle"></div>
             </div>
             <div class="difficulty-display">
+                <div class="difficulty-label">DIFFICULTY</div>
                 <div class="stars" id="difficultyStars"></div>
             </div>
-            <button class="share-btn" id="shareBtn">
-                <span>📤</span> Share Result
-            </button>
+            <div class="pattern-reveal">
+                <div class="pattern-label">THE PATTERN WAS</div>
+                <div class="pattern-name" id="patternName"></div>
+            </div>
+            <button class="share-btn" id="shareBtn">SHARE RESULT</button>
             <div class="next-puzzle">
-                <div class="next-puzzle-label">Next puzzle in</div>
+                <div class="next-puzzle-label">NEXT PUZZLE IN</div>
                 <div class="countdown" id="countdown">--:--:--</div>
             </div>
         </div>
@@ -773,33 +947,33 @@
     <div class="modal-overlay" id="helpModal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">How to Play</div>
-                <button class="modal-close" data-close="helpModal">&times;</button>
+                <div class="modal-title">HOW TO PLAY</div>
+                <button class="modal-close" data-close="helpModal">X</button>
             </div>
             <div class="how-to-play">
-                <p>Find the missing number in the sequence! You have <strong>3 attempts</strong> to guess correctly.</p>
+                <p>FIND THE MISSING NUMBER IN THE SEQUENCE. YOU HAVE 3 ATTEMPTS.</p>
 
                 <div class="example-sequence">
                     <div class="example-numbers">2, 4, 8, __, 32, 64</div>
-                    <div style="margin-top: 8px; color: var(--text-muted);">Answer: 16 (Powers of 2)</div>
+                    <div style="margin-top: 12px; color: var(--teletext-yellow);">ANSWER: 16 (POWERS OF 2)</div>
                 </div>
 
                 <ul class="hint-list">
                     <li>
-                        <span class="hint-icon">🟩</span>
-                        <span><strong>Correct!</strong> You found the missing number.</span>
+                        <span class="hint-icon" style="color: var(--teletext-green);">■</span>
+                        <span><strong style="color: var(--teletext-green);">CORRECT!</strong> YOU FOUND IT.</span>
                     </li>
                     <li>
-                        <span class="hint-icon">🟨</span>
-                        <span><strong>Close!</strong> Your guess is within 10% of the answer.</span>
+                        <span class="hint-icon" style="color: var(--teletext-yellow);">■</span>
+                        <span><strong style="color: var(--teletext-yellow);">CLOSE!</strong> WITHIN 10%.</span>
                     </li>
                     <li>
-                        <span class="hint-icon">🟥</span>
-                        <span><strong>Wrong.</strong> Try again!</span>
+                        <span class="hint-icon" style="color: var(--teletext-red);">■</span>
+                        <span><strong style="color: var(--teletext-red);">WRONG.</strong> TRY AGAIN!</span>
                     </li>
                 </ul>
 
-                <p>A new puzzle is available every day at midnight. Build your streak by playing daily!</p>
+                <p>NEW PUZZLE EVERY DAY AT MIDNIGHT. BUILD YOUR STREAK!</p>
             </div>
         </div>
     </div>
@@ -808,28 +982,28 @@
     <div class="modal-overlay" id="statsModal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">Statistics</div>
-                <button class="modal-close" data-close="statsModal">&times;</button>
+                <div class="modal-title">STATISTICS</div>
+                <button class="modal-close" data-close="statsModal">X</button>
             </div>
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-value" id="statPlayed">0</div>
-                    <div class="stat-label">Played</div>
+                    <div class="stat-label">PLAYED</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value" id="statWinPct">0</div>
-                    <div class="stat-label">Win %</div>
+                    <div class="stat-label">WIN %</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value" id="statStreak">0</div>
-                    <div class="stat-label">Streak</div>
+                    <div class="stat-label">STREAK</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value" id="statMaxStreak">0</div>
-                    <div class="stat-label">Max</div>
+                    <div class="stat-label">BEST</div>
                 </div>
             </div>
-            <div class="distribution-title">Guess Distribution</div>
+            <div class="distribution-title">GUESS DISTRIBUTION</div>
             <div id="distribution">
                 <div class="distribution-row">
                     <div class="distribution-label">1</div>
@@ -875,47 +1049,68 @@
 
         // ===== INITIALIZATION =====
         async function init() {
-            loadTheme();
-            loadStats();
-            await loadPuzzles();
+            try {
+                // Setup event listeners FIRST so buttons always work
+                setupEventListeners();
 
-            const puzzleNumber = getPuzzleNumber();
-            gameState.puzzleNumber = puzzleNumber;
+                loadStats();
+                await loadPuzzles();
 
-            // Check if already played today
-            const savedGame = loadTodaysGame();
-            if (savedGame && savedGame.puzzleNumber === puzzleNumber) {
-                gameState = savedGame;
-                if (gameState.completed) {
-                    showResult();
-                } else {
-                    renderSequence();
-                    updateAttempts();
-                }
-            } else {
-                // New day, new puzzle
+                const puzzleNumber = getPuzzleNumber();
+                gameState.puzzleNumber = puzzleNumber;
+
+                // Update page number display
+                const pageNum = document.querySelector('.page-number');
+                if (pageNum) pageNum.textContent = `P.${puzzleNumber}`;
+
+                // Always load today's puzzle
                 currentPuzzle = getPuzzleForDay(puzzleNumber);
-                renderSequence();
-            }
 
-            document.getElementById('puzzleNumber').textContent = `SEQUENCD #${puzzleNumber}`;
-            updateStreakDisplay();
-            setupEventListeners();
-            startCountdown();
+                // Check if already played today
+                const savedGame = loadTodaysGame();
+                if (savedGame && savedGame.puzzleNumber === puzzleNumber) {
+                    gameState = savedGame;
+                    if (gameState.completed) {
+                        renderSequence(); // Show the completed sequence
+                        showResult();
+                    } else {
+                        renderSequence();
+                        updateAttempts();
+                    }
+                } else {
+                    // New day, fresh game
+                    renderSequence();
+                }
+
+                document.getElementById('puzzleNumber').textContent = `SEQUENCD #${puzzleNumber}`;
+                updateStreakDisplay();
+                startCountdown();
+            } catch (err) {
+                console.error('Init error:', err);
+                // Still try to setup basic functionality
+                setupEventListeners();
+            }
         }
 
         async function loadPuzzles() {
+            // Fallback puzzles - always available
+            const fallbackPuzzles = [
+                {"sequence": [2, 4, 6, 8, 10, 12], "blankIndex": 3, "answer": 8, "pattern": "Add 2", "difficulty": 1},
+                {"sequence": [5, 10, 15, 20, 25, 30], "blankIndex": 2, "answer": 15, "pattern": "Count by 5s", "difficulty": 1},
+                {"sequence": [1, 1, 2, 3, 5, 8, 13], "blankIndex": 4, "answer": 5, "pattern": "Fibonacci sequence", "difficulty": 3},
+                {"sequence": [2, 4, 8, 16, 32, 64], "blankIndex": 3, "answer": 16, "pattern": "Powers of 2", "difficulty": 2},
+                {"sequence": [1, 4, 9, 16, 25, 36], "blankIndex": 3, "answer": 16, "pattern": "Square numbers", "difficulty": 2},
+                {"sequence": [2, 3, 5, 7, 11, 13], "blankIndex": 3, "answer": 7, "pattern": "Prime numbers", "difficulty": 3}
+            ];
+
             try {
                 const response = await fetch('puzzles.json');
+                if (!response.ok) throw new Error('Fetch failed');
                 const data = await response.json();
-                puzzles = data.puzzles;
+                puzzles = data.puzzles && data.puzzles.length > 0 ? data.puzzles : fallbackPuzzles;
             } catch (e) {
-                // Fallback puzzles if fetch fails
-                puzzles = [
-                    {"sequence": [2, 4, 6, 8, 10, 12], "blankIndex": 3, "answer": 8, "pattern": "Add 2", "difficulty": 1},
-                    {"sequence": [1, 1, 2, 3, 5, 8, 13], "blankIndex": 4, "answer": 5, "pattern": "Fibonacci sequence", "difficulty": 3},
-                    {"sequence": [2, 4, 8, 16, 32, 64], "blankIndex": 3, "answer": 16, "pattern": "Powers of 2", "difficulty": 2}
-                ];
+                console.log('Using fallback puzzles');
+                puzzles = fallbackPuzzles;
             }
         }
 
@@ -927,9 +1122,31 @@
         }
 
         function getPuzzleForDay(day) {
-            // Use day as seed for consistent puzzle selection
-            const index = day % puzzles.length;
-            return puzzles[index];
+            // Seeded random selection for mixed difficulty
+            // Same day always gives same puzzle worldwide
+            const seed = day * 2654435761; // Large prime multiplier
+            const index = Math.abs(seed) % puzzles.length;
+            const basePuzzle = puzzles[index];
+
+            // Create a copy and randomize blank position (indices 1 to len-2)
+            // This avoids first and last positions
+            const puzzle = JSON.parse(JSON.stringify(basePuzzle));
+            const seqLen = puzzle.sequence.length;
+
+            // Valid blank positions: 1 to seqLen-2 (positions 2 to second-last)
+            const validPositions = [];
+            for (let i = 1; i < seqLen - 1; i++) {
+                validPositions.push(i);
+            }
+
+            // Use second seed for blank position
+            const blankSeed = (seed * 31) % 2147483647;
+            const blankIndex = validPositions[Math.abs(blankSeed) % validPositions.length];
+
+            puzzle.blankIndex = blankIndex;
+            puzzle.answer = puzzle.sequence[blankIndex];
+
+            return puzzle;
         }
 
         // ===== RENDERING =====
@@ -988,7 +1205,7 @@
         function updateStreakDisplay() {
             const display = document.getElementById('streakDisplay');
             if (stats.currentStreak >= 2) {
-                display.innerHTML = `<div class="streak-fire">🔥 ${stats.currentStreak} day streak</div>`;
+                display.innerHTML = `<div class="streak-fire">* ${stats.currentStreak} DAY STREAK *</div>`;
             } else {
                 display.innerHTML = '';
             }
@@ -1002,7 +1219,7 @@
             const guess = parseFloat(input.value);
 
             if (isNaN(guess) || input.value.trim() === '') {
-                showFeedback('Enter a number', 'wrong');
+                showFeedback('ENTER A NUMBER', 'wrong');
                 return;
             }
 
@@ -1018,7 +1235,7 @@
                 gameState.completed = true;
                 blankSlot.textContent = formatNumber(answer);
                 blankSlot.classList.add('correct');
-                showFeedback('🎉 Correct!', 'success');
+                showFeedback('*** CORRECT! ***', 'success');
                 triggerConfetti();
 
                 // Update stats
@@ -1029,9 +1246,17 @@
 
                 setTimeout(() => showResult(), 1500);
             } else if (isClose(guess, answer)) {
-                // Close!
+                // Close - also show hints
                 blankSlot.classList.add('close');
-                showFeedback('🟨 Almost! Try again.', 'close');
+
+                let hintText = 'ALMOST! TRY AGAIN';
+                if (gameState.attempts === 1 && currentPuzzle.hint1) {
+                    hintText = `ALMOST!\n💡 ${currentPuzzle.hint1}`;
+                } else if (gameState.attempts === 2 && currentPuzzle.hint2) {
+                    hintText = `ALMOST!\n💡 ${currentPuzzle.hint2}`;
+                }
+
+                showFeedback(hintText, 'close');
                 setTimeout(() => blankSlot.classList.remove('close'), 500);
 
                 if (gameState.attempts >= 3) {
@@ -1044,10 +1269,19 @@
                     }, 1500);
                 }
             } else {
-                // Wrong
+                // Wrong - show progressive hints
                 blankSlot.classList.add('wrong');
-                const hint = guess < answer ? '📈 Higher!' : '📉 Lower!';
-                showFeedback(`🟥 ${hint}`, 'wrong');
+                const direction = guess < answer ? '>>> HIGHER!' : '<<< LOWER!';
+
+                // Get hint based on attempt number
+                let hintText = direction;
+                if (gameState.attempts === 1 && currentPuzzle.hint1) {
+                    hintText = `${direction}\n💡 ${currentPuzzle.hint1}`;
+                } else if (gameState.attempts === 2 && currentPuzzle.hint2) {
+                    hintText = `${direction}\n💡 ${currentPuzzle.hint2}`;
+                }
+
+                showFeedback(hintText, 'wrong');
                 setTimeout(() => blankSlot.classList.remove('wrong'), 500);
 
                 if (gameState.attempts >= 3) {
@@ -1101,9 +1335,11 @@
         }
 
         function showResult() {
-            document.getElementById('inputArea').style.display = 'none';
-            document.getElementById('numpad').style.display = 'none';
-            document.getElementById('feedback').classList.remove('show');
+            const inputArea = document.getElementById('inputArea');
+            if (inputArea) inputArea.style.display = 'none';
+
+            const feedback = document.getElementById('feedback');
+            if (feedback) feedback.classList.remove('show');
 
             const container = document.getElementById('resultContainer');
             container.classList.add('show');
@@ -1113,15 +1349,20 @@
             const title = document.getElementById('resultTitle');
 
             if (gameState.won) {
-                icon.textContent = '🎉';
-                title.textContent = ['Genius!', 'Impressive!', 'Well done!'][gameState.attempts - 1];
+                icon.textContent = '★';
+                icon.style.color = 'var(--teletext-yellow)';
+                icon.style.textShadow = 'var(--glow-yellow)';
+                title.textContent = ['GENIUS!', 'IMPRESSIVE!', 'WELL DONE!'][gameState.attempts - 1];
             } else {
-                icon.textContent = '😔';
-                title.textContent = 'Better luck tomorrow!';
+                icon.textContent = '✗';
+                icon.style.color = 'var(--teletext-red)';
+                icon.style.textShadow = 'var(--glow-red)';
+                title.textContent = 'BETTER LUCK TOMORROW';
+                title.style.color = 'var(--teletext-red)';
             }
 
-            document.getElementById('patternName').textContent = currentPuzzle.pattern;
-            document.getElementById('difficultyStars').textContent = '⭐'.repeat(currentPuzzle.difficulty) + '☆'.repeat(5 - currentPuzzle.difficulty);
+            document.getElementById('patternName').textContent = currentPuzzle.pattern.toUpperCase();
+            document.getElementById('difficultyStars').textContent = '★'.repeat(currentPuzzle.difficulty) + '☆'.repeat(5 - currentPuzzle.difficulty);
 
             updateStreakDisplay();
         }
@@ -1135,51 +1376,95 @@
 
         // ===== SHARING =====
         function shareResult() {
+            if (!currentPuzzle) {
+                showToast('NO PUZZLE TO SHARE');
+                return;
+            }
+
             const puzzle = currentPuzzle;
             const seq = puzzle.sequence.map((n, i) =>
                 i === puzzle.blankIndex ? '__' : n
             ).join(', ');
 
-            let result = `SEQUENCD #${gameState.puzzleNumber} ${'⭐'.repeat(puzzle.difficulty)}\n`;
+            let result = `SEQUE-NCD #${gameState.puzzleNumber}\n`;
+            result += `🧠 ${'🟪'.repeat(puzzle.difficulty)}${'⬜'.repeat(5-puzzle.difficulty)}\n`;
 
             if (gameState.won) {
-                result += `🟩 ${gameState.attempts}/3\n\n`;
+                const emoji = ['🟩', '🟨', '🟧'][gameState.attempts - 1];
+                if (gameState.attempts === 1) result += `${emoji} 1/3 GENIUS!\n`;
+                else if (gameState.attempts === 2) result += `${emoji} 2/3 IMPRESSIVE!\n`;
+                else result += `${emoji} 3/3 GOT IT!\n`;
             } else {
-                result += `❌ 0/3\n\n`;
+                result += `🟥 0/3 FAILED!\n`;
             }
 
-            result += `${seq}\n`;
-            result += `Pattern: ${puzzle.pattern}\n\n`;
-            result += `sequencd.com`;
+            result += `\n» https://sequencd.netlify.app`;
+
+            // Web Share API requires HTTPS (secure context)
+            if (!window.isSecureContext) {
+                console.log('Not secure context - clipboard fallback');
+                copyToClipboard(result);
+                showToast('COPIED! (HTTPS required for native share)');
+                return;
+            }
+
+            // Try native share - text only works best across browsers
+            const shareData = { text: result };
 
             if (navigator.share) {
-                navigator.share({ text: result }).catch(() => {
-                    copyToClipboard(result);
-                });
+                navigator.share(shareData)
+                    .then(() => showToast('SHARED!'))
+                    .catch((err) => {
+                        console.log('Share error:', err.name, err.message);
+                        if (err.name !== 'AbortError') {
+                            copyToClipboard(result);
+                        }
+                    });
             } else {
                 copyToClipboard(result);
             }
         }
 
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('Copied to clipboard!');
-            }).catch(() => {
-                showToast('Failed to copy');
-            });
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showToast('COPIED TO CLIPBOARD!'))
+                    .catch(() => fallbackCopy(text));
+            } else {
+                fallbackCopy(text);
+            }
         }
 
-        // ===== CONFETTI =====
+        function fallbackCopy(text) {
+            // Fallback for older browsers/iOS
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile
+            try {
+                document.execCommand('copy');
+                showToast('COPIED TO CLIPBOARD!');
+            } catch (err) {
+                showToast('COPY FAILED');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // ===== CONFETTI (Teletext style - blocky!) =====
         function triggerConfetti() {
             const container = document.getElementById('confetti');
-            const colors = ['#6B5B95', '#4CAF50', '#FF9800', '#f44336', '#2196F3'];
+            const colors = ['#FFFF00', '#00FFFF', '#FF00FF', '#00FF00', '#FF3333', '#FFFFFF'];
 
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 40; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confetti.style.boxShadow = `0 0 6px ${confetti.style.backgroundColor}`;
                 container.appendChild(confetti);
 
                 const animation = confetti.animate([
@@ -1215,6 +1500,8 @@
 
         // ===== STATS MODAL =====
         function showStats() {
+            console.log('Showing stats:', stats);
+
             document.getElementById('statPlayed').textContent = stats.played;
             document.getElementById('statWinPct').textContent = stats.played > 0
                 ? Math.round((stats.wins / stats.played) * 100)
@@ -1257,73 +1544,64 @@
         function loadStats() {
             const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
             if (data.stats) {
-                stats = { ...stats, ...data.stats };
+                stats = {
+                    played: data.stats.played || 0,
+                    wins: data.stats.wins || 0,
+                    currentStreak: data.stats.currentStreak || 0,
+                    maxStreak: data.stats.maxStreak || 0,
+                    distribution: {
+                        1: (data.stats.distribution && data.stats.distribution[1]) || 0,
+                        2: (data.stats.distribution && data.stats.distribution[2]) || 0,
+                        3: (data.stats.distribution && data.stats.distribution[3]) || 0
+                    },
+                    lastPlayed: data.stats.lastPlayed || null
+                };
             }
-        }
-
-        // ===== THEME =====
-        function loadTheme() {
-            const theme = localStorage.getItem('sequencd_theme') || 'light';
-            document.documentElement.setAttribute('data-theme', theme);
-            updateThemeIcon(theme);
-        }
-
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('sequencd_theme', next);
-            updateThemeIcon(next);
-        }
-
-        function updateThemeIcon(theme) {
-            document.getElementById('themeBtn').textContent = theme === 'dark' ? '☀️' : '🌙';
+            console.log('Loaded stats:', stats);
         }
 
         // ===== EVENT LISTENERS =====
         function setupEventListeners() {
-            // Numpad
-            document.querySelectorAll('.numpad-btn[data-num]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    if (gameState.completed) return;
-                    const input = document.getElementById('numberInput');
-                    if (input.value.length < 10) {
-                        input.value += btn.dataset.num;
+            // Helper to safely add click listener
+            function addClick(selector, handler) {
+                const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+                if (el) {
+                    el.addEventListener('click', handler);
+                }
+            }
+
+            // Submit button
+            addClick('#submitBtn', submitGuess);
+
+            // Keyboard support (Enter to submit)
+            const numberInput = document.getElementById('numberInput');
+            if (numberInput) {
+                numberInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        submitGuess();
                     }
                 });
-            });
-
-            document.querySelector('.numpad-btn[data-action="delete"]').addEventListener('click', () => {
-                const input = document.getElementById('numberInput');
-                input.value = input.value.slice(0, -1);
-            });
-
-            document.querySelector('.numpad-btn[data-action="submit"]').addEventListener('click', submitGuess);
-
-            // Keyboard
-            document.getElementById('numberInput').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    submitGuess();
-                }
-            });
+            }
 
             // Header buttons
-            document.getElementById('helpBtn').addEventListener('click', () => {
-                document.getElementById('helpModal').classList.add('show');
+            addClick('#helpBtn', () => {
+                const modal = document.getElementById('helpModal');
+                if (modal) modal.classList.add('show');
             });
 
-            document.getElementById('statsBtn').addEventListener('click', showStats);
-            document.getElementById('themeBtn').addEventListener('click', toggleTheme);
-            document.getElementById('shareBtn').addEventListener('click', shareResult);
+            addClick('#statsBtn', showStats);
+            addClick('#shareBtn', shareResult);
 
-            // Modal close
+            // Modal close buttons
             document.querySelectorAll('.modal-close').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.getElementById(btn.dataset.close).classList.remove('show');
+                addClick(btn, () => {
+                    const modal = document.getElementById(btn.dataset.close);
+                    if (modal) modal.classList.remove('show');
                 });
             });
 
+            // Click outside modal to close
             document.querySelectorAll('.modal-overlay').forEach(overlay => {
                 overlay.addEventListener('click', (e) => {
                     if (e.target === overlay) {
@@ -1331,20 +1609,13 @@
                     }
                 });
             });
-
-            // Decimal point support
-            document.addEventListener('keydown', (e) => {
-                if (e.key === '.' && document.activeElement === document.getElementById('numberInput')) {
-                    const input = document.getElementById('numberInput');
-                    if (!input.value.includes('.')) {
-                        input.value += '.';
-                    }
-                }
-            });
         }
 
         // Start the game
         init();
     </script>
+<!-- Analytics -->
+<script data-goatcounter="https://sequencd.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
