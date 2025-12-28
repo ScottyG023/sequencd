@@ -4,167 +4,6 @@
       "sequence": [
         2,
         4,
-        6,
-        8,
-        10,
-        12
-      ],
-      "blankIndex": 3,
-      "answer": 8,
-      "pattern": "Add 2",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "Almost there..."
-    },
-    {
-      "sequence": [
-        5,
-        10,
-        15,
-        20,
-        25,
-        30
-      ],
-      "blankIndex": 2,
-      "answer": 15,
-      "pattern": "Count by 5s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "The pattern is there"
-    },
-    {
-      "sequence": [
-        3,
-        6,
-        9,
-        12,
-        15,
-        18
-      ],
-      "blankIndex": 4,
-      "answer": 15,
-      "pattern": "Count by 3s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "Look closer..."
-    },
-    {
-      "sequence": [
-        10,
-        20,
-        30,
-        40,
-        50,
-        60
-      ],
-      "blankIndex": 3,
-      "answer": 40,
-      "pattern": "Count by 10s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "Keep looking"
-    },
-    {
-      "sequence": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7
-      ],
-      "blankIndex": 4,
-      "answer": 5,
-      "pattern": "Count by 1s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "What changes each time?"
-    },
-    {
-      "sequence": [
-        4,
-        8,
-        12,
-        16,
-        20,
-        24
-      ],
-      "blankIndex": 2,
-      "answer": 12,
-      "pattern": "Count by 4s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "Check the differences"
-    },
-    {
-      "sequence": [
-        7,
-        14,
-        21,
-        28,
-        35,
-        42
-      ],
-      "blankIndex": 3,
-      "answer": 28,
-      "pattern": "Count by 7s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "Check the differences"
-    },
-    {
-      "sequence": [
-        25,
-        50,
-        75,
-        100,
-        125,
-        150
-      ],
-      "blankIndex": 2,
-      "answer": 75,
-      "pattern": "Count by 25s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "Think simpler"
-    },
-    {
-      "sequence": [
-        11,
-        22,
-        33,
-        44,
-        55,
-        66
-      ],
-      "blankIndex": 4,
-      "answer": 55,
-      "pattern": "Count by 11s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "Keep looking"
-    },
-    {
-      "sequence": [
-        6,
-        12,
-        18,
-        24,
-        30,
-        36
-      ],
-      "blankIndex": 1,
-      "answer": 12,
-      "pattern": "Count by 6s",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "The pattern is there"
-    },
-    {
-      "sequence": [
-        2,
-        4,
         8,
         16,
         32,
@@ -1192,70 +1031,6 @@
     },
     {
       "sequence": [
-        12,
-        24,
-        36,
-        48,
-        60,
-        72
-      ],
-      "blankIndex": 3,
-      "answer": 48,
-      "pattern": "Multiples of 12",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Follow the pattern"
-    },
-    {
-      "sequence": [
-        15,
-        30,
-        45,
-        60,
-        75,
-        90
-      ],
-      "blankIndex": 4,
-      "answer": 75,
-      "pattern": "Multiples of 15",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "What connects them?"
-    },
-    {
-      "sequence": [
-        8,
-        16,
-        24,
-        32,
-        40,
-        48
-      ],
-      "blankIndex": 2,
-      "answer": 24,
-      "pattern": "Multiples of 8",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Look at the gaps"
-    },
-    {
-      "sequence": [
-        9,
-        18,
-        27,
-        36,
-        45,
-        54
-      ],
-      "blankIndex": 5,
-      "answer": 54,
-      "pattern": "Multiples of 9",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "The clue is in the numbers"
-    },
-    {
-      "sequence": [
         13,
         26,
         39,
@@ -1512,71 +1287,6 @@
     },
     {
       "sequence": [
-        60,
-        120,
-        180,
-        240,
-        300,
-        360
-      ],
-      "blankIndex": 3,
-      "answer": 240,
-      "pattern": "Minutes in hours",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Almost there..."
-    },
-    {
-      "sequence": [
-        24,
-        48,
-        72,
-        96,
-        120,
-        144
-      ],
-      "blankIndex": 4,
-      "answer": 120,
-      "pattern": "Hours in days",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "What connects them?"
-    },
-    {
-      "sequence": [
-        7,
-        14,
-        21,
-        28,
-        35,
-        42,
-        49
-      ],
-      "blankIndex": 5,
-      "answer": 42,
-      "pattern": "Days in weeks",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Look at the gaps"
-    },
-    {
-      "sequence": [
-        30,
-        60,
-        90,
-        120,
-        150,
-        180
-      ],
-      "blankIndex": 2,
-      "answer": 90,
-      "pattern": "Angle measures",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Think simpler"
-    },
-    {
-      "sequence": [
         45,
         90,
         135,
@@ -1656,36 +1366,6 @@
     },
     {
       "sequence": [
-        2,
-        20,
-        200,
-        2000,
-        20000
-      ],
-      "blankIndex": 3,
-      "answer": 2000,
-      "pattern": "Multiply by 10",
-      "difficulty": 1,
-      "hint1": "Think multiplication",
-      "hint2": "Keep looking"
-    },
-    {
-      "sequence": [
-        5,
-        50,
-        500,
-        5000,
-        50000
-      ],
-      "blankIndex": 2,
-      "answer": 500,
-      "pattern": "Multiply by 10",
-      "difficulty": 1,
-      "hint1": "Think multiplication",
-      "hint2": "Follow the pattern"
-    },
-    {
-      "sequence": [
         1,
         22,
         333,
@@ -1698,39 +1378,6 @@
       "difficulty": 3,
       "hint1": "Famous number",
       "hint2": "Almost there..."
-    },
-    {
-      "sequence": [
-        11,
-        22,
-        33,
-        44,
-        55,
-        66,
-        77
-      ],
-      "blankIndex": 4,
-      "answer": 55,
-      "pattern": "Multiples of 11",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Almost there..."
-    },
-    {
-      "sequence": [
-        111,
-        222,
-        333,
-        444,
-        555,
-        666
-      ],
-      "blankIndex": 3,
-      "answer": 444,
-      "pattern": "Multiples of 111",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -1965,89 +1612,6 @@
     },
     {
       "sequence": [
-        9,
-        8,
-        7,
-        6,
-        5,
-        4,
-        3
-      ],
-      "blankIndex": 3,
-      "answer": 6,
-      "pattern": "Count down by 1",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Check the differences"
-    },
-    {
-      "sequence": [
-        20,
-        18,
-        16,
-        14,
-        12,
-        10,
-        8
-      ],
-      "blankIndex": 4,
-      "answer": 12,
-      "pattern": "Count down by 2",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Almost there..."
-    },
-    {
-      "sequence": [
-        100,
-        95,
-        90,
-        85,
-        80,
-        75
-      ],
-      "blankIndex": 3,
-      "answer": 85,
-      "pattern": "Count down by 5",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "Look at the gaps"
-    },
-    {
-      "sequence": [
-        1000,
-        900,
-        800,
-        700,
-        600,
-        500
-      ],
-      "blankIndex": 2,
-      "answer": 800,
-      "pattern": "Count down by 100",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "What connects them?"
-    },
-    {
-      "sequence": [
-        50,
-        45,
-        40,
-        35,
-        30,
-        25,
-        20
-      ],
-      "blankIndex": 5,
-      "answer": 25,
-      "pattern": "Count down by 5",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "It's right in front of you"
-    },
-    {
-      "sequence": [
         99,
         88,
         77,
@@ -2094,21 +1658,6 @@
       "difficulty": 2,
       "hint1": "Think multiplication",
       "hint2": "Check the differences"
-    },
-    {
-      "sequence": [
-        10000,
-        1000,
-        100,
-        10,
-        1
-      ],
-      "blankIndex": 2,
-      "answer": 100,
-      "pattern": "Divide by 10",
-      "difficulty": 1,
-      "hint1": "Look for the pattern",
-      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -2435,6 +1984,327 @@
       "pattern": "Powers of 9",
       "difficulty": 3,
       "hint1": "Think multiplication",
+      "hint2": "Compare neighbours"
+    },
+    {
+      "sequence": [
+        3,
+        7,
+        11,
+        15,
+        19,
+        23
+      ],
+      "blankIndex": 3,
+      "answer": 15,
+      "pattern": "Add 4",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "Look closer..."
+    },
+    {
+      "sequence": [
+        7,
+        12,
+        17,
+        22,
+        27,
+        32
+      ],
+      "blankIndex": 2,
+      "answer": 17,
+      "pattern": "Add 5",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "The pattern is there"
+    },
+    {
+      "sequence": [
+        4,
+        11,
+        18,
+        25,
+        32,
+        39
+      ],
+      "blankIndex": 3,
+      "answer": 25,
+      "pattern": "Add 7",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "Check the differences"
+    },
+    {
+      "sequence": [
+        13,
+        21,
+        29,
+        37,
+        45,
+        53
+      ],
+      "blankIndex": 4,
+      "answer": 45,
+      "pattern": "Add 8",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "What changes each time?"
+    },
+    {
+      "sequence": [
+        47,
+        41,
+        35,
+        29,
+        23,
+        17
+      ],
+      "blankIndex": 3,
+      "answer": 29,
+      "pattern": "Subtract 6",
+      "difficulty": 1,
+      "hint1": "Think subtraction",
+      "hint2": "Compare neighbours"
+    },
+    {
+      "sequence": [
+        63,
+        54,
+        45,
+        36,
+        27,
+        18
+      ],
+      "blankIndex": 2,
+      "answer": 45,
+      "pattern": "Subtract 9",
+      "difficulty": 1,
+      "hint1": "Think subtraction",
+      "hint2": "Look closer..."
+    },
+    {
+      "sequence": [
+        88,
+        77,
+        66,
+        55,
+        44,
+        33
+      ],
+      "blankIndex": 4,
+      "answer": 44,
+      "pattern": "Subtract 11",
+      "difficulty": 1,
+      "hint1": "Think subtraction",
+      "hint2": "The pattern is there"
+    },
+    {
+      "sequence": [
+        3,
+        6,
+        12,
+        24,
+        48,
+        96
+      ],
+      "blankIndex": 3,
+      "answer": 24,
+      "pattern": "Double each time",
+      "difficulty": 1,
+      "hint1": "Think multiplication",
+      "hint2": "Check the differences"
+    },
+    {
+      "sequence": [
+        160,
+        80,
+        40,
+        20,
+        10,
+        5
+      ],
+      "blankIndex": 3,
+      "answer": 20,
+      "pattern": "Halve each time",
+      "difficulty": 1,
+      "hint1": "Think division",
+      "hint2": "What changes each time?"
+    },
+    {
+      "sequence": [
+        17,
+        24,
+        31,
+        38,
+        45,
+        52
+      ],
+      "blankIndex": 2,
+      "answer": 31,
+      "pattern": "Add 7",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "Compare neighbours"
+    },
+    {
+      "sequence": [
+        8,
+        17,
+        26,
+        35,
+        44,
+        53
+      ],
+      "blankIndex": 3,
+      "answer": 35,
+      "pattern": "Add 9",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "Look closer..."
+    },
+    {
+      "sequence": [
+        91,
+        82,
+        73,
+        64,
+        55,
+        46
+      ],
+      "blankIndex": 2,
+      "answer": 73,
+      "pattern": "Subtract 9",
+      "difficulty": 1,
+      "hint1": "Think subtraction",
+      "hint2": "The pattern is there"
+    },
+    {
+      "sequence": [
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20
+      ],
+      "blankIndex": 4,
+      "answer": 14,
+      "pattern": "Add 3",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "Check the differences"
+    },
+    {
+      "sequence": [
+        1,
+        6,
+        11,
+        16,
+        21,
+        26
+      ],
+      "blankIndex": 3,
+      "answer": 16,
+      "pattern": "Add 5",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "What changes each time?"
+    },
+    {
+      "sequence": [
+        99,
+        90,
+        81,
+        72,
+        63,
+        54
+      ],
+      "blankIndex": 3,
+      "answer": 72,
+      "pattern": "Subtract 9",
+      "difficulty": 1,
+      "hint1": "Think subtraction",
+      "hint2": "Compare neighbours"
+    },
+    {
+      "sequence": [
+        14,
+        23,
+        32,
+        41,
+        50,
+        59
+      ],
+      "blankIndex": 2,
+      "answer": 32,
+      "pattern": "Add 9",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "Look closer..."
+    },
+    {
+      "sequence": [
+        6,
+        13,
+        20,
+        27,
+        34,
+        41
+      ],
+      "blankIndex": 4,
+      "answer": 34,
+      "pattern": "Add 7",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "The pattern is there"
+    },
+    {
+      "sequence": [
+        75,
+        66,
+        57,
+        48,
+        39,
+        30
+      ],
+      "blankIndex": 2,
+      "answer": 57,
+      "pattern": "Subtract 9",
+      "difficulty": 1,
+      "hint1": "Think subtraction",
+      "hint2": "Check the differences"
+    },
+    {
+      "sequence": [
+        5,
+        11,
+        17,
+        23,
+        29,
+        35
+      ],
+      "blankIndex": 3,
+      "answer": 23,
+      "pattern": "Add 6",
+      "difficulty": 1,
+      "hint1": "Think addition",
+      "hint2": "What changes each time?"
+    },
+    {
+      "sequence": [
+        19,
+        28,
+        37,
+        46,
+        55,
+        64
+      ],
+      "blankIndex": 4,
+      "answer": 55,
+      "pattern": "Add 9",
+      "difficulty": 1,
+      "hint1": "Think addition",
       "hint2": "Compare neighbours"
     }
   ]
