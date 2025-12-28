@@ -1417,11 +1417,11 @@
             if (gameState.solveTime) {
                 const seconds = Math.floor(gameState.solveTime / 1000);
                 if (seconds < 60) {
-                    result += `⏱️ ${seconds} seconds\n`;
+                    result += `⏱️  ${seconds} seconds\n`;
                 } else {
                     const mins = Math.floor(seconds / 60);
                     const secs = seconds % 60;
-                    result += `⏱️ ${mins}m ${secs}s\n`;
+                    result += `⏱️  ${mins}m ${secs}s\n`;
                 }
             }
 
