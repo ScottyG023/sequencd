@@ -1661,12 +1661,12 @@
             if (gameState.won && stats.currentStreak > 0) {
                 ctx.fillStyle = '#FF9900';
                 ctx.font = '40px "Courier New", monospace';
-                ctx.fillText(`🔥 ${stats.currentStreak} day streak`, 540, yPos);
+                ctx.fillText(`🔥 ${stats.currentStreak} DAY STREAK`, 540, yPos);
                 yPos += 80;
             } else if (!gameState.won) {
                 ctx.fillStyle = '#FF3333';
                 ctx.font = '40px "Courier New", monospace';
-                ctx.fillText('💔 Streak lost', 540, yPos);
+                ctx.fillText('💔 STREAK LOST', 540, yPos);
                 yPos += 80;
             }
 
@@ -1675,11 +1675,11 @@
                 const seconds = Math.floor(gameState.solveTime / 1000);
                 let timeText;
                 if (seconds < 60) {
-                    timeText = `⏱️ ${seconds} seconds`;
+                    timeText = `⏱️  ${seconds} SECONDS`;
                 } else {
                     const mins = Math.floor(seconds / 60);
                     const secs = seconds % 60;
-                    timeText = `⏱️ ${mins}m ${secs}s`;
+                    timeText = `⏱️  ${mins}M ${secs}S`;
                 }
                 ctx.fillStyle = '#00FFFF';
                 ctx.font = '40px "Courier New", monospace';
