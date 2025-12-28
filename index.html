@@ -1668,6 +1668,7 @@
             const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
             data.stats = stats;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            console.log('Saved stats:', stats);
         }
 
         function loadStats() {
@@ -1687,6 +1688,12 @@
                 };
             }
             console.log('Loaded stats:', stats);
+            console.log('Date check:', {
+                today: new Date().toDateString(),
+                yesterday: new Date(Date.now() - 86400000).toDateString(),
+                lastPlayed: stats.lastPlayed,
+                wouldMatch: stats.lastPlayed === new Date(Date.now() - 86400000).toDateString()
+            });
         }
 
         // ===== EVENT LISTENERS =====
