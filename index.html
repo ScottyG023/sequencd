@@ -367,7 +367,6 @@
 
         /* Hint Button */
         .hint-btn {
-            display: block;
             margin: 16px auto;
             padding: 12px 20px;
             font-size: 1.5rem;
@@ -1148,12 +1147,12 @@
         async function loadPuzzles() {
             // Fallback puzzles - always available
             const fallbackPuzzles = [
-                {"sequence": [2, 4, 6, 8, 10, 12], "blankIndex": 3, "answer": 8, "pattern": "Add 2", "difficulty": 1},
-                {"sequence": [5, 10, 15, 20, 25, 30], "blankIndex": 2, "answer": 15, "pattern": "Count by 5s", "difficulty": 1},
-                {"sequence": [1, 1, 2, 3, 5, 8, 13], "blankIndex": 4, "answer": 5, "pattern": "Fibonacci sequence", "difficulty": 3},
-                {"sequence": [2, 4, 8, 16, 32, 64], "blankIndex": 3, "answer": 16, "pattern": "Powers of 2", "difficulty": 2},
-                {"sequence": [1, 4, 9, 16, 25, 36], "blankIndex": 3, "answer": 16, "pattern": "Square numbers", "difficulty": 2},
-                {"sequence": [2, 3, 5, 7, 11, 13], "blankIndex": 3, "answer": 7, "pattern": "Prime numbers", "difficulty": 3}
+                {"sequence": [2, 4, 6, 8, 10, 12], "blankIndex": 3, "answer": 8, "pattern": "Add 2", "difficulty": 1, "hint1": "Think addition", "hint2": "Look closer..."},
+                {"sequence": [5, 10, 15, 20, 25, 30], "blankIndex": 2, "answer": 15, "pattern": "Count by 5s", "difficulty": 1, "hint1": "Think addition", "hint2": "The pattern is there"},
+                {"sequence": [1, 1, 2, 3, 5, 8, 13], "blankIndex": 4, "answer": 5, "pattern": "Fibonacci sequence", "difficulty": 3, "hint1": "Look at previous numbers", "hint2": "Check the differences"},
+                {"sequence": [2, 4, 8, 16, 32, 64], "blankIndex": 3, "answer": 16, "pattern": "Powers of 2", "difficulty": 2, "hint1": "Think multiplication", "hint2": "What changes each time?"},
+                {"sequence": [1, 4, 9, 16, 25, 36], "blankIndex": 3, "answer": 16, "pattern": "Square numbers", "difficulty": 2, "hint1": "Think about squares", "hint2": "Compare neighbours"},
+                {"sequence": [2, 3, 5, 7, 11, 13], "blankIndex": 3, "answer": 7, "pattern": "Prime numbers", "difficulty": 3, "hint1": "Special number sequence", "hint2": "Focus on relationships"}
             ];
 
             try {
