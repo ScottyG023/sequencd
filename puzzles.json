@@ -14,7 +14,7 @@
       "pattern": "Add 2",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -30,7 +30,7 @@
       "pattern": "Count by 5s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -46,7 +46,7 @@
       "pattern": "Count by 3s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -62,7 +62,7 @@
       "pattern": "Count by 10s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -79,7 +79,7 @@
       "pattern": "Count by 1s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -95,7 +95,7 @@
       "pattern": "Count by 4s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -111,7 +111,7 @@
       "pattern": "Count by 7s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -127,7 +127,7 @@
       "pattern": "Count by 25s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "The answer is staring at you"
+      "hint2": "Think simpler"
     },
     {
       "sequence": [
@@ -143,7 +143,7 @@
       "pattern": "Count by 11s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -159,7 +159,7 @@
       "pattern": "Count by 6s",
       "difficulty": 1,
       "hint1": "Think addition",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -175,7 +175,7 @@
       "pattern": "Powers of 2",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -191,7 +191,7 @@
       "pattern": "Powers of 3",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -207,7 +207,7 @@
       "pattern": "Multiply by 3",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -223,7 +223,7 @@
       "pattern": "Double each time",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "The pattern is there"
+      "hint2": "Step back and look again"
     },
     {
       "sequence": [
@@ -239,7 +239,7 @@
       "pattern": "Double each time",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -255,7 +255,7 @@
       "pattern": "Powers of 4",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "Almost!"
+      "hint2": "The clue is in the numbers"
     },
     {
       "sequence": [
@@ -271,7 +271,7 @@
       "pattern": "Halve each time",
       "difficulty": 2,
       "hint1": "Think division",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -287,7 +287,7 @@
       "pattern": "Powers of 5",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -303,7 +303,7 @@
       "pattern": "Double each time",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -318,7 +318,7 @@
       "pattern": "Divide by 3",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -335,7 +335,7 @@
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -353,7 +353,7 @@
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -370,7 +370,7 @@
       "pattern": "Lucas numbers",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
-      "hint2": "The pattern is there"
+      "hint2": "Step back and look again"
     },
     {
       "sequence": [
@@ -387,7 +387,7 @@
       "pattern": "Square numbers",
       "difficulty": 2,
       "hint1": "Think about squares",
-      "hint2": "Almost!"
+      "hint2": "The clue is in the numbers"
     },
     {
       "sequence": [
@@ -403,7 +403,7 @@
       "pattern": "Square numbers",
       "difficulty": 2,
       "hint1": "Think about squares",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -419,7 +419,7 @@
       "pattern": "Square numbers",
       "difficulty": 2,
       "hint1": "Think about squares",
-      "hint2": "The pattern is there"
+      "hint2": "Step back and look again"
     },
     {
       "sequence": [
@@ -435,7 +435,7 @@
       "pattern": "Cube numbers",
       "difficulty": 3,
       "hint1": "Think about cubes",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -451,7 +451,7 @@
       "pattern": "Cube numbers",
       "difficulty": 3,
       "hint1": "Think about cubes",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -468,7 +468,7 @@
       "pattern": "Triangular numbers",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -484,7 +484,7 @@
       "pattern": "Triangular numbers",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -501,7 +501,7 @@
       "pattern": "Prime numbers",
       "difficulty": 3,
       "hint1": "Special number sequence",
-      "hint2": "The pattern is there"
+      "hint2": "Step back and look again"
     },
     {
       "sequence": [
@@ -517,7 +517,7 @@
       "pattern": "Prime numbers",
       "difficulty": 3,
       "hint1": "Special number sequence",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -533,7 +533,7 @@
       "pattern": "Prime numbers",
       "difficulty": 3,
       "hint1": "Special number sequence",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -549,7 +549,7 @@
       "pattern": "Prime numbers",
       "difficulty": 4,
       "hint1": "Special number sequence",
-      "hint2": "Take a fresh look"
+      "hint2": "Compare neighbours"
     },
     {
       "sequence": [
@@ -565,7 +565,7 @@
       "pattern": "Prime numbers",
       "difficulty": 4,
       "hint1": "Special number sequence",
-      "hint2": "Almost!"
+      "hint2": "The clue is in the numbers"
     },
     {
       "sequence": [
@@ -582,7 +582,7 @@
       "pattern": "Add 1, 2, 3, 4...",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -598,7 +598,7 @@
       "pattern": "Add 2, 3, 4, 5...",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -615,7 +615,7 @@
       "pattern": "Powers of 2",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -632,7 +632,7 @@
       "pattern": "Halve each time",
       "difficulty": 2,
       "hint1": "Think division",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -648,7 +648,7 @@
       "pattern": "Halve each time",
       "difficulty": 2,
       "hint1": "Think division",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -665,7 +665,7 @@
       "pattern": "Add 1, add 2, repeat",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -682,7 +682,7 @@
       "pattern": "Add 3",
       "difficulty": 2,
       "hint1": "Think addition",
-      "hint2": "The answer is staring at you"
+      "hint2": "Think simpler"
     },
     {
       "sequence": [
@@ -699,7 +699,7 @@
       "pattern": "Add 3",
       "difficulty": 2,
       "hint1": "Think addition",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -715,7 +715,7 @@
       "pattern": "Add 4",
       "difficulty": 2,
       "hint1": "Think addition",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -731,7 +731,7 @@
       "pattern": "Add 5",
       "difficulty": 2,
       "hint1": "Think addition",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -747,7 +747,7 @@
       "pattern": "Add 7",
       "difficulty": 2,
       "hint1": "Think addition",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -763,7 +763,7 @@
       "pattern": "Add 9",
       "difficulty": 2,
       "hint1": "Think addition",
-      "hint2": "The answer is staring at you"
+      "hint2": "Think simpler"
     },
     {
       "sequence": [
@@ -779,7 +779,7 @@
       "pattern": "Subtract 9",
       "difficulty": 2,
       "hint1": "Think subtraction",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -795,7 +795,7 @@
       "pattern": "Subtract 7",
       "difficulty": 2,
       "hint1": "Think subtraction",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -811,7 +811,7 @@
       "pattern": "Subtract 8",
       "difficulty": 2,
       "hint1": "Think subtraction",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -827,7 +827,7 @@
       "pattern": "Double and add 1",
       "difficulty": 4,
       "hint1": "Think addition",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -843,7 +843,7 @@
       "pattern": "Double and add 1",
       "difficulty": 4,
       "hint1": "Think addition",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -859,7 +859,7 @@
       "pattern": "Triple and add 1",
       "difficulty": 4,
       "hint1": "Think addition",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -876,7 +876,7 @@
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -893,7 +893,7 @@
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -909,7 +909,7 @@
       "pattern": "Fibonacci sequence",
       "difficulty": 4,
       "hint1": "Look at previous numbers",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -925,7 +925,7 @@
       "pattern": "Fibonacci sequence",
       "difficulty": 4,
       "hint1": "Look at previous numbers",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -941,7 +941,7 @@
       "pattern": "Factorials",
       "difficulty": 4,
       "hint1": "Think multiplication",
-      "hint2": "Almost!"
+      "hint2": "The clue is in the numbers"
     },
     {
       "sequence": [
@@ -957,7 +957,7 @@
       "pattern": "Factorials",
       "difficulty": 4,
       "hint1": "Think multiplication",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -973,7 +973,7 @@
       "pattern": "Factorials",
       "difficulty": 4,
       "hint1": "Think multiplication",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -990,7 +990,7 @@
       "pattern": "Multiply previous two",
       "difficulty": 5,
       "hint1": "Think multiplication",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -1006,7 +1006,7 @@
       "pattern": "Multiply previous two",
       "difficulty": 5,
       "hint1": "Think multiplication",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -1023,7 +1023,7 @@
       "pattern": "Square numbers",
       "difficulty": 2,
       "hint1": "Think about squares",
-      "hint2": "Take a fresh look"
+      "hint2": "Compare neighbours"
     },
     {
       "sequence": [
@@ -1039,7 +1039,7 @@
       "pattern": "Square numbers",
       "difficulty": 2,
       "hint1": "Think about squares",
-      "hint2": "The pattern is there"
+      "hint2": "Step back and look again"
     },
     {
       "sequence": [
@@ -1055,7 +1055,7 @@
       "pattern": "Square numbers",
       "difficulty": 3,
       "hint1": "Think about squares",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -1071,7 +1071,7 @@
       "pattern": "Square numbers",
       "difficulty": 3,
       "hint1": "Think about squares",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -1088,7 +1088,7 @@
       "pattern": "Two sequences interleaved",
       "difficulty": 4,
       "hint1": "Two patterns mixed",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -1105,7 +1105,7 @@
       "pattern": "Add 2, subtract 1, repeat",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -1122,7 +1122,7 @@
       "pattern": "Add 2, subtract 1, repeat",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "The pattern is there"
+      "hint2": "Step back and look again"
     },
     {
       "sequence": [
@@ -1139,7 +1139,7 @@
       "pattern": "Alternating +1, -2 and -1, +3",
       "difficulty": 4,
       "hint1": "Look for the pattern",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -1156,7 +1156,7 @@
       "pattern": "Digits of Pi",
       "difficulty": 5,
       "hint1": "Famous number",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -1172,7 +1172,7 @@
       "pattern": "Digits of e",
       "difficulty": 5,
       "hint1": "Famous number",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -1188,7 +1188,7 @@
       "pattern": "Golden ratio digits",
       "difficulty": 5,
       "hint1": "Famous number",
-      "hint2": "Almost!"
+      "hint2": "The clue is in the numbers"
     },
     {
       "sequence": [
@@ -1204,7 +1204,7 @@
       "pattern": "Multiples of 12",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -1220,7 +1220,7 @@
       "pattern": "Multiples of 15",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -1236,7 +1236,7 @@
       "pattern": "Multiples of 8",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -1252,7 +1252,7 @@
       "pattern": "Multiples of 9",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "Almost!"
+      "hint2": "The clue is in the numbers"
     },
     {
       "sequence": [
@@ -1268,7 +1268,7 @@
       "pattern": "Multiples of 13",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -1284,7 +1284,7 @@
       "pattern": "Multiples of 17",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -1300,7 +1300,7 @@
       "pattern": "Multiples of 19",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -1317,7 +1317,7 @@
       "pattern": "Cube numbers",
       "difficulty": 3,
       "hint1": "Think about cubes",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -1333,7 +1333,7 @@
       "pattern": "Cube numbers",
       "difficulty": 3,
       "hint1": "Think about cubes",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -1349,7 +1349,7 @@
       "pattern": "Cube numbers",
       "difficulty": 4,
       "hint1": "Think about cubes",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -1365,7 +1365,7 @@
       "pattern": "Double previous minus 1",
       "difficulty": 4,
       "hint1": "Think multiplication",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -1381,7 +1381,7 @@
       "pattern": "Double and add 3",
       "difficulty": 4,
       "hint1": "Think addition",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -1397,7 +1397,7 @@
       "pattern": "Double and add 1",
       "difficulty": 4,
       "hint1": "Think addition",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -1413,7 +1413,7 @@
       "pattern": "Double and add 2",
       "difficulty": 4,
       "hint1": "Think addition",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -1428,7 +1428,7 @@
       "pattern": "Look and say sequence",
       "difficulty": 5,
       "hint1": "Describe what you see",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -1445,7 +1445,7 @@
       "pattern": "n times (n+1)",
       "difficulty": 3,
       "hint1": "Look for the pattern",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -1461,7 +1461,7 @@
       "pattern": "n times (n+1)",
       "difficulty": 3,
       "hint1": "Look for the pattern",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -1475,7 +1475,7 @@
       "pattern": "Perfect numbers",
       "difficulty": 5,
       "hint1": "Look for the pattern",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -1492,7 +1492,7 @@
       "pattern": "Currency denominations",
       "difficulty": 2,
       "hint1": "Real world values",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -1508,7 +1508,7 @@
       "pattern": "US coin values (cents)",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "Take a fresh look"
+      "hint2": "Compare neighbours"
     },
     {
       "sequence": [
@@ -1524,7 +1524,7 @@
       "pattern": "Minutes in hours",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -1540,7 +1540,7 @@
       "pattern": "Hours in days",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -1557,7 +1557,7 @@
       "pattern": "Days in weeks",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -1573,7 +1573,7 @@
       "pattern": "Angle measures",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "The answer is staring at you"
+      "hint2": "Think simpler"
     },
     {
       "sequence": [
@@ -1589,7 +1589,7 @@
       "pattern": "Multiples of 45",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -1605,7 +1605,7 @@
       "pattern": "Multiples of 360",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -1622,7 +1622,7 @@
       "pattern": "Clock hours",
       "difficulty": 2,
       "hint1": "Time-based",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -1638,7 +1638,7 @@
       "pattern": "Powers of 10",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -1652,7 +1652,7 @@
       "pattern": "Squares of powers of 10",
       "difficulty": 3,
       "hint1": "Think multiplication",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -1667,7 +1667,7 @@
       "pattern": "Multiply by 10",
       "difficulty": 1,
       "hint1": "Think multiplication",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -1682,7 +1682,7 @@
       "pattern": "Multiply by 10",
       "difficulty": 1,
       "hint1": "Think multiplication",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -1697,7 +1697,7 @@
       "pattern": "Digit repeated n times",
       "difficulty": 3,
       "hint1": "Famous number",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -1714,7 +1714,7 @@
       "pattern": "Multiples of 11",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -1730,7 +1730,7 @@
       "pattern": "Multiples of 111",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -1747,7 +1747,7 @@
       "pattern": "Consecutive digit pairs",
       "difficulty": 2,
       "hint1": "Famous number",
-      "hint2": "Almost!"
+      "hint2": "The clue is in the numbers"
     },
     {
       "sequence": [
@@ -1764,7 +1764,7 @@
       "pattern": "Reversed consecutive pairs",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -1780,7 +1780,7 @@
       "pattern": "Add 11",
       "difficulty": 2,
       "hint1": "Think addition",
-      "hint2": "The answer is staring at you"
+      "hint2": "Think simpler"
     },
     {
       "sequence": [
@@ -1798,7 +1798,7 @@
       "pattern": "Add 1, 2, 3, 4...",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "The pattern is there"
+      "hint2": "Step back and look again"
     },
     {
       "sequence": [
@@ -1815,7 +1815,7 @@
       "pattern": "Add 2, 4, 6, 8...",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -1832,7 +1832,7 @@
       "pattern": "Add 3, 5, 7, 9...",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -1849,7 +1849,7 @@
       "pattern": "Add 3, 6, 9, 12...",
       "difficulty": 4,
       "hint1": "Think addition",
-      "hint2": "The answer is staring at you"
+      "hint2": "Think simpler"
     },
     {
       "sequence": [
@@ -1866,7 +1866,7 @@
       "pattern": "Square minus 1",
       "difficulty": 3,
       "hint1": "Think about squares",
-      "hint2": "Take a fresh look"
+      "hint2": "Compare neighbours"
     },
     {
       "sequence": [
@@ -1882,7 +1882,7 @@
       "pattern": "Square plus 1",
       "difficulty": 3,
       "hint1": "Think about squares",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -1898,7 +1898,7 @@
       "pattern": "Square plus 2",
       "difficulty": 3,
       "hint1": "Think about squares",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -1914,7 +1914,7 @@
       "pattern": "2 times square",
       "difficulty": 3,
       "hint1": "Think about squares",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -1930,7 +1930,7 @@
       "pattern": "Square pyramidal",
       "difficulty": 5,
       "hint1": "Think about squares",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -1946,7 +1946,7 @@
       "pattern": "Tetrahedral numbers",
       "difficulty": 5,
       "hint1": "Look for the pattern",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -1961,7 +1961,7 @@
       "pattern": "Concatenating digits",
       "difficulty": 3,
       "hint1": "Famous number",
-      "hint2": "The pattern is there"
+      "hint2": "Step back and look again"
     },
     {
       "sequence": [
@@ -1978,7 +1978,7 @@
       "pattern": "Count down by 1",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -1995,7 +1995,7 @@
       "pattern": "Count down by 2",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -2011,7 +2011,7 @@
       "pattern": "Count down by 5",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -2027,7 +2027,7 @@
       "pattern": "Count down by 100",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -2044,7 +2044,7 @@
       "pattern": "Count down by 5",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -2061,7 +2061,7 @@
       "pattern": "Count down by 11",
       "difficulty": 2,
       "hint1": "Look for the pattern",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -2077,7 +2077,7 @@
       "pattern": "Powers of 2 descending",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -2093,7 +2093,7 @@
       "pattern": "Powers of 3 descending",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -2108,7 +2108,7 @@
       "pattern": "Divide by 10",
       "difficulty": 1,
       "hint1": "Look for the pattern",
-      "hint2": "You are nearly there"
+      "hint2": "What connects them?"
     },
     {
       "sequence": [
@@ -2126,7 +2126,7 @@
       "pattern": "Square numbers",
       "difficulty": 2,
       "hint1": "Think about squares",
-      "hint2": "You are so close!"
+      "hint2": "Look closer..."
     },
     {
       "sequence": [
@@ -2142,7 +2142,7 @@
       "pattern": "Square numbers",
       "difficulty": 3,
       "hint1": "Think about squares",
-      "hint2": "One more try tomorrow?"
+      "hint2": "It's right in front of you"
     },
     {
       "sequence": [
@@ -2160,7 +2160,7 @@
       "pattern": "Prime numbers",
       "difficulty": 3,
       "hint1": "Special number sequence",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -2176,7 +2176,7 @@
       "pattern": "Prime numbers",
       "difficulty": 4,
       "hint1": "Special number sequence",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -2195,7 +2195,7 @@
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
-      "hint2": "Look again tomorrow"
+      "hint2": "What changes each time?"
     },
     {
       "sequence": [
@@ -2211,7 +2211,7 @@
       "pattern": "Fibonacci sequence",
       "difficulty": 4,
       "hint1": "Look at previous numbers",
-      "hint2": "Sleep on it..."
+      "hint2": "The pattern is there"
     },
     {
       "sequence": [
@@ -2229,7 +2229,7 @@
       "pattern": "Triangular numbers",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -2245,7 +2245,7 @@
       "pattern": "Triangular numbers",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -2261,7 +2261,7 @@
       "pattern": "Triangular numbers",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Almost!"
+      "hint2": "The clue is in the numbers"
     },
     {
       "sequence": [
@@ -2277,7 +2277,7 @@
       "pattern": "Triangular numbers",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -2294,7 +2294,7 @@
       "pattern": "Add 2, 4, 6, 8...",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Think it over"
+      "hint2": "Keep looking"
     },
     {
       "sequence": [
@@ -2311,7 +2311,7 @@
       "pattern": "Square pyramidal numbers",
       "difficulty": 5,
       "hint1": "Think about squares",
-      "hint2": "Its simpler than you think"
+      "hint2": "Look at the gaps"
     },
     {
       "sequence": [
@@ -2328,7 +2328,7 @@
       "pattern": "Add 2, 4, 6, 8...",
       "difficulty": 3,
       "hint1": "Think addition",
-      "hint2": "Trust your gut"
+      "hint2": "Check the differences"
     },
     {
       "sequence": [
@@ -2344,7 +2344,7 @@
       "pattern": "Powers of 3",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -2359,7 +2359,7 @@
       "pattern": "Powers of 5",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "Take a fresh look"
+      "hint2": "Compare neighbours"
     },
     {
       "sequence": [
@@ -2374,7 +2374,7 @@
       "pattern": "Powers of 6",
       "difficulty": 3,
       "hint1": "Think multiplication",
-      "hint2": "You have got this!"
+      "hint2": "Focus on relationships"
     },
     {
       "sequence": [
@@ -2389,7 +2389,7 @@
       "pattern": "Powers of 7",
       "difficulty": 3,
       "hint1": "Think multiplication",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -2405,7 +2405,7 @@
       "pattern": "Powers of 4",
       "difficulty": 2,
       "hint1": "Think multiplication",
-      "hint2": "Keep thinking..."
+      "hint2": "Follow the pattern"
     },
     {
       "sequence": [
@@ -2420,7 +2420,7 @@
       "pattern": "Powers of 8",
       "difficulty": 3,
       "hint1": "Think multiplication",
-      "hint2": "So close..."
+      "hint2": "Almost there..."
     },
     {
       "sequence": [
@@ -2435,7 +2435,7 @@
       "pattern": "Powers of 9",
       "difficulty": 3,
       "hint1": "Think multiplication",
-      "hint2": "Take a fresh look"
+      "hint2": "Compare neighbours"
     }
   ]
 }
