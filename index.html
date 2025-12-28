@@ -1378,29 +1378,15 @@
             const today = new Date().toDateString();
             const yesterday = new Date(Date.now() - 86400000).toDateString();
 
-            console.log('updateStreak called:', {
-                won,
-                today,
-                yesterday,
-                lastPlayed: stats.lastPlayed,
-                currentStreak: stats.currentStreak,
-                match: stats.lastPlayed === yesterday
-            });
-
             if (won) {
                 if (stats.lastPlayed === yesterday || stats.lastPlayed === null) {
                     stats.currentStreak++;
-                    console.log('Streak incremented to:', stats.currentStreak);
                 } else if (stats.lastPlayed !== today) {
                     stats.currentStreak = 1;
-                    console.log('Streak reset to 1 (missed a day)');
-                } else {
-                    console.log('Same day play - streak unchanged');
                 }
                 stats.maxStreak = Math.max(stats.maxStreak, stats.currentStreak);
             } else {
                 stats.currentStreak = 0;
-                console.log('Lost - streak reset to 0');
             }
             stats.lastPlayed = today;
         }
@@ -1668,7 +1654,6 @@
             const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
             data.stats = stats;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            console.log('Saved stats:', stats);
         }
 
         function loadStats() {
@@ -1687,13 +1672,6 @@
                     lastPlayed: data.stats.lastPlayed || null
                 };
             }
-            console.log('Loaded stats:', stats);
-            console.log('Date check:', {
-                today: new Date().toDateString(),
-                yesterday: new Date(Date.now() - 86400000).toDateString(),
-                lastPlayed: stats.lastPlayed,
-                wouldMatch: stats.lastPlayed === new Date(Date.now() - 86400000).toDateString()
-            });
         }
 
         // ===== EVENT LISTENERS =====
