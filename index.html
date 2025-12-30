@@ -1450,25 +1450,33 @@
                 return;
             }
 
-            // For non-iOS, use OneSignal as before
+            // For non-iOS, use OneSignal
             OneSignalDeferred.push(async function(OneSignal) {
-                const permission = await OneSignal.Notifications.permission;
-                const isSubscribed = permission === true;
+                // Check actual push subscription status, not just permission
+                const pushSubscription = OneSignal.User.PushSubscription;
+                const isSubscribed = pushSubscription.optedIn === true;
 
-                // Hide if already subscribed
-                if (isSubscribed) {
+                console.log('OneSignal status:', {
+                    optedIn: pushSubscription.optedIn,
+                    id: pushSubscription.id,
+                    permission: Notification.permission
+                });
+
+                // Only hide if actually subscribed to OneSignal
+                if (isSubscribed && pushSubscription.id) {
                     bell.style.display = 'none';
                     return;
                 }
 
-                // Show the bell
+                // Show the bell - user needs to subscribe
                 bell.style.display = 'flex';
 
                 // Handle click
                 bell.addEventListener('click', async () => {
                     await OneSignal.Notifications.requestPermission();
-                    const newPermission = await OneSignal.Notifications.permission;
-                    if (newPermission === true) {
+                    // Check if now subscribed
+                    const newOptedIn = OneSignal.User.PushSubscription.optedIn;
+                    if (newOptedIn === true) {
                         bell.style.display = 'none';
                         showToast('NOTIFICATIONS ON!');
                     }
