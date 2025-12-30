@@ -29,6 +29,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="SEQUENCD - A daily number sequence puzzle game. Find the missing number!">
     <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SEQUENCD">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <title>SEQUE-NCD - Daily Number Puzzle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -568,6 +573,84 @@
             box-shadow: var(--glow-cyan) !important;
         }
 
+        /* iOS Install Prompt */
+        .ios-prompt {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, #000 100%);
+            border-top: 3px solid var(--teletext-cyan);
+            padding: 20px;
+            z-index: 1000;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .ios-prompt.show {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .ios-prompt-content {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .ios-prompt-title {
+            font-size: 0.8rem;
+            color: var(--teletext-cyan);
+            text-shadow: var(--glow-cyan);
+            margin-bottom: 12px;
+        }
+
+        .ios-prompt-text {
+            font-size: 0.55rem;
+            color: var(--teletext-white);
+            margin-bottom: 16px;
+        }
+
+        .ios-prompt-steps {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .ios-step {
+            font-size: 0.5rem;
+            color: var(--teletext-yellow);
+            margin: 8px 0;
+            padding-left: 10px;
+        }
+
+        .ios-step strong {
+            color: var(--teletext-cyan);
+        }
+
+        .ios-icon {
+            font-size: 1rem;
+        }
+
+        .ios-prompt-close {
+            background: var(--teletext-magenta);
+            color: var(--teletext-black);
+            border: none;
+            padding: 12px 24px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.6rem;
+            cursor: pointer;
+            box-shadow: var(--glow-magenta);
+        }
+
+        .ios-prompt-close:hover {
+            background: var(--teletext-yellow);
+            box-shadow: var(--glow-yellow);
+        }
+
         /* Timer */
         .next-puzzle {
             margin-top: 12px;
@@ -1076,6 +1159,22 @@
         </div>
     </div>
 
+    <!-- iOS Install Prompt -->
+    <div class="ios-prompt" id="iosPrompt">
+        <div class="ios-prompt-content">
+            <div class="ios-prompt-title">GET DAILY REMINDERS</div>
+            <div class="ios-prompt-text">
+                Add SEQUENCD to your home screen:
+            </div>
+            <div class="ios-prompt-steps">
+                <div class="ios-step">1. Tap <span class="ios-icon">⬆️</span> Share button</div>
+                <div class="ios-step">2. Scroll and tap <strong>Add to Home Screen</strong></div>
+                <div class="ios-step">3. Tap <strong>Add</strong></div>
+            </div>
+            <button class="ios-prompt-close" id="iosPromptClose">GOT IT</button>
+        </div>
+    </div>
+
     <!-- Stats Modal -->
     <div class="modal-overlay" id="statsModal">
         <div class="modal">
@@ -1188,10 +1287,41 @@
                 document.getElementById('puzzleNumber').textContent = `SEQUENCD #${puzzleNumber}`;
                 updateStreakDisplay();
                 startCountdown();
+
+                // Check for iOS and show install prompt
+                checkiOSInstallPrompt();
             } catch (err) {
                 console.error('Init error:', err);
                 // Still try to setup basic functionality
                 setupEventListeners();
+            }
+        }
+
+        // ===== iOS INSTALL PROMPT =====
+        function isiOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        }
+
+        function isInStandaloneMode() {
+            return window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+        }
+
+        function checkiOSInstallPrompt() {
+            // Only show on iOS, not already installed, and hasn't been dismissed
+            if (isiOS() && !isInStandaloneMode() && !localStorage.getItem('iosPromptDismissed')) {
+                // Show after a short delay
+                setTimeout(() => {
+                    document.getElementById('iosPrompt').classList.add('show');
+                }, 2000);
+            }
+
+            // Setup close button
+            const closeBtn = document.getElementById('iosPromptClose');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    document.getElementById('iosPrompt').classList.remove('show');
+                    localStorage.setItem('iosPromptDismissed', 'true');
+                });
             }
         }
 
