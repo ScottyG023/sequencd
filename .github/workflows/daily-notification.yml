@@ -42,6 +42,8 @@ jobs:
                 "headings": {"en": "SEQUE-NCD"},
                 "contents": {"en": "'"$MESSAGE"'"},
                 "url": "https://sequencd.com.au",
+                "chrome_web_icon": "https://sequencd.com.au/icon-192.png",
+                "firefox_icon": "https://sequencd.com.au/icon-192.png",
                 "delayed_option": "timezone",
                 "delivery_time_of_day": "07:00AM"
               }'
@@ -54,6 +56,8 @@ jobs:
                 "included_segments": ["All"],
                 "headings": {"en": "SEQUE-NCD"},
                 "contents": {"en": "'"$MESSAGE"'"},
-                "url": "https://sequencd.com.au"
+                "url": "https://sequencd.com.au",
+                "chrome_web_icon": "https://sequencd.com.au/icon-192.png",
+                "firefox_icon": "https://sequencd.com.au/icon-192.png"
               }'
           fi
