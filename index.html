@@ -1407,7 +1407,35 @@
                 return;
             }
 
-            // Check OneSignal subscription status
+            // For iOS standalone, show bell immediately (OneSignal can be flaky on iOS)
+            if (isiOS() && isInStandaloneMode()) {
+                // Check if already granted via native API
+                if (Notification.permission === 'granted') {
+                    bell.style.display = 'none';
+                    return;
+                }
+                // Show bell for iOS PWA
+                bell.style.display = 'flex';
+                bell.addEventListener('click', async () => {
+                    try {
+                        const permission = await Notification.requestPermission();
+                        if (permission === 'granted') {
+                            // Also register with OneSignal if available
+                            if (window.OneSignal) {
+                                await OneSignal.Notifications.requestPermission();
+                            }
+                            bell.style.display = 'none';
+                            showToast('NOTIFICATIONS ON!');
+                        }
+                    } catch (err) {
+                        console.log('Notification permission error:', err);
+                        showToast('ENABLE IN SETTINGS');
+                    }
+                });
+                return;
+            }
+
+            // For non-iOS, use OneSignal as before
             OneSignalDeferred.push(async function(OneSignal) {
                 const permission = await OneSignal.Notifications.permission;
                 const isSubscribed = permission === true;
