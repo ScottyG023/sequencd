@@ -562,6 +562,16 @@
             margin: 0;
             padding: 12px 16px;
             font-size: 0.55rem;
+            animation: btnPulse 2s ease-in-out infinite;
+        }
+
+        .share-buttons .share-btn:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .instagram-btn {
@@ -1853,7 +1863,6 @@
             "How fast can your mates solve it?",
             "Share your streak! 🔥",
             "Spread the word!",
-            "Can they beat your time?",
             "Tag a puzzle lover!"
         ];
 
