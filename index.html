@@ -1851,7 +1851,7 @@
             ctx.lineWidth = 4;
             ctx.strokeRect(60, 60, 960, 960);
 
-            // Try to share, fall back to download
+            // Try to share, fall back to download or iOS save
             canvas.toBlob(async (blob) => {
                 const file = new File([blob], `sequencd-${gameState.puzzleNumber}.png`, { type: 'image/png' });
 
@@ -1866,23 +1866,50 @@
                         showToast('SHARED!');
                     } catch (err) {
                         if (err.name !== 'AbortError') {
-                            // User didn't cancel, actually failed - download instead
-                            downloadFallback(canvas);
+                            // User didn't cancel, actually failed - try fallback
+                            handleImageFallback(canvas);
                         }
                     }
                 } else {
-                    // Web Share not supported - download instead
-                    downloadFallback(canvas);
+                    // Web Share not supported - use fallback
+                    handleImageFallback(canvas);
                 }
             }, 'image/png');
         }
 
-        function downloadFallback(canvas) {
-            const link = document.createElement('a');
-            link.download = `sequencd-${gameState.puzzleNumber}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            showToast('IMAGE DOWNLOADED!');
+        function handleImageFallback(canvas) {
+            // Check if iOS
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                // iOS: Show image in modal for long-press save
+                showImageModal(canvas.toDataURL('image/png'));
+            } else {
+                // Desktop/Android: Download
+                const link = document.createElement('a');
+                link.download = `sequencd-${gameState.puzzleNumber}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast('IMAGE DOWNLOADED!');
+            }
+        }
+
+        function showImageModal(dataUrl) {
+            // Create modal to show image for saving
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay show';
+            modal.id = 'imageModal';
+            modal.innerHTML = `
+                <div class="modal" style="max-width: 350px;">
+                    <div class="modal-header">
+                        <div class="modal-title">SAVE IMAGE</div>
+                        <button class="modal-close" onclick="document.getElementById('imageModal').remove()">X</button>
+                    </div>
+                    <div style="padding: 15px; text-align: center;">
+                        <p style="font-size: 0.5rem; color: var(--teletext-yellow); margin-bottom: 15px;">LONG-PRESS IMAGE TO SAVE</p>
+                        <img src="${dataUrl}" style="width: 100%; border: 2px solid var(--teletext-cyan);">
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
         }
 
         // ===== CONFETTI (Teletext style - blocky!) =====
