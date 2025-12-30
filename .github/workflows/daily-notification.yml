@@ -29,16 +29,31 @@ jobs:
           INDEX=$((DAY_OF_YEAR % ${#MESSAGES[@]}))
           MESSAGE="${MESSAGES[$INDEX]}"
 
-          # Send via OneSignal API with timezone-aware delivery
-          curl -X POST "https://onesignal.com/api/v1/notifications" \
-            -H "Authorization: Basic ${{ secrets.ONESIGNAL_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "app_id": "9f0be18e-6f81-4d81-9fc9-309626615580",
-              "included_segments": ["All"],
-              "headings": {"en": "SEQUE-NCD"},
-              "contents": {"en": "'"$MESSAGE"'"},
-              "url": "https://sequencd.com.au",
-              "delayed_option": "timezone",
-              "delivery_time_of_day": "07:00AM"
-            }'
+          # Send via OneSignal API
+          # For scheduled runs (cron): deliver at 7 AM in user's timezone
+          # For manual runs: deliver immediately
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            curl -X POST "https://onesignal.com/api/v1/notifications" \
+              -H "Authorization: Basic ${{ secrets.ONESIGNAL_API_KEY }}" \
+              -H "Content-Type: application/json" \
+              -d '{
+                "app_id": "9f0be18e-6f81-4d81-9fc9-309626615580",
+                "included_segments": ["All"],
+                "headings": {"en": "SEQUE-NCD"},
+                "contents": {"en": "'"$MESSAGE"'"},
+                "url": "https://sequencd.com.au",
+                "delayed_option": "timezone",
+                "delivery_time_of_day": "07:00AM"
+              }'
+          else
+            curl -X POST "https://onesignal.com/api/v1/notifications" \
+              -H "Authorization: Basic ${{ secrets.ONESIGNAL_API_KEY }}" \
+              -H "Content-Type: application/json" \
+              -d '{
+                "app_id": "9f0be18e-6f81-4d81-9fc9-309626615580",
+                "included_segments": ["All"],
+                "headings": {"en": "SEQUE-NCD"},
+                "contents": {"en": "'"$MESSAGE"'"},
+                "url": "https://sequencd.com.au"
+              }'
+          fi
