@@ -1482,12 +1482,15 @@
                     const pushSubscription = OneSignal.User.PushSubscription;
                     console.log('OneSignal status:', {
                         optedIn: pushSubscription.optedIn,
-                        id: pushSubscription.id
+                        id: pushSubscription.id,
+                        token: pushSubscription.token
                     });
 
-                    if (pushSubscription.optedIn && pushSubscription.id) {
-                        bell.style.display = 'none';
-                    }
+                    // Only hide if we have a valid subscription ID (not just local state)
+                    // TEMPORARILY DISABLED - keeping bell visible for debugging
+                    // if (pushSubscription.optedIn && pushSubscription.id) {
+                    //     bell.style.display = 'none';
+                    // }
                 } catch (err) {
                     console.error('OneSignal check error:', err);
                 }
