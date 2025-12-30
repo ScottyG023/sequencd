@@ -11,6 +11,20 @@
     </script>
     <!-- GoatCounter -->
     <script data-goatcounter="https://sequencd.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <!-- OneSignal Push Notifications -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "9f0be18e-6f81-4d81-9fc9-309626615580",
+          safari_web_id: "web.onesignal.auto.3db514d6-c75f-4a27-ad99-adae19a9a814",
+          notifyButton: {
+            enable: true,
+          },
+        });
+      });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="SEQUENCD - A daily number sequence puzzle game. Find the missing number!">
