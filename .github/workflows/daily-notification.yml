@@ -2,9 +2,8 @@ name: Daily Push Notification
 
 on:
   schedule:
-    # Run at 7 AM Sydney time (AEDT = UTC+11, so 20:00 UTC previous day)
-    # Adjust if needed: https://crontab.guru
-    - cron: '0 20 * * *'
+    # Run at midnight UTC daily - OneSignal handles timezone delivery
+    - cron: '0 0 * * *'
   workflow_dispatch: # Allows manual trigger for testing
 
 jobs:
@@ -30,7 +29,7 @@ jobs:
           INDEX=$((DAY_OF_YEAR % ${#MESSAGES[@]}))
           MESSAGE="${MESSAGES[$INDEX]}"
 
-          # Send via OneSignal API
+          # Send via OneSignal API with timezone-aware delivery
           curl -X POST "https://onesignal.com/api/v1/notifications" \
             -H "Authorization: Basic ${{ secrets.ONESIGNAL_API_KEY }}" \
             -H "Content-Type: application/json" \
@@ -39,5 +38,7 @@ jobs:
               "included_segments": ["All"],
               "headings": {"en": "SEQUE-NCD"},
               "contents": {"en": "'"$MESSAGE"'"},
-              "url": "https://sequencd.com.au"
+              "url": "https://sequencd.com.au",
+              "delayed_option": "timezone",
+              "delivery_time_of_day": "07:00AM"
             }'
