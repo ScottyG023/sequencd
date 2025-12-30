@@ -574,6 +574,30 @@
             box-shadow: var(--glow-cyan) !important;
         }
 
+        .share-prompt {
+            color: var(--teletext-yellow);
+            font-size: 0.6rem;
+            text-align: center;
+            margin-bottom: 10px;
+            animation: fadeInOut 4s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .share-stats {
+            color: var(--teletext-gray);
+            font-size: 0.45rem;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .share-stats span {
+            color: var(--teletext-cyan);
+        }
+
         /* Custom Notification Bell */
         .notify-bell {
             position: fixed;
@@ -1156,10 +1180,12 @@
                 <div class="pattern-label">THE PATTERN WAS</div>
                 <div class="pattern-name" id="patternName"></div>
             </div>
+            <div class="share-prompt" id="sharePrompt">Challenge your friends!</div>
             <div class="share-buttons">
                 <button class="share-btn" id="shareBtn">SHARE TEXT</button>
                 <button class="share-btn instagram-btn" id="instaBtn">SHARE IMAGE</button>
             </div>
+            <div class="share-stats" id="shareStats"></div>
             <div class="next-puzzle">
                 <div class="next-puzzle-label">NEXT PUZZLE IN</div>
                 <div class="countdown" id="countdown">--:--:--</div>
@@ -1213,6 +1239,26 @@
             </div>
             <div class="hint-content" id="hintContent">
                 <!-- Hint text will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Prompt Modal -->
+    <div class="modal-overlay" id="notifyPromptModal">
+        <div class="modal" style="max-width: 350px;">
+            <div class="modal-header">
+                <div class="modal-title">DAILY REMINDERS</div>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 20px;">
+                <div style="font-size: 2rem; margin-bottom: 15px;">🔔</div>
+                <p style="color: var(--teletext-white); margin-bottom: 20px;">
+                    Never miss a puzzle!<br>
+                    Get a reminder at <span style="color: var(--teletext-yellow);">7 AM</span> each day.
+                </p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="share-btn" id="notifyYesBtn" style="background: var(--teletext-green);">YES PLEASE</button>
+                    <button class="share-btn" id="notifyLaterBtn" style="background: var(--teletext-gray);">MAYBE LATER</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1402,13 +1448,6 @@
             const bell = document.getElementById('notifyBell');
             if (!bell) return;
 
-            // Debug logging
-            console.log('setupNotificationBell:', {
-                isiOS: isiOS(),
-                isStandalone: isInStandaloneMode(),
-                notificationSupport: typeof Notification !== 'undefined'
-            });
-
             // Don't show on iOS in browser (need standalone for notifications)
             if (isiOS() && !isInStandaloneMode()) {
                 bell.style.display = 'none';
@@ -1459,7 +1498,6 @@
                     if (window.OneSignal) {
                         await OneSignal.Notifications.requestPermission();
                         const optedIn = OneSignal.User.PushSubscription.optedIn;
-                        console.log('OneSignal subscription result:', optedIn);
                         if (optedIn) {
                             bell.style.display = 'none';
                             showToast('NOTIFICATIONS ON!');
@@ -1480,17 +1518,10 @@
             OneSignalDeferred.push(async function(OneSignal) {
                 try {
                     const pushSubscription = OneSignal.User.PushSubscription;
-                    console.log('OneSignal status:', {
-                        optedIn: pushSubscription.optedIn,
-                        id: pushSubscription.id,
-                        token: pushSubscription.token
-                    });
-
-                    // Only hide if we have a valid subscription ID (not just local state)
-                    // TEMPORARILY DISABLED - keeping bell visible for debugging
-                    // if (pushSubscription.optedIn && pushSubscription.id) {
-                    //     bell.style.display = 'none';
-                    // }
+                    // Hide bell if user is already subscribed
+                    if (pushSubscription.optedIn && pushSubscription.id) {
+                        bell.style.display = 'none';
+                    }
                 } catch (err) {
                     console.error('OneSignal check error:', err);
                 }
@@ -1804,6 +1835,90 @@
             document.getElementById('difficultyStars').textContent = '★'.repeat(currentPuzzle.difficulty) + '☆'.repeat(5 - currentPuzzle.difficulty);
 
             updateStreakDisplay();
+
+            // Show rotating share prompt
+            updateSharePrompt();
+
+            // Update share stats display
+            updateShareStats();
+
+            // Check if we should show notification prompt
+            setTimeout(() => checkNotificationPrompt(), 2000);
+        }
+
+        // ===== SHARE ENCOURAGEMENT =====
+        const sharePrompts = [
+            "Challenge your friends!",
+            "How fast can your mates solve it?",
+            "Share your streak! 🔥",
+            "Spread the word!",
+            "Can they beat your time?",
+            "Tag a puzzle lover!"
+        ];
+
+        function updateSharePrompt() {
+            const prompt = document.getElementById('sharePrompt');
+            if (prompt) {
+                // Pick a random prompt
+                const randomPrompt = sharePrompts[Math.floor(Math.random() * sharePrompts.length)];
+                prompt.textContent = randomPrompt;
+            }
+        }
+
+        function updateShareStats() {
+            const shareCount = parseInt(localStorage.getItem('shareCount') || '0');
+            const statsEl = document.getElementById('shareStats');
+            if (statsEl && shareCount > 0) {
+                statsEl.innerHTML = `You've shared <span>${shareCount}</span> time${shareCount !== 1 ? 's' : ''} 📤`;
+            }
+        }
+
+        function incrementShareCount() {
+            const count = parseInt(localStorage.getItem('shareCount') || '0') + 1;
+            localStorage.setItem('shareCount', count.toString());
+            updateShareStats();
+        }
+
+        // ===== NOTIFICATION PROMPT =====
+        function checkNotificationPrompt() {
+            // Don't show if already subscribed
+            if (Notification.permission === 'granted') return;
+
+            // Don't show if user said no twice
+            const promptCount = parseInt(localStorage.getItem('notifyPromptCount') || '0');
+            if (promptCount >= 2) return;
+
+            // Don't show if dismissed today
+            const lastPrompt = localStorage.getItem('notifyPromptDate');
+            const today = new Date().toDateString();
+            if (lastPrompt === today) return;
+
+            // Show after 1st puzzle, or 3rd if they said "maybe later"
+            const gamesPlayed = stats.played || 0;
+            if (gamesPlayed === 1 || (promptCount === 1 && gamesPlayed >= 3)) {
+                showNotificationPrompt();
+            }
+        }
+
+        function showNotificationPrompt() {
+            const modal = document.getElementById('notifyPromptModal');
+            if (modal) {
+                modal.classList.add('show');
+
+                document.getElementById('notifyYesBtn').onclick = async () => {
+                    modal.classList.remove('show');
+                    // Trigger notification subscription
+                    const bell = document.getElementById('notifyBell');
+                    if (bell) bell.click();
+                };
+
+                document.getElementById('notifyLaterBtn').onclick = () => {
+                    modal.classList.remove('show');
+                    const count = parseInt(localStorage.getItem('notifyPromptCount') || '0') + 1;
+                    localStorage.setItem('notifyPromptCount', count.toString());
+                    localStorage.setItem('notifyPromptDate', new Date().toDateString());
+                };
+            }
         }
 
         function showToast(message) {
@@ -1863,6 +1978,7 @@
                 console.log('Not secure context - clipboard fallback');
                 copyToClipboard(result);
                 showToast('COPIED! (HTTPS required for native share)');
+                incrementShareCount();
                 return;
             }
 
@@ -1871,7 +1987,7 @@
 
             if (navigator.share) {
                 navigator.share(shareData)
-                    .then(() => showToast('SHARED!'))
+                    .then(() => { showToast('SHARED!'); incrementShareCount(); })
                     .catch((err) => {
                         console.log('Share error:', err.name, err.message);
                         if (err.name !== 'AbortError') {
@@ -1887,7 +2003,7 @@
             // Try modern clipboard API first
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text)
-                    .then(() => showToast('COPIED TO CLIPBOARD!'))
+                    .then(() => { showToast('COPIED TO CLIPBOARD!'); incrementShareCount(); })
                     .catch(() => fallbackCopy(text));
             } else {
                 fallbackCopy(text);
@@ -1906,6 +2022,7 @@
             try {
                 document.execCommand('copy');
                 showToast('COPIED TO CLIPBOARD!');
+                incrementShareCount();
             } catch (err) {
                 showToast('COPY FAILED');
             }
@@ -2036,6 +2153,7 @@
                             text: `SEQUE-NCD #${gameState.puzzleNumber} - sequencd.com.au #SEQUENCD`
                         });
                         showToast('SHARED!');
+                        incrementShareCount();
                     } catch (err) {
                         if (err.name !== 'AbortError') {
                             // User didn't cancel, actually failed - try fallback
@@ -2061,6 +2179,7 @@
                 link.href = canvas.toDataURL('image/png');
                 link.click();
                 showToast('IMAGE DOWNLOADED!');
+                incrementShareCount();
             }
         }
 
