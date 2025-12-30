@@ -1375,7 +1375,7 @@
       "blankIndex": 2,
       "answer": 333,
       "pattern": "Digit repeated n times",
-      "difficulty": 3,
+      "difficulty": 1,
       "hint1": "Famous number",
       "hint2": "Almost there..."
     },
@@ -1606,7 +1606,7 @@
       "blankIndex": 2,
       "answer": 123,
       "pattern": "Concatenating digits",
-      "difficulty": 3,
+      "difficulty": 1,
       "hint1": "Famous number",
       "hint2": "Step back and look again"
     },
