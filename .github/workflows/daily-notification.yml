@@ -1,0 +1,43 @@
+name: Daily Push Notification
+
+on:
+  schedule:
+    # Run at 7 AM Sydney time (AEDT = UTC+11, so 20:00 UTC previous day)
+    # Adjust if needed: https://crontab.guru
+    - cron: '0 20 * * *'
+  workflow_dispatch: # Allows manual trigger for testing
+
+jobs:
+  send-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Push Notification
+        run: |
+          # Array of messages to rotate through
+          MESSAGES=(
+            "New puzzle is live! Can you crack today's pattern?"
+            "Your daily brain teaser awaits. How fast can you solve it?"
+            "Fresh sequence dropped. Can YOU find the pattern?"
+            "Day's puzzle ready. Keep that streak alive!"
+            "New number sequence just dropped. Good luck!"
+            "Today's puzzle is waiting. Don't break your streak!"
+            "Rise and shine! New SEQUE-NCD puzzle is here."
+            "Brain workout time! Today's sequence is ready."
+          )
+
+          # Pick a random message based on day of year
+          DAY_OF_YEAR=$(date +%j)
+          INDEX=$((DAY_OF_YEAR % ${#MESSAGES[@]}))
+          MESSAGE="${MESSAGES[$INDEX]}"
+
+          # Send via OneSignal API
+          curl -X POST "https://onesignal.com/api/v1/notifications" \
+            -H "Authorization: Basic ${{ secrets.ONESIGNAL_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "app_id": "9f0be18e-6f81-4d81-9fc9-309626615580",
+              "included_segments": ["All"],
+              "headings": {"en": "SEQUE-NCD"},
+              "contents": {"en": "'"$MESSAGE"'"},
+              "url": "https://sequencd.com.au"
+            }'
