@@ -1410,9 +1410,10 @@
                 const permission = await OneSignal.Notifications.permission;
                 const isSubscribed = permission === true;
 
+                // Hide if already subscribed
                 if (isSubscribed) {
-                    bell.classList.add('subscribed');
-                    bell.querySelector('.bell-text').textContent = 'SUBSCRIBED';
+                    bell.style.display = 'none';
+                    return;
                 }
 
                 // Show the bell
@@ -1420,16 +1421,11 @@
 
                 // Handle click
                 bell.addEventListener('click', async () => {
-                    if (!isSubscribed) {
-                        await OneSignal.Notifications.requestPermission();
-                        const newPermission = await OneSignal.Notifications.permission;
-                        if (newPermission === true) {
-                            bell.classList.add('subscribed');
-                            bell.querySelector('.bell-text').textContent = 'SUBSCRIBED';
-                            showToast('NOTIFICATIONS ON!');
-                        }
-                    } else {
-                        showToast('ALREADY SUBSCRIBED!');
+                    await OneSignal.Notifications.requestPermission();
+                    const newPermission = await OneSignal.Notifications.permission;
+                    if (newPermission === true) {
+                        bell.style.display = 'none';
+                        showToast('NOTIFICATIONS ON!');
                     }
                 });
             });
