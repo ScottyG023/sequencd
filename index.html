@@ -1401,6 +1401,13 @@
             const bell = document.getElementById('notifyBell');
             if (!bell) return;
 
+            // Debug logging
+            console.log('setupNotificationBell:', {
+                isiOS: isiOS(),
+                isStandalone: isInStandaloneMode(),
+                notificationSupport: typeof Notification !== 'undefined'
+            });
+
             // Don't show on iOS in browser (need standalone for notifications)
             if (isiOS() && !isInStandaloneMode()) {
                 bell.style.display = 'none';
@@ -1409,6 +1416,12 @@
 
             // For iOS standalone, show bell immediately (OneSignal can be flaky on iOS)
             if (isiOS() && isInStandaloneMode()) {
+                // Check if Notification API exists (iOS 16.4+)
+                if (typeof Notification === 'undefined') {
+                    console.log('Notifications not supported on this iOS version');
+                    bell.style.display = 'none';
+                    return;
+                }
                 // Check if already granted via native API
                 if (Notification.permission === 'granted') {
                     bell.style.display = 'none';
@@ -1416,6 +1429,7 @@
                 }
                 // Show bell for iOS PWA
                 bell.style.display = 'flex';
+                console.log('Bell should be visible now');
                 bell.addEventListener('click', async () => {
                     try {
                         const permission = await Notification.requestPermission();
