@@ -1450,37 +1450,47 @@
                 return;
             }
 
-            // For non-iOS, use OneSignal
-            OneSignalDeferred.push(async function(OneSignal) {
-                // Check actual push subscription status, not just permission
-                const pushSubscription = OneSignal.User.PushSubscription;
-                const isSubscribed = pushSubscription.optedIn === true;
+            // For non-iOS, show bell immediately then check OneSignal
+            bell.style.display = 'flex';
 
-                console.log('OneSignal status:', {
-                    optedIn: pushSubscription.optedIn,
-                    id: pushSubscription.id,
-                    permission: Notification.permission
-                });
-
-                // Only hide if actually subscribed to OneSignal
-                if (isSubscribed && pushSubscription.id) {
-                    bell.style.display = 'none';
-                    return;
-                }
-
-                // Show the bell - user needs to subscribe
-                bell.style.display = 'flex';
-
-                // Handle click
-                bell.addEventListener('click', async () => {
-                    await OneSignal.Notifications.requestPermission();
-                    // Check if now subscribed
-                    const newOptedIn = OneSignal.User.PushSubscription.optedIn;
-                    if (newOptedIn === true) {
-                        bell.style.display = 'none';
-                        showToast('NOTIFICATIONS ON!');
+            bell.addEventListener('click', async () => {
+                try {
+                    // Try OneSignal first
+                    if (window.OneSignal) {
+                        await OneSignal.Notifications.requestPermission();
+                        const optedIn = OneSignal.User.PushSubscription.optedIn;
+                        console.log('OneSignal subscription result:', optedIn);
+                        if (optedIn) {
+                            bell.style.display = 'none';
+                            showToast('NOTIFICATIONS ON!');
+                            return;
+                        }
                     }
-                });
+                    // Fallback to native
+                    const permission = await Notification.requestPermission();
+                    if (permission === 'granted') {
+                        showToast('ALLOWED - REFRESH PAGE');
+                    }
+                } catch (err) {
+                    console.error('Notification error:', err);
+                }
+            });
+
+            // Check if already subscribed via OneSignal (async)
+            OneSignalDeferred.push(async function(OneSignal) {
+                try {
+                    const pushSubscription = OneSignal.User.PushSubscription;
+                    console.log('OneSignal status:', {
+                        optedIn: pushSubscription.optedIn,
+                        id: pushSubscription.id
+                    });
+
+                    if (pushSubscription.optedIn && pushSubscription.id) {
+                        bell.style.display = 'none';
+                    }
+                } catch (err) {
+                    console.error('OneSignal check error:', err);
+                }
             });
         }
 
