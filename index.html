@@ -1671,7 +1671,12 @@
                 if (i === currentPuzzle.blankIndex) {
                     item.classList.add('blank');
                     item.id = 'blankSlot';
-                    item.textContent = gameState.completed ? currentPuzzle.answer : '?';
+                    if (gameState.completed) {
+                        item.textContent = formatNumber(currentPuzzle.answer);
+                        item.classList.add(gameState.won ? 'correct' : 'wrong');
+                    } else {
+                        item.textContent = '?';
+                    }
                 } else {
                     item.textContent = formatNumber(num);
                 }
