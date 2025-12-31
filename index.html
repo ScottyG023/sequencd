@@ -773,6 +773,95 @@
             box-shadow: var(--glow-yellow);
         }
 
+        /* Notification Wizard */
+        .notify-wizard-btn {
+            background: var(--teletext-green);
+            color: var(--teletext-black);
+            border: none;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.5rem;
+            cursor: pointer;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            animation: pulseGreen 2s ease-in-out infinite;
+        }
+
+        .notify-wizard-btn:hover {
+            background: var(--teletext-yellow);
+            box-shadow: var(--glow-yellow);
+        }
+
+        .notify-wizard-btn.subscribed {
+            background: var(--teletext-gray);
+            animation: none;
+            box-shadow: none;
+        }
+
+        @keyframes pulseGreen {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); }
+            50% { transform: scale(1.02); box-shadow: 0 0 25px rgba(0, 255, 0, 0.8); }
+        }
+
+        .wizard-step {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid var(--teletext-cyan);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .wizard-step-number {
+            display: inline-block;
+            background: var(--teletext-cyan);
+            color: var(--teletext-black);
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.7rem;
+        }
+
+        .wizard-step-text {
+            color: var(--teletext-white);
+            font-size: 0.5rem;
+            line-height: 1.8;
+        }
+
+        .wizard-step-icon {
+            font-size: 1.2rem;
+            margin: 0 5px;
+        }
+
+        .wizard-action-btn {
+            background: var(--teletext-green);
+            color: var(--teletext-black);
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.6rem;
+            cursor: pointer;
+            margin: 15px auto;
+            display: block;
+            box-shadow: var(--glow-green);
+        }
+
+        .wizard-action-btn:hover {
+            background: var(--teletext-yellow);
+            box-shadow: var(--glow-yellow);
+        }
+
+        .wizard-platform {
+            color: var(--teletext-yellow);
+            font-size: 0.45rem;
+            margin-bottom: 15px;
+        }
+
         /* Timer */
         .next-puzzle {
             margin-top: 8px;
@@ -1233,6 +1322,7 @@
                 <button class="share-btn instagram-btn" id="instaBtn">SHARE IMAGE</button>
             </div>
             <div class="share-stats" id="shareStats"></div>
+            <button class="notify-wizard-btn" id="notifyWizardBtn">🔔 GET DAILY REMINDERS</button>
             <div class="next-puzzle">
                 <div class="next-puzzle-label">NEXT PUZZLE IN</div>
                 <div class="countdown" id="countdown">--:--:--</div>
@@ -1324,6 +1414,19 @@
                 <div class="ios-step">3. Tap <strong>Add to Home Screen</strong></div>
             </div>
             <button class="ios-prompt-close" id="iosPromptClose">GOT IT</button>
+        </div>
+    </div>
+
+    <!-- Notification Wizard Modal -->
+    <div class="modal-overlay" id="notifyWizardModal">
+        <div class="modal" style="max-width: 380px;">
+            <div class="modal-header">
+                <div class="modal-title">🔔 DAILY REMINDERS</div>
+                <button class="modal-close" data-close="notifyWizardModal">X</button>
+            </div>
+            <div class="modal-body" style="padding: 20px;" id="wizardContent">
+                <!-- Content populated by JavaScript based on platform -->
+            </div>
         </div>
     </div>
 
@@ -1445,6 +1548,9 @@
 
                 // Setup notification bell
                 setupNotificationBell();
+
+                // Setup notification wizard button
+                setupNotifyWizard();
             } catch (err) {
                 console.error('Init error:', err);
                 // Still try to setup basic functionality
@@ -1573,6 +1679,189 @@
                     console.error('OneSignal check error:', err);
                 }
             });
+        }
+
+        // ===== NOTIFICATION WIZARD =====
+        function setupNotifyWizard() {
+            const btn = document.getElementById('notifyWizardBtn');
+            if (!btn) return;
+
+            // Check if already subscribed
+            updateWizardButtonState();
+
+            btn.addEventListener('click', () => {
+                openNotifyWizard();
+            });
+        }
+
+        function updateWizardButtonState() {
+            const btn = document.getElementById('notifyWizardBtn');
+            if (!btn) return;
+
+            // Check native permission first
+            if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+                btn.textContent = '✓ REMINDERS ON';
+                btn.classList.add('subscribed');
+                return;
+            }
+
+            // Check OneSignal subscription
+            if (window.OneSignal) {
+                OneSignalDeferred.push(async function(OneSignal) {
+                    try {
+                        const pushSubscription = OneSignal.User.PushSubscription;
+                        if (pushSubscription.optedIn && pushSubscription.id) {
+                            btn.textContent = '✓ REMINDERS ON';
+                            btn.classList.add('subscribed');
+                        }
+                    } catch (err) {
+                        console.log('OneSignal check error:', err);
+                    }
+                });
+            }
+        }
+
+        function openNotifyWizard() {
+            const modal = document.getElementById('notifyWizardModal');
+            const content = document.getElementById('wizardContent');
+
+            // Detect platform
+            const isIOSDevice = isiOS();
+            const isStandalone = isInStandaloneMode();
+            const isAndroid = /Android/i.test(navigator.userAgent);
+
+            let html = '';
+
+            if (isIOSDevice && !isStandalone) {
+                // iOS in browser - need to add to home screen first
+                html = `
+                    <div class="wizard-platform">📱 iPhone/iPad detected</div>
+                    <p style="color: var(--teletext-white); font-size: 0.5rem; margin-bottom: 15px;">
+                        To get daily reminders, add SEQUE-NCD to your home screen:
+                    </p>
+                    <div class="wizard-step">
+                        <span class="wizard-step-number">1</span>
+                        <span class="wizard-step-text">
+                            Tap the <span class="wizard-step-icon">⬆️</span> <strong>Share</strong> button below
+                        </span>
+                    </div>
+                    <div class="wizard-step">
+                        <span class="wizard-step-number">2</span>
+                        <span class="wizard-step-text">
+                            Scroll down and tap <strong>"Add to Home Screen"</strong>
+                        </span>
+                    </div>
+                    <div class="wizard-step">
+                        <span class="wizard-step-number">3</span>
+                        <span class="wizard-step-text">
+                            Open SEQUE-NCD from your home screen
+                        </span>
+                    </div>
+                    <div class="wizard-step">
+                        <span class="wizard-step-number">4</span>
+                        <span class="wizard-step-text">
+                            Tap <strong>"GET DAILY REMINDERS"</strong> again
+                        </span>
+                    </div>
+                    <p style="color: var(--teletext-yellow); font-size: 0.45rem; margin-top: 15px; text-align: center;">
+                        ⚠️ Must use Safari (not Chrome)
+                    </p>
+                    <button class="wizard-action-btn" data-close="notifyWizardModal">GOT IT</button>
+                `;
+            } else if (isIOSDevice && isStandalone) {
+                // iOS PWA - can request directly
+                html = `
+                    <div class="wizard-platform">📱 iPhone/iPad App</div>
+                    <p style="color: var(--teletext-white); font-size: 0.5rem; margin-bottom: 20px; text-align: center;">
+                        Get a reminder at <span style="color: var(--teletext-yellow);">7 AM</span> each day when the new puzzle drops!
+                    </p>
+                    <button class="wizard-action-btn" id="wizardEnableBtn">
+                        🔔 ENABLE NOTIFICATIONS
+                    </button>
+                    <p style="color: var(--teletext-gray); font-size: 0.4rem; margin-top: 15px; text-align: center;">
+                        Tap "Allow" when prompted
+                    </p>
+                `;
+            } else if (isAndroid) {
+                // Android - can request directly
+                html = `
+                    <div class="wizard-platform">🤖 Android detected</div>
+                    <p style="color: var(--teletext-white); font-size: 0.5rem; margin-bottom: 20px; text-align: center;">
+                        Get a reminder at <span style="color: var(--teletext-yellow);">7 AM</span> each day when the new puzzle drops!
+                    </p>
+                    <button class="wizard-action-btn" id="wizardEnableBtn">
+                        🔔 ENABLE NOTIFICATIONS
+                    </button>
+                    <p style="color: var(--teletext-gray); font-size: 0.4rem; margin-top: 15px; text-align: center;">
+                        Tap "Allow" when prompted
+                    </p>
+                `;
+            } else {
+                // Desktop
+                html = `
+                    <div class="wizard-platform">💻 Desktop detected</div>
+                    <p style="color: var(--teletext-white); font-size: 0.5rem; margin-bottom: 20px; text-align: center;">
+                        Get a reminder at <span style="color: var(--teletext-yellow);">7 AM</span> each day when the new puzzle drops!
+                    </p>
+                    <button class="wizard-action-btn" id="wizardEnableBtn">
+                        🔔 ENABLE NOTIFICATIONS
+                    </button>
+                    <p style="color: var(--teletext-gray); font-size: 0.4rem; margin-top: 15px; text-align: center;">
+                        Click "Allow" when your browser prompts you
+                    </p>
+                `;
+            }
+
+            content.innerHTML = html;
+            modal.classList.add('show');
+
+            // Wire up enable button if present
+            const enableBtn = document.getElementById('wizardEnableBtn');
+            if (enableBtn) {
+                enableBtn.addEventListener('click', async () => {
+                    await requestNotificationPermission();
+                });
+            }
+        }
+
+        async function requestNotificationPermission() {
+            const modal = document.getElementById('notifyWizardModal');
+
+            try {
+                // Try OneSignal first
+                if (window.OneSignal) {
+                    await OneSignal.Notifications.requestPermission();
+                    const optedIn = OneSignal.User.PushSubscription.optedIn;
+                    if (optedIn) {
+                        modal.classList.remove('show');
+                        showToast('🔔 REMINDERS ON!');
+                        updateWizardButtonState();
+                        // Also hide the floating bell
+                        const bell = document.getElementById('notifyBell');
+                        if (bell) bell.style.display = 'none';
+                        return;
+                    }
+                }
+
+                // Fallback to native Notification API
+                if (typeof Notification !== 'undefined') {
+                    const permission = await Notification.requestPermission();
+                    if (permission === 'granted') {
+                        modal.classList.remove('show');
+                        showToast('🔔 REMINDERS ON!');
+                        updateWizardButtonState();
+                        // Also hide the floating bell
+                        const bell = document.getElementById('notifyBell');
+                        if (bell) bell.style.display = 'none';
+                        return;
+                    } else if (permission === 'denied') {
+                        showToast('BLOCKED - CHECK SETTINGS');
+                    }
+                }
+            } catch (err) {
+                console.error('Notification permission error:', err);
+                showToast('ERROR - TRY AGAIN');
+            }
         }
 
         async function loadPuzzles() {
