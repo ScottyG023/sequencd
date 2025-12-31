@@ -581,13 +581,25 @@
         }
 
         .instagram-btn {
-            background: var(--teletext-orange) !important;
-            box-shadow: 0 0 10px rgba(255, 153, 0, 0.5) !important;
+            animation: colorBreatheOrange 3s ease-in-out infinite !important;
+            animation-delay: 1.5s !important;
         }
 
         .instagram-btn:hover {
             background: var(--teletext-cyan) !important;
             box-shadow: var(--glow-cyan) !important;
+            animation: none !important;
+        }
+
+        @keyframes colorBreatheOrange {
+            0%, 100% {
+                background-color: var(--teletext-orange);
+                box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+            }
+            50% {
+                background-color: var(--teletext-white);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
         }
 
         .share-prompt {
