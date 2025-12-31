@@ -562,16 +562,22 @@
             margin: 0;
             padding: 12px 16px;
             font-size: 0.55rem;
-            animation: btnPulse 2s ease-in-out infinite;
+            animation: colorBreathe 3s ease-in-out infinite;
         }
 
         .share-buttons .share-btn:nth-child(2) {
-            animation-delay: 0.3s;
+            animation-delay: 1.5s;
         }
 
-        @keyframes btnPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes colorBreathe {
+            0%, 100% {
+                background-color: var(--teletext-cyan);
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            }
+            50% {
+                background-color: var(--teletext-white);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
         }
 
         .instagram-btn {
@@ -612,36 +618,40 @@
         /* Custom Notification Bell */
         .notify-bell {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+            right: 16px;
             background: var(--teletext-black);
-            border: 3px solid var(--teletext-cyan);
-            padding: 10px 15px;
+            border: 2px solid var(--teletext-cyan);
+            padding: 8px 12px;
             cursor: pointer;
-            z-index: 999;
+            z-index: 100;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             animation: bellPulse 2s infinite;
             box-shadow: var(--glow-cyan);
+            max-width: calc(100vw - 32px);
+            box-sizing: border-box;
         }
 
-        .notify-bell:hover {
+        .notify-bell:hover, .notify-bell:active {
             border-color: var(--teletext-yellow);
             box-shadow: var(--glow-yellow);
         }
 
         .bell-icon {
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .bell-text {
             font-family: 'Press Start 2P', monospace;
-            font-size: 0.45rem;
+            font-size: 0.4rem;
             color: var(--teletext-cyan);
+            white-space: nowrap;
         }
 
-        .notify-bell:hover .bell-text {
+        .notify-bell:hover .bell-text,
+        .notify-bell:active .bell-text {
             color: var(--teletext-yellow);
         }
 
@@ -657,6 +667,20 @@
 
         .notify-bell.subscribed .bell-text {
             color: var(--teletext-green);
+        }
+
+        /* Hide bell on very small screens to prevent overlap */
+        @media (max-height: 600px) {
+            .notify-bell {
+                bottom: 10px;
+                padding: 6px 10px;
+            }
+            .bell-icon {
+                font-size: 0.9rem;
+            }
+            .bell-text {
+                font-size: 0.35rem;
+            }
         }
 
         /* iOS Install Prompt */
@@ -1819,6 +1843,10 @@
             const hintBtn = document.getElementById('hintBtn');
             if (hintBtn) hintBtn.style.display = 'none';
 
+            // Hide the floating bell to prevent overlap with results
+            const notifyBell = document.getElementById('notifyBell');
+            if (notifyBell) notifyBell.style.display = 'none';
+
             const feedback = document.getElementById('feedback');
             if (feedback) feedback.classList.remove('show');
 
@@ -1946,42 +1974,44 @@
             }
 
             const puzzle = currentPuzzle;
-            const seq = puzzle.sequence.map((n, i) =>
-                i === puzzle.blankIndex ? '__' : n
-            ).join(', ');
 
+            // Build share text with double newlines (survives Reddit/social media better)
             let result = `SEQUE-NCD #${gameState.puzzleNumber}\n\n`;
-            result += `🧠 ${'🟪'.repeat(puzzle.difficulty)}${'⬜'.repeat(5-puzzle.difficulty)}\n`;
 
+            // Difficulty stars
+            result += `${'⭐'.repeat(puzzle.difficulty)}${'☆'.repeat(5-puzzle.difficulty)}\n\n`;
+
+            // Result
             if (gameState.won) {
                 const emoji = ['🟩', '🟨', '🟧'][gameState.attempts - 1];
-                if (gameState.attempts === 1) result += `${emoji} 1/3 GENIUS!\n`;
-                else if (gameState.attempts === 2) result += `${emoji} 2/3 IMPRESSIVE!\n`;
-                else result += `${emoji} 3/3 GOT IT!\n`;
+                const word = ['GENIUS', 'IMPRESSIVE', 'GOT IT'][gameState.attempts - 1];
+                result += `${emoji} ${gameState.attempts}/3 ${word}!\n\n`;
             } else {
-                result += `🟥 0/3 FAILED!\n`;
+                result += `🟥 X/3 FAILED\n\n`;
             }
 
-            // Add streak
+            // Stats line (streak + time on same line)
+            let statsLine = '';
             if (gameState.won && stats.currentStreak > 0) {
-                result += `🔥 ${stats.currentStreak} day streak\n`;
+                statsLine += `🔥 ${stats.currentStreak} day streak`;
             } else if (!gameState.won) {
-                result += `💔 Streak lost\n`;
+                statsLine += `💔 Streak lost`;
             }
 
-            // Add time
             if (gameState.solveTime) {
                 const seconds = Math.floor(gameState.solveTime / 1000);
+                if (statsLine) statsLine += ' · ';
                 if (seconds < 60) {
-                    result += `⏱️  ${seconds} seconds\n`;
+                    statsLine += `⏱️ ${seconds}s`;
                 } else {
                     const mins = Math.floor(seconds / 60);
                     const secs = seconds % 60;
-                    result += `⏱️  ${mins}m ${secs}s\n`;
+                    statsLine += `⏱️ ${mins}m ${secs}s`;
                 }
             }
+            if (statsLine) result += `${statsLine}\n\n`;
 
-            result += `\nhttps://sequencd.com.au\n\n#SEQUENCD`;
+            result += `https://sequencd.com.au #SEQUENCD`;
 
             // Web Share API requires HTTPS (secure context)
             if (!window.isSecureContext) {
