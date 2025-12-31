@@ -1482,6 +1482,14 @@
         const EPOCH = new Date('2024-01-01').getTime();
 
         let puzzles = [];
+        let deferredInstallPrompt = null; // For Android "Add to Home Screen"
+
+        // Capture the install prompt for Android
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+            console.log('Install prompt captured');
+        });
         let currentPuzzle = null;
         let gameState = {
             puzzleNumber: 0,
@@ -1783,19 +1791,56 @@
                     </p>
                 `;
             } else if (isAndroid) {
-                // Android - can request directly
-                html = `
-                    <div class="wizard-platform">🤖 Android detected</div>
-                    <p style="color: var(--teletext-white); font-size: 0.5rem; margin-bottom: 20px; text-align: center;">
-                        Get a reminder at <span style="color: var(--teletext-yellow);">7 AM</span> each day when the new puzzle drops!
-                    </p>
-                    <button class="wizard-action-btn" id="wizardEnableBtn">
-                        🔔 ENABLE NOTIFICATIONS
-                    </button>
-                    <p style="color: var(--teletext-gray); font-size: 0.4rem; margin-top: 15px; text-align: center;">
-                        Tap "Allow" when prompted
-                    </p>
-                `;
+                // Android - check if we can offer install
+                const canInstall = deferredInstallPrompt !== null;
+                const isInstalledAndroid = isInStandaloneMode();
+
+                if (isInstalledAndroid) {
+                    // Already installed as PWA
+                    html = `
+                        <div class="wizard-platform">🤖 Android App</div>
+                        <p style="color: var(--teletext-white); font-size: 0.5rem; margin-bottom: 20px; text-align: center;">
+                            Get a reminder at <span style="color: var(--teletext-yellow);">7 AM</span> each day when the new puzzle drops!
+                        </p>
+                        <button class="wizard-action-btn" id="wizardEnableBtn">
+                            🔔 ENABLE NOTIFICATIONS
+                        </button>
+                        <p style="color: var(--teletext-gray); font-size: 0.4rem; margin-top: 15px; text-align: center;">
+                            Tap "Allow" when prompted
+                        </p>
+                    `;
+                } else if (canInstall) {
+                    // Can trigger install prompt
+                    html = `
+                        <div class="wizard-platform">🤖 Android detected</div>
+                        <p style="color: var(--teletext-white); font-size: 0.5rem; margin-bottom: 15px; text-align: center;">
+                            For the best experience, install the app:
+                        </p>
+                        <button class="wizard-action-btn" id="wizardInstallBtn" style="background: var(--teletext-cyan);">
+                            📲 INSTALL APP
+                        </button>
+                        <p style="color: var(--teletext-gray); font-size: 0.4rem; margin: 15px 0; text-align: center;">
+                            — or just enable notifications —
+                        </p>
+                        <button class="wizard-action-btn" id="wizardEnableBtn" style="background: var(--teletext-green);">
+                            🔔 ENABLE NOTIFICATIONS
+                        </button>
+                    `;
+                } else {
+                    // No install prompt available, just offer notifications
+                    html = `
+                        <div class="wizard-platform">🤖 Android detected</div>
+                        <p style="color: var(--teletext-white); font-size: 0.5rem; margin-bottom: 20px; text-align: center;">
+                            Get a reminder at <span style="color: var(--teletext-yellow);">7 AM</span> each day when the new puzzle drops!
+                        </p>
+                        <button class="wizard-action-btn" id="wizardEnableBtn">
+                            🔔 ENABLE NOTIFICATIONS
+                        </button>
+                        <p style="color: var(--teletext-gray); font-size: 0.4rem; margin-top: 15px; text-align: center;">
+                            Tap "Allow" when prompted
+                        </p>
+                    `;
+                }
             } else {
                 // Desktop
                 html = `
@@ -1820,6 +1865,25 @@
             if (enableBtn) {
                 enableBtn.addEventListener('click', async () => {
                     await requestNotificationPermission();
+                });
+            }
+
+            // Wire up install button for Android
+            const installBtn = document.getElementById('wizardInstallBtn');
+            if (installBtn && deferredInstallPrompt) {
+                installBtn.addEventListener('click', async () => {
+                    try {
+                        deferredInstallPrompt.prompt();
+                        const result = await deferredInstallPrompt.userChoice;
+                        if (result.outcome === 'accepted') {
+                            showToast('📲 APP INSTALLED!');
+                            deferredInstallPrompt = null;
+                            // Close modal - they'll need to open from home screen
+                            modal.classList.remove('show');
+                        }
+                    } catch (err) {
+                        console.error('Install error:', err);
+                    }
                 });
             }
         }
