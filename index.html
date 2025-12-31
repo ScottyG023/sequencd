@@ -1998,11 +1998,11 @@
             if (gameState.solveTime) {
                 const seconds = Math.floor(gameState.solveTime / 1000);
                 if (seconds < 60) {
-                    result += `⏱️${seconds} seconds\n`;
+                    result += `⏱️ ${seconds} seconds\n`;
                 } else {
                     const mins = Math.floor(seconds / 60);
                     const secs = seconds % 60;
-                    result += `⏱️${mins}m ${secs}s\n`;
+                    result += `⏱️ ${mins}m ${secs}s\n`;
                 }
             }
 
@@ -2143,11 +2143,11 @@
                 const seconds = Math.floor(gameState.solveTime / 1000);
                 let timeText;
                 if (seconds < 60) {
-                    timeText = `⏱️${seconds} SECONDS`;
+                    timeText = `⏱️ ${seconds} SECONDS`;
                 } else {
                     const mins = Math.floor(seconds / 60);
                     const secs = seconds % 60;
-                    timeText = `⏱️${mins}M ${secs}S`;
+                    timeText = `⏱️ ${mins}M ${secs}S`;
                 }
                 ctx.fillStyle = '#00FFFF';
                 ctx.font = '40px "Courier New", monospace';
