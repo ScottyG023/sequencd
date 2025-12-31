@@ -1609,14 +1609,15 @@
             // Same day always gives same puzzle worldwide
             const seed = day * 2654435761; // Large prime multiplier
 
-            // Weight selection: 1-star = 10%, 2-star = 20%, 3-star = 30%, 4-star = 25%, 5-star = 15%
-            const weights = {1: 10, 2: 20, 3: 30, 4: 25, 5: 15};
+            // Weight selection: 3-4 star most common, then 2, then 1 and 5 least
+            // 1-star = 10%, 2-star = 15%, 3-star = 35%, 4-star = 30%, 5-star = 10%
+            const weights = {1: 10, 2: 15, 3: 35, 4: 30, 5: 10};
             const targetRoll = Math.abs(seed) % 100;
             let targetDifficulty;
             if (targetRoll < 10) targetDifficulty = 1;
-            else if (targetRoll < 30) targetDifficulty = 2;
+            else if (targetRoll < 25) targetDifficulty = 2;
             else if (targetRoll < 60) targetDifficulty = 3;
-            else if (targetRoll < 85) targetDifficulty = 4;
+            else if (targetRoll < 90) targetDifficulty = 4;
             else targetDifficulty = 5;
 
             // Filter puzzles by target difficulty, fallback to all if none found
