@@ -1951,10 +1951,15 @@
         }
 
         function getPuzzleNumber() {
+            // Use UTC so everyone worldwide gets the same puzzle
             const now = new Date();
-            const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            const daysSinceEpoch = Math.floor((midnight.getTime() - EPOCH) / (1000 * 60 * 60 * 24));
+            const utcMidnight = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+            const daysSinceEpoch = Math.floor((utcMidnight - EPOCH) / (1000 * 60 * 60 * 24));
             return daysSinceEpoch + 1;
+        }
+
+        function getUTCDateString(date = new Date()) {
+            return `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDate()}`;
         }
 
         function getPuzzleForDay(day) {
@@ -2152,8 +2157,9 @@
         }
 
         function updateStreak(won) {
-            const today = new Date().toDateString();
-            const yesterday = new Date(Date.now() - 86400000).toDateString();
+            // Use UTC dates so streaks are consistent globally
+            const today = getUTCDateString();
+            const yesterday = getUTCDateString(new Date(Date.now() - 86400000));
 
             if (won) {
                 if (stats.lastPlayed === yesterday || stats.lastPlayed === null) {
@@ -2638,9 +2644,10 @@
         }
 
         function updateCountdown() {
+            // Countdown to next UTC midnight (when new puzzle drops)
             const now = new Date();
-            const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-            const diff = tomorrow - now;
+            const tomorrowUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1);
+            const diff = tomorrowUTC - now.getTime();
 
             const hours = Math.floor(diff / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
