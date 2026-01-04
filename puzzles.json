@@ -161,16 +161,16 @@
     },
     {
       "sequence": [
-        1,
-        1,
-        2,
         3,
         5,
         8,
-        13
+        13,
+        21,
+        34,
+        55
       ],
       "blankIndex": 4,
-      "answer": 5,
+      "answer": 21,
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
@@ -178,17 +178,16 @@
     },
     {
       "sequence": [
-        1,
-        1,
-        2,
-        3,
         5,
         8,
         13,
-        21
+        21,
+        34,
+        55,
+        89
       ],
-      "blankIndex": 5,
-      "answer": 8,
+      "blankIndex": 4,
+      "answer": 34,
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
@@ -519,7 +518,7 @@
       "blankIndex": 4,
       "answer": 14,
       "pattern": "Add 3",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think addition",
       "hint2": "Think simpler"
     },
@@ -536,7 +535,7 @@
       "blankIndex": 3,
       "answer": 10,
       "pattern": "Add 3",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think addition",
       "hint2": "Keep looking"
     },
@@ -552,7 +551,7 @@
       "blankIndex": 2,
       "answer": 13,
       "pattern": "Add 4",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think addition",
       "hint2": "Focus on relationships"
     },
@@ -568,7 +567,7 @@
       "blankIndex": 4,
       "answer": 23,
       "pattern": "Add 5",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think addition",
       "hint2": "Look at the gaps"
     },
@@ -584,7 +583,7 @@
       "blankIndex": 3,
       "answer": 23,
       "pattern": "Add 7",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think addition",
       "hint2": "What changes each time?"
     },
@@ -600,7 +599,7 @@
       "blankIndex": 2,
       "answer": 19,
       "pattern": "Add 9",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think addition",
       "hint2": "Think simpler"
     },
@@ -616,7 +615,7 @@
       "blankIndex": 3,
       "answer": 73,
       "pattern": "Subtract 9",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think subtraction",
       "hint2": "Check the differences"
     },
@@ -632,7 +631,7 @@
       "blankIndex": 4,
       "answer": 22,
       "pattern": "Subtract 7",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think subtraction",
       "hint2": "It's right in front of you"
     },
@@ -648,7 +647,7 @@
       "blankIndex": 2,
       "answer": 64,
       "pattern": "Subtract 8",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think subtraction",
       "hint2": "Look at the gaps"
     },
@@ -702,16 +701,16 @@
     },
     {
       "sequence": [
-        0,
-        1,
-        1,
-        2,
-        3,
-        5,
-        8
+        8,
+        13,
+        21,
+        34,
+        55,
+        89,
+        144
       ],
-      "blankIndex": 4,
-      "answer": 3,
+      "blankIndex": 3,
+      "answer": 34,
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
@@ -719,16 +718,16 @@
     },
     {
       "sequence": [
-        1,
-        2,
-        3,
-        5,
-        8,
         13,
-        21
+        21,
+        34,
+        55,
+        89,
+        144,
+        233
       ],
-      "blankIndex": 5,
-      "answer": 13,
+      "blankIndex": 4,
+      "answer": 89,
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
@@ -1041,7 +1040,7 @@
       "blankIndex": 3,
       "answer": 52,
       "pattern": "Multiples of 13",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Look for the pattern",
       "hint2": "Check the differences"
     },
@@ -1057,7 +1056,7 @@
       "blankIndex": 4,
       "answer": 85,
       "pattern": "Multiples of 17",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Look for the pattern",
       "hint2": "Keep looking"
     },
@@ -1073,7 +1072,7 @@
       "blankIndex": 2,
       "answer": 57,
       "pattern": "Multiples of 19",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Look for the pattern",
       "hint2": "The pattern is there"
     },
@@ -1297,7 +1296,7 @@
       "blankIndex": 4,
       "answer": 225,
       "pattern": "Multiples of 45",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Look for the pattern",
       "hint2": "Look at the gaps"
     },
@@ -1313,7 +1312,7 @@
       "blankIndex": 3,
       "answer": 1440,
       "pattern": "Multiples of 360",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Look for the pattern",
       "hint2": "Look at the gaps"
     },
@@ -1425,7 +1424,7 @@
       "blankIndex": 2,
       "answer": 32,
       "pattern": "Add 11",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Think addition",
       "hint2": "Think simpler"
     },
@@ -1623,7 +1622,7 @@
       "blankIndex": 3,
       "answer": 66,
       "pattern": "Count down by 11",
-      "difficulty": 2,
+      "difficulty": 1,
       "hint1": "Look for the pattern",
       "hint2": "It's right in front of you"
     },
@@ -1729,18 +1728,16 @@
     },
     {
       "sequence": [
-        1,
-        1,
-        2,
-        3,
-        5,
-        8,
-        13,
-        21,
-        34
+        34,
+        55,
+        89,
+        144,
+        233,
+        377,
+        610
       ],
-      "blankIndex": 7,
-      "answer": 21,
+      "blankIndex": 3,
+      "answer": 144,
       "pattern": "Fibonacci sequence",
       "difficulty": 3,
       "hint1": "Look at previous numbers",
@@ -2459,6 +2456,141 @@
       "difficulty": 4,
       "hint1": "Sum of squared digits",
       "hint2": "Eventually reaches 1"
+    },
+    {
+      "sequence": [2, 6, 14, 30, 62, 126],
+      "blankIndex": 3,
+      "answer": 30,
+      "pattern": "Double and subtract 2",
+      "difficulty": 3,
+      "hint1": "Think multiplication",
+      "hint2": "Then adjust"
+    },
+    {
+      "sequence": [1, 3, 7, 13, 21, 31, 43],
+      "blankIndex": 4,
+      "answer": 21,
+      "pattern": "Add 2, 4, 6, 8...",
+      "difficulty": 3,
+      "hint1": "Differences grow",
+      "hint2": "By how much each time?"
+    },
+    {
+      "sequence": [5, 8, 14, 23, 35, 50],
+      "blankIndex": 3,
+      "answer": 23,
+      "pattern": "Add 3, 6, 9, 12...",
+      "difficulty": 3,
+      "hint1": "Think addition",
+      "hint2": "Gaps grow in steps"
+    },
+    {
+      "sequence": [1, 2, 6, 15, 31, 56],
+      "blankIndex": 3,
+      "answer": 15,
+      "pattern": "Add 1, 4, 9, 16...",
+      "difficulty": 3,
+      "hint1": "Add square numbers",
+      "hint2": "1, 4, 9, 16..."
+    },
+    {
+      "sequence": [3, 5, 9, 17, 33, 65],
+      "blankIndex": 3,
+      "answer": 17,
+      "pattern": "Double minus 1",
+      "difficulty": 3,
+      "hint1": "Almost doubling",
+      "hint2": "Close to powers of 2"
+    },
+    {
+      "sequence": [1, 4, 11, 29, 76, 199],
+      "blankIndex": 3,
+      "answer": 29,
+      "pattern": "Triple minus 2",
+      "difficulty": 3,
+      "hint1": "Think multiplication",
+      "hint2": "Then adjust slightly"
+    },
+    {
+      "sequence": [2, 3, 5, 8, 12, 17, 23],
+      "blankIndex": 4,
+      "answer": 12,
+      "pattern": "Add 1, 2, 3, 4...",
+      "difficulty": 3,
+      "hint1": "Differences increase",
+      "hint2": "By one each time"
+    },
+    {
+      "sequence": [100, 97, 91, 82, 70, 55],
+      "blankIndex": 3,
+      "answer": 82,
+      "pattern": "Subtract 3, 6, 9, 12...",
+      "difficulty": 3,
+      "hint1": "Decreasing gaps",
+      "hint2": "Gaps grow by 3"
+    },
+    {
+      "sequence": [4, 7, 13, 22, 34, 49],
+      "blankIndex": 3,
+      "answer": 22,
+      "pattern": "Add 3, 6, 9, 12...",
+      "difficulty": 3,
+      "hint1": "Differences grow",
+      "hint2": "Multiples of 3"
+    },
+    {
+      "sequence": [1, 3, 6, 11, 18, 27, 38],
+      "blankIndex": 4,
+      "answer": 18,
+      "pattern": "Add 2, 3, 5, 7, 9...",
+      "difficulty": 3,
+      "hint1": "Odd differences",
+      "hint2": "After the first"
+    },
+    {
+      "sequence": [2, 5, 11, 20, 32, 47],
+      "blankIndex": 3,
+      "answer": 20,
+      "pattern": "Add 3, 6, 9, 12...",
+      "difficulty": 3,
+      "hint1": "Think addition",
+      "hint2": "Triangular increases"
+    },
+    {
+      "sequence": [7, 11, 19, 35, 67, 131],
+      "blankIndex": 3,
+      "answer": 35,
+      "pattern": "Double minus 3",
+      "difficulty": 3,
+      "hint1": "Think multiplication",
+      "hint2": "Almost doubling"
+    },
+    {
+      "sequence": [1, 2, 5, 14, 41, 122],
+      "blankIndex": 3,
+      "answer": 14,
+      "pattern": "Triple minus 1",
+      "difficulty": 3,
+      "hint1": "Think multiplication",
+      "hint2": "Times 3 then adjust"
+    },
+    {
+      "sequence": [50, 48, 44, 38, 30, 20],
+      "blankIndex": 3,
+      "answer": 38,
+      "pattern": "Subtract 2, 4, 6, 8...",
+      "difficulty": 3,
+      "hint1": "Decreasing sequence",
+      "hint2": "Gaps increase by 2"
+    },
+    {
+      "sequence": [1, 2, 4, 7, 11, 16, 22],
+      "blankIndex": 5,
+      "answer": 16,
+      "pattern": "Add 1, 2, 3, 4...",
+      "difficulty": 3,
+      "hint1": "Differences grow",
+      "hint2": "Simply increasing"
     }
   ]
 }

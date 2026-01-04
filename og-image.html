@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            width: 1200px;
+            height: 630px;
+            background: #000000;
+            font-family: 'Press Start 2P', 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 10;
+        }
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%);
+            pointer-events: none;
+            z-index: 9;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+        }
+        .logo {
+            font-size: 58px;
+            color: #00FFFF;
+            text-shadow: 0 0 20px #00FFFF, 0 0 40px rgba(0,255,255,0.4);
+            letter-spacing: 6px;
+            margin-bottom: 45px;
+            display: flex;
+            align-items: center;
+        }
+        .blank {
+            display: inline-block;
+            width: 45px;
+            height: 8px;
+            background: #00FFFF;
+            margin: 0 4px;
+            box-shadow: 0 0 10px #00FFFF;
+            position: relative;
+            top: 8px;
+        }
+        .sequence {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 45px;
+        }
+        .num {
+            width: 100px;
+            height: 100px;
+            background: #0a0a0a;
+            border: 4px solid #00FFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #FFFFFF;
+            box-shadow: 0 0 15px rgba(0,255,255,0.3), inset 0 0 20px rgba(0,255,255,0.1);
+        }
+        .num.mystery {
+            background: #00FFFF;
+            color: #000000;
+            font-size: 52px;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(0,255,255,0.6);
+        }
+        .tagline {
+            font-size: 22px;
+            color: #FFFF00;
+            text-shadow: 0 0 15px rgba(255,255,0,0.6);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            letter-spacing: 4px;
+        }
+        .brain {
+            position: absolute;
+            top: 35px;
+            right: 45px;
+            font-size: 52px;
+        }
+        .url {
+            font-size: 18px;
+            color: #00FFFF;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
+            margin-top: 45px;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="content">
+        <div class="logo">SEQUE<span class="blank"></span>NCD</div>
+        <div class="sequence">
+            <div class="num">1</div>
+            <div class="num">3</div>
+            <div class="num">7</div>
+            <div class="num">15</div>
+            <div class="num mystery">?</div>
+            <div class="num">63</div>
+        </div>
+        <div class="tagline">Can you find the missing number?</div>
+        <div class="subtitle">FREE DAILY PUZZLE</div>
+        <div class="url">sequencd.com.au</div>
+    </div>
+</body>
+</html>
