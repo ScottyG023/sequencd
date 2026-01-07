@@ -2177,23 +2177,6 @@
     },
     {
       "sequence": [
-        2,
-        5,
-        8,
-        11,
-        14,
-        17,
-        20
-      ],
-      "blankIndex": 4,
-      "answer": 14,
-      "pattern": "Add 3",
-      "difficulty": 1,
-      "hint1": "Think addition",
-      "hint2": "Check the differences"
-    },
-    {
-      "sequence": [
         1,
         6,
         11,
@@ -2305,7 +2288,15 @@
       "hint2": "Compare neighbours"
     },
     {
-      "sequence": [1, 1, 2, 5, 14, 42, 132],
+      "sequence": [
+        1,
+        1,
+        2,
+        5,
+        14,
+        42,
+        132
+      ],
       "blankIndex": 4,
       "answer": 14,
       "pattern": "Catalan numbers",
@@ -2314,7 +2305,15 @@
       "hint2": "Used in combinatorics"
     },
     {
-      "sequence": [1, 1, 2, 5, 15, 52, 203],
+      "sequence": [
+        1,
+        1,
+        2,
+        5,
+        15,
+        52,
+        203
+      ],
       "blankIndex": 3,
       "answer": 5,
       "pattern": "Bell numbers",
@@ -2323,7 +2322,16 @@
       "hint2": "How many ways to group?"
     },
     {
-      "sequence": [0, 1, 3, 6, 2, 7, 13, 20],
+      "sequence": [
+        0,
+        1,
+        3,
+        6,
+        2,
+        7,
+        13,
+        20
+      ],
       "blankIndex": 4,
       "answer": 2,
       "pattern": "Recamán's sequence",
@@ -2332,7 +2340,15 @@
       "hint2": "Each step changes by n"
     },
     {
-      "sequence": [0, 1, 2, 5, 12, 29, 70],
+      "sequence": [
+        0,
+        1,
+        2,
+        5,
+        12,
+        29,
+        70
+      ],
       "blankIndex": 4,
       "answer": 12,
       "pattern": "Pell numbers",
@@ -2341,7 +2357,16 @@
       "hint2": "Double plus previous"
     },
     {
-      "sequence": [0, 1, 2, 5, 12, 29, 70, 169],
+      "sequence": [
+        0,
+        1,
+        2,
+        5,
+        12,
+        29,
+        70,
+        169
+      ],
       "blankIndex": 5,
       "answer": 29,
       "pattern": "Pell numbers",
@@ -2350,7 +2375,17 @@
       "hint2": "2×current + previous"
     },
     {
-      "sequence": [0, 0, 1, 1, 2, 4, 7, 13, 24],
+      "sequence": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        4,
+        7,
+        13,
+        24
+      ],
       "blankIndex": 5,
       "answer": 4,
       "pattern": "Tribonacci sequence",
@@ -2359,7 +2394,16 @@
       "hint2": "Sum of THREE previous"
     },
     {
-      "sequence": [1, 1, 2, 4, 7, 13, 24, 44],
+      "sequence": [
+        1,
+        1,
+        2,
+        4,
+        7,
+        13,
+        24,
+        44
+      ],
       "blankIndex": 4,
       "answer": 7,
       "pattern": "Tribonacci sequence",
@@ -2368,7 +2412,15 @@
       "hint2": "Add three numbers"
     },
     {
-      "sequence": [1, 5, 12, 22, 35, 51, 70],
+      "sequence": [
+        1,
+        5,
+        12,
+        22,
+        35,
+        51,
+        70
+      ],
       "blankIndex": 3,
       "answer": 22,
       "pattern": "Pentagonal numbers",
@@ -2377,7 +2429,16 @@
       "hint2": "Like triangular but five-sided"
     },
     {
-      "sequence": [1, 2, 4, 7, 11, 16, 22, 29],
+      "sequence": [
+        1,
+        2,
+        4,
+        7,
+        11,
+        16,
+        22,
+        29
+      ],
       "blankIndex": 4,
       "answer": 11,
       "pattern": "Lazy caterer's sequence",
@@ -2386,7 +2447,15 @@
       "hint2": "Add 1, 2, 3, 4..."
     },
     {
-      "sequence": [1, 5, 13, 25, 41, 61, 85],
+      "sequence": [
+        1,
+        5,
+        13,
+        25,
+        41,
+        61,
+        85
+      ],
       "blankIndex": 3,
       "answer": 25,
       "pattern": "Centered square numbers",
@@ -2395,7 +2464,14 @@
       "hint2": "Add 4, 8, 12, 16..."
     },
     {
-      "sequence": [1, 13, 37, 73, 121, 181],
+      "sequence": [
+        1,
+        13,
+        37,
+        73,
+        121,
+        181
+      ],
       "blankIndex": 3,
       "answer": 73,
       "pattern": "Star numbers",
@@ -2404,7 +2480,15 @@
       "hint2": "Add 12, 24, 36..."
     },
     {
-      "sequence": [1, 3, 7, 15, 31, 63, 127],
+      "sequence": [
+        1,
+        3,
+        7,
+        15,
+        31,
+        63,
+        127
+      ],
       "blankIndex": 4,
       "answer": 31,
       "pattern": "Powers of 2 minus 1",
@@ -2413,7 +2497,15 @@
       "hint2": "Double and add 1"
     },
     {
-      "sequence": [1, 2, 4, 8, 15, 26, 42],
+      "sequence": [
+        1,
+        2,
+        4,
+        8,
+        15,
+        26,
+        42
+      ],
       "blankIndex": 4,
       "answer": 15,
       "pattern": "Cake numbers",
@@ -2422,16 +2514,32 @@
       "hint2": "Maximum pieces with n cuts"
     },
     {
-      "sequence": [1, 5, 10, 50, 100, 500, 1000],
+      "sequence": [
+        1,
+        5,
+        10,
+        50,
+        100,
+        500,
+        1000
+      ],
       "blankIndex": 3,
       "answer": 50,
-      "pattern": "Roman numeral values",
+      "pattern": "I, V, X, L, C, D, M values",
       "difficulty": 2,
       "hint1": "Ancient counting system",
       "hint2": "I, V, X, L, C, D, M"
     },
     {
-      "sequence": [2, 6, 12, 20, 30, 42, 56],
+      "sequence": [
+        2,
+        6,
+        12,
+        20,
+        30,
+        42,
+        56
+      ],
       "blankIndex": 4,
       "answer": 30,
       "pattern": "Oblong numbers",
@@ -2440,7 +2548,15 @@
       "hint2": "n times (n+1)"
     },
     {
-      "sequence": [1, 4, 10, 19, 31, 46, 64],
+      "sequence": [
+        1,
+        4,
+        10,
+        19,
+        31,
+        46,
+        64
+      ],
       "blankIndex": 3,
       "answer": 19,
       "pattern": "Centered triangular numbers",
@@ -2449,7 +2565,16 @@
       "hint2": "Add 3, 6, 9, 12..."
     },
     {
-      "sequence": [1, 7, 10, 13, 19, 23, 28, 31],
+      "sequence": [
+        1,
+        7,
+        10,
+        13,
+        19,
+        23,
+        28,
+        31
+      ],
       "blankIndex": 4,
       "answer": 19,
       "pattern": "Happy numbers",
@@ -2458,16 +2583,31 @@
       "hint2": "Eventually reaches 1"
     },
     {
-      "sequence": [2, 6, 14, 30, 62, 126],
+      "sequence": [
+        4,
+        9,
+        19,
+        39,
+        79,
+        159
+      ],
       "blankIndex": 3,
-      "answer": 30,
-      "pattern": "Double and subtract 2",
+      "answer": 39,
+      "pattern": "Double and add 1",
       "difficulty": 3,
       "hint1": "Think multiplication",
       "hint2": "Then adjust"
     },
     {
-      "sequence": [1, 3, 7, 13, 21, 31, 43],
+      "sequence": [
+        1,
+        3,
+        7,
+        13,
+        21,
+        31,
+        43
+      ],
       "blankIndex": 4,
       "answer": 21,
       "pattern": "Add 2, 4, 6, 8...",
@@ -2476,7 +2616,14 @@
       "hint2": "By how much each time?"
     },
     {
-      "sequence": [5, 8, 14, 23, 35, 50],
+      "sequence": [
+        5,
+        8,
+        14,
+        23,
+        35,
+        50
+      ],
       "blankIndex": 3,
       "answer": 23,
       "pattern": "Add 3, 6, 9, 12...",
@@ -2485,7 +2632,14 @@
       "hint2": "Gaps grow in steps"
     },
     {
-      "sequence": [1, 2, 6, 15, 31, 56],
+      "sequence": [
+        1,
+        2,
+        6,
+        15,
+        31,
+        56
+      ],
       "blankIndex": 3,
       "answer": 15,
       "pattern": "Add 1, 4, 9, 16...",
@@ -2494,7 +2648,14 @@
       "hint2": "1, 4, 9, 16..."
     },
     {
-      "sequence": [3, 5, 9, 17, 33, 65],
+      "sequence": [
+        3,
+        5,
+        9,
+        17,
+        33,
+        65
+      ],
       "blankIndex": 3,
       "answer": 17,
       "pattern": "Double minus 1",
@@ -2503,16 +2664,31 @@
       "hint2": "Close to powers of 2"
     },
     {
-      "sequence": [1, 4, 11, 29, 76, 199],
+      "sequence": [
+        1,
+        2,
+        5,
+        14,
+        41,
+        122
+      ],
       "blankIndex": 3,
-      "answer": 29,
-      "pattern": "Triple minus 2",
+      "answer": 14,
+      "pattern": "Triple minus 1",
       "difficulty": 3,
       "hint1": "Think multiplication",
       "hint2": "Then adjust slightly"
     },
     {
-      "sequence": [2, 3, 5, 8, 12, 17, 23],
+      "sequence": [
+        2,
+        3,
+        5,
+        8,
+        12,
+        17,
+        23
+      ],
       "blankIndex": 4,
       "answer": 12,
       "pattern": "Add 1, 2, 3, 4...",
@@ -2521,7 +2697,14 @@
       "hint2": "By one each time"
     },
     {
-      "sequence": [100, 97, 91, 82, 70, 55],
+      "sequence": [
+        100,
+        97,
+        91,
+        82,
+        70,
+        55
+      ],
       "blankIndex": 3,
       "answer": 82,
       "pattern": "Subtract 3, 6, 9, 12...",
@@ -2530,7 +2713,14 @@
       "hint2": "Gaps grow by 3"
     },
     {
-      "sequence": [4, 7, 13, 22, 34, 49],
+      "sequence": [
+        4,
+        7,
+        13,
+        22,
+        34,
+        49
+      ],
       "blankIndex": 3,
       "answer": 22,
       "pattern": "Add 3, 6, 9, 12...",
@@ -2539,7 +2729,15 @@
       "hint2": "Multiples of 3"
     },
     {
-      "sequence": [1, 3, 6, 11, 18, 27, 38],
+      "sequence": [
+        1,
+        3,
+        6,
+        11,
+        18,
+        27,
+        38
+      ],
       "blankIndex": 4,
       "answer": 18,
       "pattern": "Add 2, 3, 5, 7, 9...",
@@ -2548,7 +2746,14 @@
       "hint2": "After the first"
     },
     {
-      "sequence": [2, 5, 11, 20, 32, 47],
+      "sequence": [
+        2,
+        5,
+        11,
+        20,
+        32,
+        47
+      ],
       "blankIndex": 3,
       "answer": 20,
       "pattern": "Add 3, 6, 9, 12...",
@@ -2557,7 +2762,14 @@
       "hint2": "Triangular increases"
     },
     {
-      "sequence": [7, 11, 19, 35, 67, 131],
+      "sequence": [
+        7,
+        11,
+        19,
+        35,
+        67,
+        131
+      ],
       "blankIndex": 3,
       "answer": 35,
       "pattern": "Double minus 3",
@@ -2566,16 +2778,14 @@
       "hint2": "Almost doubling"
     },
     {
-      "sequence": [1, 2, 5, 14, 41, 122],
-      "blankIndex": 3,
-      "answer": 14,
-      "pattern": "Triple minus 1",
-      "difficulty": 3,
-      "hint1": "Think multiplication",
-      "hint2": "Times 3 then adjust"
-    },
-    {
-      "sequence": [50, 48, 44, 38, 30, 20],
+      "sequence": [
+        50,
+        48,
+        44,
+        38,
+        30,
+        20
+      ],
       "blankIndex": 3,
       "answer": 38,
       "pattern": "Subtract 2, 4, 6, 8...",
@@ -2584,7 +2794,15 @@
       "hint2": "Gaps increase by 2"
     },
     {
-      "sequence": [1, 2, 4, 7, 11, 16, 22],
+      "sequence": [
+        1,
+        2,
+        4,
+        7,
+        11,
+        16,
+        22
+      ],
       "blankIndex": 5,
       "answer": 16,
       "pattern": "Add 1, 2, 3, 4...",
