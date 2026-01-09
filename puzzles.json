@@ -2506,8 +2506,8 @@
         26,
         42
       ],
-      "blankIndex": 4,
-      "answer": 15,
+      "blankIndex": 3,
+      "answer": 8,
       "pattern": "Cake numbers",
       "difficulty": 3,
       "hint1": "Slicing a cake in 3D",
